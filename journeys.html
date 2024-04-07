@@ -5,7 +5,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width"/>
 
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./journeys_style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
@@ -13,15 +13,15 @@
 </head>
 
 <body>
-    <header>
-        <div>
+    <header class="header-container">
+        <div class="header-left-elements">
             <a class="header-home" href="#">
                 <img class="header-logo" src="./img-journeys/mode_of_travel.svg" alt="Logo"/>
-                Getaway
+                getaway
             </a>
             <nav class="header-navbar-options">
-                <a href="#" class="header-nav-link">
-                    <img class="header-nav-img" src="./img-journeys/camping.svg" alt="Camping Icon"/>
+                <a href="#" class="header-nav-link" id="active-page">
+                    <img class="header-nav-img" src="./img-journeys/camping-dark.svg" alt="Camping Icon"/>
                     Journeys
                 </a>
                 <a href="#" class="header-nav-link">
@@ -29,72 +29,106 @@
                     Create Your Journey
                 </a>
             </nav>
-            <div>
-                <div>
-                    <img class="header-language-icon" src="./img-journeys/language.svg" alt="Language Icon"/>
-                    <select class="header-language-select">
-                        <option>En</option>
-                        <option>Ua</option>
-                    </select>
-                </div>
-                <button class="header-item-user-button">
-                    <img class="header-logo" src="./img-journeys/user.svg" alt="User Icon"/>
-                </button>
+        </div>
+        <div class="header-right-elements">
+            <div class="header-select">
+                <img class="header-language-icon" src="./img-journeys/language.svg" alt="Language Icon"/>
+                <select class="header-language-select">
+                    <option>En</option>
+                    <option>Ua</option>
+                </select>
             </div>
+            <button class="header-item-user-button">
+                <img class="header-user-icon" src="./img-journeys/user.svg" alt="User Icon"/>
+            </button>
         </div>
     </header>
 
     <section class="journeys-greeting">
-        <h3>Hi, UserName! Your Adventures Await!</h3>
+        <h3 class="journeys-greeting-text">Hi, UserName! Your Adventures Await!</h3>
         <div class="journeys-buttons">
-            <button class="journeys-greeting-active-button">
-                <img class="journeys-greeting-icon" src="./img-journeys/camping.svg" alt="Camping Icon"/>
-                Active
+            <button class="journeys-greeting-button" id="active-button">
+                <img class="journeys-greeting-icon" src="./img-journeys/camping-white.svg" alt="Camping Icon"/>
+                <span>Active</span>
             </button>
-            <button class="journeys-greeting-pending-button">
-                <img class="journeys-greeting-icon" src="./img-journeys/camping.svg" alt="Camping Icon"/>
-                Pending
+            <button class="journeys-greeting-button">
+                <img class="journeys-greeting-icon" src="./img-journeys/camping-white.svg" alt="Camping Icon"/>
+                <span>Pending</span>
             </button>
         </div>
     </section>
 
-    <section class="journeys">
-        <h2>Active/Pending Journeys</h2>
+    <section class="journeys-empty">
+        <h2 class="journeys-header">Journeys</h2>
+        <div class="journeys-list-empty">
+            <img class="journeys-empty-image" src="./img-journeys/bro.png" alt="A guy riding a car"/>
+            <h3>There are no journeys planned, yet!</h3>
+        </div>
+    </section>
+
+    <section class="journeys-active">
+        <h2 class="journeys-header">Active Journeys</h2>
         <div class="journeys-list">
-            <div>
+            <div class="journeys-list-item">
                 <img class="journeys-item-image" src="./img-journeys/placeholder.png" alt="Placeholder Image for a journey"/>
-                <span>Country</span>
-                <span>Journey title</span>
-                <button>
-                    <img class="journeys-item-preview" src="./img-journeys/open_preview.svg" alt="Preview Open Icon"/>
-                </button>
+                <span class="journey-item-country">Country</span>
+                <div class="journey-preview-wrapper">
+                    <div class="journey-info">
+                        <span class="journey-item-destination">Journey title</span>
+                        <span class="journey-item-date">Date</span>
+                    </div>
+                    <button class="journeys-button">
+                        <img class="journeys-item-preview" src="./img-journeys/open_preview.svg" alt="Preview Open Icon"/>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="journeys-pending">
+        <h2 class="journeys-header">Pending Journeys</h2>
+        <div class="journeys-list">
+            <div class="journeys-list-item">
+                <img class="journeys-item-image" src="./img-journeys/placeholder.png" alt="Placeholder Image for a journey"/>
+                <span class="journey-item-country">Country</span>
+                <div class="journey-preview-wrapper">
+                    <div class="journey-info">
+                        <span class="journey-item-destination">Journey title</span>
+                        <span class="journey-item-date">Date</span>
+                    </div>
+                    <button class="journeys-button">
+                        <img class="journeys-item-preview" src="./img-journeys/open_preview.svg" alt="Preview Open Icon"/>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 
     <footer>
-        <div>
-            <img class="footer-logo" src="./img-journeys/mode_of_travel.svg" alt="Logo"/>
-            <span>Getaway</span>
-        </div>
-        <div>
-            <span>Follow Us</span>
-            <div>
-                <a href="https://www.instagram.com/" class="footer-follow-link">
-                    <img class="footer-follow-img" src="./img-journeys/instagram.svg" alt="Instagram Icon"/>
-                </a>
-                <a href="https://www.facebook.com/" class="footer-follow-link">
-                    <img class="footer-follow-img" src="./img-journeys/facebook.svg" alt="Facebook Icon"/>
-                </a>
-                <a href="https://twitter.com/?lang=en" class="footer-follow-link">
-                    <img class="footer-follow-img" src="./img-journeys/twitter.svg" alt="Twitter Icon"/>
-                </a>
+        <div class="footer-content-container">
+            <div class="footer-logo-container">
+                <img class="footer-logo" src="./img-journeys/mode_of_travel.svg" alt="Logo"/>
+                <span>getaway</span>
+            </div>
+            <div class="footer-contact-container">
+                <span class="footer-contact-follow">Follow Us</span>
+                <div class="footer-follow-wrapper">
+                    <a href="https://www.instagram.com/" class="footer-follow-link">
+                        <img class="footer-follow-img" src="./img-journeys/instagram.svg" alt="Instagram Icon"/>
+                    </a>
+                    <a href="https://www.facebook.com/" class="footer-follow-link">
+                        <img class="footer-follow-img" src="./img-journeys/facebook.svg" alt="Facebook Icon"/>
+                    </a>
+                    <a href="https://twitter.com/?lang=en" class="footer-follow-link">
+                        <img class="footer-follow-img" src="./img-journeys/twitter.svg" alt="Twitter Icon"/>
+                    </a>
+                </div>
             </div>
         </div>
 
         <!-- Line element -->
-        <div></div>
-        <span>© 2024 getaway. All rights reserved.</span>
+        <div class="footer-divider"></div>
+        <span class="footer-text">© 2024 getaway. All rights reserved.</span>
     </footer>
 
 </body>
