@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <title>Getaway</title>
+</head>
+
+<body>
+    <header>
+        <div>
+            <a class="header-home" href="#">
+                <img class="header-logo" src="./img-journeys/mode_of_travel.svg" alt="Logo"/>
+                Getaway
+            </a>
+            <nav class="header-navbar-options">
+                <a href="#" class="header-nav-link">
+                    <img class="header-nav-img" src="./img-journeys/camping.svg" alt="Camping Icon"/>
+                    Journeys
+                </a>
+                <a href="#" class="header-nav-link">
+                    <img class="header-nav-img" src="./img-journeys/commute.svg" alt="Journey Icon"/>
+                    Create Your Journey
+                </a>
+            </nav>
+            <div>
+                <div>
+                    <img class="header-language-icon" src="./img-journeys/language.svg" alt="Language Icon"/>
+                    <select class="header-language-select">
+                        <option>En</option>
+                        <option>Ua</option>
+                    </select>
+                </div>
+                <button class="header-item-user-button">
+                    <img class="header-logo" src="./img-journeys/user.svg" alt="User Icon"/>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="journeys-greeting">
+        <h3>Hi, UserName! Your Adventures Await!</h3>
+        <div class="journeys-buttons">
+            <button class="journeys-greeting-active-button">
+                <img class="journeys-greeting-icon" src="./img-journeys/camping.svg" alt="Camping Icon"/>
+                Active
+            </button>
+            <button class="journeys-greeting-pending-button">
+                <img class="journeys-greeting-icon" src="./img-journeys/camping.svg" alt="Camping Icon"/>
+                Pending
+            </button>
+        </div>
+    </section>
+
+    <section class="journeys">
+        <h2>Active/Pending Journeys</h2>
+        <div class="journeys-list">
+            <div>
+                <img class="journeys-item-image" src="./img-journeys/placeholder.png" alt="Placeholder Image for a journey"/>
+                <span>Country</span>
+                <span>Journey title</span>
+                <button>
+                    <img class="journeys-item-preview" src="./img-journeys/open_preview.svg" alt="Preview Open Icon"/>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div>
+            <img class="footer-logo" src="./img-journeys/mode_of_travel.svg" alt="Logo"/>
+            <span>Getaway</span>
+        </div>
+        <div>
+            <span>Follow Us</span>
+            <div>
+                <a href="https://www.instagram.com/" class="footer-follow-link">
+                    <img class="footer-follow-img" src="./img-journeys/instagram.svg" alt="Instagram Icon"/>
+                </a>
+                <a href="https://www.facebook.com/" class="footer-follow-link">
+                    <img class="footer-follow-img" src="./img-journeys/facebook.svg" alt="Facebook Icon"/>
+                </a>
+                <a href="https://twitter.com/?lang=en" class="footer-follow-link">
+                    <img class="footer-follow-img" src="./img-journeys/twitter.svg" alt="Twitter Icon"/>
+                </a>
+            </div>
+        </div>
+
+        <!-- Line element -->
+        <div></div>
+        <span>© 2024 getaway. All rights reserved.</span>
+    </footer>
+
+</body>
+</html>
