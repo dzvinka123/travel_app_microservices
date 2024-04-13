@@ -2,7 +2,7 @@
     /* --active-button-color: #10B981; */
     --background-item-color: #191C20;
     --text-color: #1B1C57;
-    --text-secondary: #626687;
+    --text-secondary: #626687; /* Fix root setting for project */
 }
 
 *, *::before, *::after {
