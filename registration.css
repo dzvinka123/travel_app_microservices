@@ -8,13 +8,12 @@
     box-sizing: border-box;
     font-family: Inter;
     color: white;
-    
 }
 
 body{
     background-color: #141414;
-
 }
+
 .wrapper{
     overflow: hidden;
     display: flex;
@@ -38,6 +37,7 @@ header{
     flex-direction: row;
     justify-content: space-between;
 }
+
 .logo{
     margin-left: 32px;
     display: flex;
@@ -51,8 +51,6 @@ header{
     font-weight: 500;
 }
 
-
-
 .left{
     margin-right: 34px;
     display: flex;
@@ -64,7 +62,6 @@ header{
     background-color: transparent;
     color: #FAFAFABD;
     font-size: 16px;
-
 }
 
 .registration{
@@ -102,7 +99,7 @@ header{
 .registration-form{
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 20px;
 }
 
 .form-row{
@@ -112,6 +109,7 @@ header{
     color: #FAFAFABD;
     font-weight: 200;
 }
+
 .form-row input{
     background-color: transparent;
     border-radius: 8px;
@@ -125,10 +123,12 @@ header{
 .form-row label{
     font-size: 12px;
 }
+
 .password{
     display: flex;
     flex-direction: row;
 }
+
 .password label{
     margin-left: -40px;
     margin-top: 12px;
@@ -139,6 +139,8 @@ header{
     flex-direction: row;
     gap: 8px;
     font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .terms-and-conditions a{
@@ -153,6 +155,7 @@ header{
     font-weight: 400;
     font-size: 16px;
     background: #005A44;
+    margin-bottom: 10px;
 }
 
 .registration-bottom{
@@ -161,16 +164,16 @@ header{
     align-items: center;
     gap: 4px;
 }
+
 .registration-bottom h2{
     color: #FAFAFABD;
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 14px;
+    font-weight: 300;
 }
-
 
 .registration-bottom a{
     text-decoration: none;
     color: white;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 400;
 }
