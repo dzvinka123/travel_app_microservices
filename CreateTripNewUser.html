@@ -49,18 +49,24 @@
             <form class="search-container">
                 <div class="search-container-input">
                     <img class="search-from-icon" src="./img/distance.svg" alt="Distance Icon"/>
-                    <label for="from">From</label>
-                    <input type="text" name="from" class="search-field" placeholder="Your Location?" required>
+                    <div class="search-field">
+                        <label for="from">From</label>
+                        <input type="text" name="from" placeholder="Your Location?" required>
+                    </div>
                 </div>
                 <div class="search-container-input">
                     <img class="search-from-icon" src="./img/distance.svg" alt="Distance Icon"/>
-                    <label for="to">To</label>
-                    <input type="text" name="to" class="search-field" placeholder="Where are you going?" required>
+                    <div class="search-field">
+                         <label for="to">To</label>
+                        <input type="text" name="to" placeholder="Where are you going?" required>
+                    </div>
                 </div>
-                <div class="search-container-input">
+                <div class="search-container-input last-field">
                     <img class="search-from-icon" src="./img/calendar_clock.svg" alt="Distance Icon"/>
-                    <label for="from">Date</label>
-                    <input type="text" name="date" class="search-field" onfocus="(this.type='date')" placeholder="Add dates">
+                    <div class="search-field">
+                        <label for="from">Date</label>
+                        <input type="text" name="date" onfocus="(this.type='date')" placeholder="Add dates">
+                    </div>
                 </div>
                 <button type="submit" class="search-button">Create Your Journey</button>
             </form>
@@ -110,34 +116,33 @@
                 </div>
             </article>
         </div>
-    
-        <footer class="footer-content">
-            <div class="footer-content-container">
-                <div class="logo-section">
-                    <img class="footer-logo" src="./img/logo.svg" alt="Logo"/>
-                    <span class="logo-text">getaway</span>
-                </div>
-                <div class="footer-contact-container">
-                    <span class="footer-contact-follow">Follow Us</span>
-                    <div class="footer-follow-wrapper">
-                        <a href="https://www.instagram.com/" class="footer-follow-link">
-                            <img class="footer-follow-img" src="./img/instagram.svg" alt="Instagram Icon"/>
-                        </a>
-                        <a href="https://www.facebook.com/" class="footer-follow-link">
-                            <img class="footer-follow-img" src="./img/instagram.svg" alt="Facebook Icon"/>
-                        </a>
-                        <a href="https://twitter.com/?lang=en" class="footer-follow-link">
-                            <img class="footer-follow-img" src="./img/instagram.svg" alt="Twitter Icon"/>
-                        </a>
-                    </div>
-                </div>    
-            </div>
-            <!-- Line element -->
-            <div class="footer-divider">
-                <div class="footer-line"></div>
-                <span class="footer-text">© 2024 getaway. All rights reserved.</span>
-            </div>
-        </footer>
-    
     </section>
+    <footer class="footer-content">
+        <div class="footer-content-container">
+            <div class="logo-section">
+                <img class="footer-logo" src="./img/logo.svg" alt="Logo"/>
+                <span class="logo-text">getaway</span>
+            </div>
+            <div class="footer-contact-container">
+                <span class="footer-contact-follow">Follow Us</span>
+                <div class="footer-follow-wrapper">
+                    <a href="https://www.instagram.com/" class="footer-follow-link">
+                        <img class="footer-follow-img" src="./img/instagram.svg" alt="Instagram Icon"/>
+                    </a>
+                    <a href="https://www.facebook.com/" class="footer-follow-link">
+                        <img class="footer-follow-img" src="./img/instagram.svg" alt="Facebook Icon"/>
+                    </a>
+                    <a href="https://twitter.com/?lang=en" class="footer-follow-link">
+                        <img class="footer-follow-img" src="./img/instagram.svg" alt="Twitter Icon"/>
+                    </a>
+                </div>
+            </div>    
+        </div>
+        <!-- Line element -->
+        <div class="footer-divider">
+            <div class="footer-line"></div>
+            <span class="footer-text">© 2024 getaway. All rights reserved.</span>
+        </div>
+    </footer>
+
 </body>
