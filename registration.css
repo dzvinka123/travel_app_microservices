@@ -1,0 +1,176 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
+
+* {
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    box-sizing: border-box;
+    font-family: Inter;
+    color: white;
+    
+}
+
+body{
+    background-color: #141414;
+
+}
+.wrapper{
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    max-width: 1440px;
+    background: url(icons/map.png) center;
+    background-repeat: no-repeat;
+    margin: 0px auto;    
+}
+
+.width-alligner{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0px auto;    
+}
+
+header{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.logo{
+    margin-left: 32px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.logo-text{
+    align-self: center;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+
+
+.left{
+    margin-right: 34px;
+    display: flex;
+    flex-direction: row;
+    gap: 19px;
+}
+
+.left-selection select{
+    background-color: transparent;
+    color: #FAFAFABD;
+    font-size: 16px;
+
+}
+
+.registration{
+    display: flex;
+    flex-direction: column;
+    background-color: #191C20;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-radius: 5px;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 442px;
+    gap: 24px;
+}
+
+.registration-top{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    
+}
+
+.registration-top h5{
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.registration-top h5{
+    color: #FAFAFABD;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.registration-form{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.form-row{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #FAFAFABD;
+    font-weight: 200;
+}
+.form-row input{
+    background-color: transparent;
+    border-radius: 8px;
+    padding-left: 12px;
+    padding-right: 120px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 2px solid #FAFAFA14;
+}
+
+.form-row label{
+    font-size: 12px;
+}
+.password{
+    display: flex;
+    flex-direction: row;
+}
+.password label{
+    margin-left: -40px;
+    margin-top: 12px;
+}
+
+.terms-and-conditions{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.terms-and-conditions a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.sign-up-button{
+    padding-top:15px; 
+    padding-bottom:15px; 
+    border-radius: 48px;
+    font-weight: 400;
+    font-size: 16px;
+    background: #005A44;
+}
+
+.registration-bottom{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+.registration-bottom h2{
+    color: #FAFAFABD;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+
+.registration-bottom a{
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+}
