@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+
+    <link rel="stylesheet" href="welcome_back.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <title>Getaway</title>
+    <script>
+        function showPassword() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="width-alligner">
+                <header>
+                <div class="logo">
+                    <div class="logo-img"><img src="icons/logo.png" alt=""></div>
+                    <div class="logo-text"><p>getaway</p></div>
+                </div>
+                <div class="left">
+                    <div class="left-img"><img src="icons/languages.png" alt=""></div>
+                    <div class="left-selection">
+                        <select >
+                        <option>English</option>
+                        <option>Ukrainian</option>
+                        <option>German</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="width-alligner">
+            <div class="registration">
+                <div class="registration-top">
+                    <h2>Welcome Back</h2>
+                    <h5>Enter your credentials to access your account.</h5>
+                </div>
+                <form class="registration-form">
+                   
+
+                    <div class="form-row">
+                        <label for="email">Email:</label>
+                        <input type="email" placeholder="Enter your email"  required>
+                    </div>
+                
+                    <div class="form-row">
+                        <label for="password">Password:</label>
+                        <div class="password">
+                            <input type="password" id="password" placeholder="Enter your password" required>
+                            <input type="checkbox" id="show-password"  onclick="showPassword()" hidden>
+                            <label for="show-password"><img src="icons/eye.png" alt=""></label>
+                        </div>
+                    </div>
+                
+                    <div class="form-row remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+
+                    <button class="log-in-button" type="submit">Log in</button>
+                    <a class="forgot-password" href="#">Forgot password?</a>
+
+                </form>
+                <div class="registration-bottom">
+                    <h2>Don't have an account?</h2>
+                    <a href="#">Create Account</a>
+                </div>
+                <div class="miwa">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
