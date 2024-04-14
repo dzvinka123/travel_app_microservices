@@ -28,8 +28,8 @@ html, body {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    margin-left: calc((100vw - 1200px) / 2);
-    margin-right: calc((100vw - 1200px) / 2);
+    margin-left: calc((100vw - 1240px) / 2);
+    margin-right: calc((100vw - 1240px) / 2);
     margin-top: 24px;
 }
 
@@ -258,8 +258,8 @@ html, body {
     display: flex;
     flex-direction: column;
     gap: 43px;
-    margin-left: calc((100vw - 1200px) / 2);
-    margin-right: calc((100vw - 1200px) / 2);
+    margin-left: calc((100vw - 1240px) / 2);
+    margin-right: calc((100vw - 1240px) / 2);
 }
 
 .recommendation-trips-header {
@@ -365,8 +365,8 @@ html, body {
     background: var(--BG---Secondary, #191C20);
     margin-top: 112px;
     margin-bottom: 24px;
-    margin-left: calc((100vw - 1200px) / 2);
-    margin-right: calc((100vw - 1200px) / 2);
+    margin-left: calc((100vw - 1240px) / 2);
+    margin-right: calc((100vw - 1240px) / 2);
 }
 
 .footer-content-container {
