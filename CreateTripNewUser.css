@@ -153,8 +153,6 @@ html, body {
     flex-direction: row;
     background-color: transparent;
     gap: 16px;
-    justify-content: space-evenly;
-    flex-grow: 1;
 }
   
 .search-container-input {
@@ -217,10 +215,10 @@ html, body {
     width: 240px;
     justify-content: center;
     align-items: center;
-    padding: 0px 24px;
     flex-shrink: 0;
     border-radius: 48px;
     background: var(--Accent-1, #005A44);
+    margin-left: 16px;
     border: none;
 
     /* Style for text*/
