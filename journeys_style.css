@@ -16,11 +16,20 @@ html, body {
 
 /* Header styles */
 
+.main-journeys {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-left: calc((100vw - 1240px) / 2);
+    margin-right: calc((100vw - 1240px) / 2);
+    margin-top: 24px;
+}
+
 .header-container {
     display: flex;
     flex-direction: row;
     padding: 16px 24px;
-    margin: 24px;
+    /* margin: 24px; */
     border-radius: 32px;
     background: var(--background-item-color);
     box-shadow: 4px 4px 30.4px 0px rgba(7, 5, 5, 0.20);
@@ -134,7 +143,7 @@ html, body {
     display: flex;
     flex-direction: column;
     padding: 24px;
-    margin: 24px;
+    /* margin: 24px; */
     background-color: #191C20;
     border: none;
     border-radius: 32px;
@@ -186,7 +195,7 @@ html, body {
 section {
     display: flex;
     flex-direction: column;
-    margin: 48px 24px;
+    /* margin: 48px 24px; */
 }
 
 .journeys-header {
