@@ -1,4 +1,3 @@
-import React from 'react';
 import './Journeys.css';
 import campingDark from '../../img/camping-dark.svg';
 

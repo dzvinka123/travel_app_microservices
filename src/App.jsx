@@ -1,19 +1,22 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from '/src/pages/Home';
-import Login from '/src/pages/Login';
-import CreateTrip from '/src/pages/CreateTrip';
-import MainJourneys from '/src/pages/Journeys';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import CreateNewUserTrip from './pages/CreateNewUserTrip';
+import MainJourneys from './pages/Journeys';
+import TripDetails from './pages/TripDetails';
+
 
 export default function App() {
   return (
     <BrowserRouter>
         <Routes>
-          <Route index element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} /> 
-          <Route path="/create-trip" element={<CreateTrip />} />
+          <Route path="/create-new-user-trip" element={<CreateNewUserTrip />} />
           <Route path="/journeys" element={<MainJourneys />} />
+          <Route path="/create-new-user-trip/trip-details" element={<TripDetails />} />
         </Routes>
     </BrowserRouter>
   );

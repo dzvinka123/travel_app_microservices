@@ -1,4 +1,3 @@
-import React from 'react';
 import './Journeys.css';
 import placeholder from '../../img/placeholder.png';
 import openPreview from '../../img/open_preview.svg';

@@ -1,0 +1,30 @@
+.create-home {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-left: calc((100vw - 1240px) / 2);
+    margin-right: calc((100vw - 1240px) / 2);
+    margin-top: 24px;
+}
+
+
+.search-location {
+    display: flex;
+    padding: 24px;
+    flex-direction: column;
+    gap: 24px;
+    border-radius: 32px;
+    background: var(--BG---Secondary, #191C20);
+    align-items: flex-start;
+
+}
+
+.search-location h2 {
+    margin: 0;
+    color: var(--White---Hight-Empathy, #FAFAFA);
+    font-family: 'Inter';
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 32px; /* 133.333% */
+}
