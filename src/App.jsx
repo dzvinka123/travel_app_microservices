@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import CreateNewUserTrip from './pages/CreateNewUserTrip';
 import MainJourneys from './pages/Journeys';
 import TripDetails from './pages/TripDetails';
+import CreateTripNewUser from '/src/pages/CreateTripNewUser';
 
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/create-new-user-trip" element={<CreateNewUserTrip />} />
           <Route path="/journeys" element={<MainJourneys />} />
           <Route path="/create-new-user-trip/trip-details" element={<TripDetails />} />
+          <Route path="/userpage" element={<CreateTripNewUser />} />
         </Routes>
     </BrowserRouter>
   );
