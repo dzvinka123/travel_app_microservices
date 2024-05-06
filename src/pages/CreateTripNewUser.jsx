@@ -2,9 +2,14 @@ import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 import Driver from "../components/newuser/Driver";
 import HotelCard from "../components/newuser/HotelCard";
+import ToDos from "../components/newuser/ToDos";
+import AddButton from "../components/newuser/AddButton";
+import Description from "../components/newuser/Description";
 import plus from "../img/add.svg"
 import person from "../img/person.png"
 import booking from "../img/booking.png"
+import "../components/newuser/createdTripUser.css";
+
 
 export default function CreateTripNewUser() {
     return (
@@ -43,10 +48,33 @@ export default function CreateTripNewUser() {
                 </div>
             </div>
         </div>
+    
+        {/* 5 block */}
+        <section class="additional-container">
+            <div class="todo-list">
+                <div class="todo-text">
+                    <h2>Additional Information</h2>
+                </div>  
+                    
+                <div class="todo-box">
+                    <div class="todo-box-text">
+                        <h4>To-Do List</h4> 
+                    </div>
+                    <div class="checkboxes">
+                        <div class="checkbox-list">
+                            <ToDos text={"Research local cafes for breakfast spots in Yaremche"}/>
+                            <ToDos text={"Book tickets for the Waterfall Probiy"} />
+                            <div class="todo-button">
+                                <AddButton plus={plus} />
+                                <label for="box2"><input placeholder="Add your tasks here..."/></label><br/> {/* this might be dynamic */}
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <Description />  
+        </section>  
         
-        {/* 4 block */}
-        
-
         <Footer />
       </>
     );
