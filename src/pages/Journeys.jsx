@@ -16,4 +16,4 @@ export default function MainJourneys() {
         <Footer />
       </main>
     );
-  }
+}
