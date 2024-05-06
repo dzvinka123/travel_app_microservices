@@ -664,8 +664,8 @@ html, body {
 
 .additional-container {
     display: flex;
-    width: 1280px;
-    padding: 48px 24px;
+    width: 1240px;
+    padding: 48px 94px 24px;
     align-items: flex-start;
     flex-direction: row;
     gap: 24px;
@@ -673,7 +673,6 @@ html, body {
 
 .todo-list {
     display: flex;
-    width: 652px;
     flex-direction: column;
     align-items: flex-start;
     gap: 24px;
@@ -702,7 +701,6 @@ html, body {
 
 .todo-box {
     display: flex;
-    width: 604px;
     padding: 24px;
     flex-direction: column;
     justify-content: center;
