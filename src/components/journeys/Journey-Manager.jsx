@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import JourneyOption from './Journey-Option';
-import JourneyWidget from './Journey-Widget';
+import JourneyWrapper from './Journey-Wrapper';
 import "./widgetstyles.css";
 
 export default function JourneyManager() {
@@ -13,7 +13,7 @@ export default function JourneyManager() {
     return (
         <div>
             <JourneyOption onButtonClick={toggleWidgetVisibility} />
-            {widgetVisible && <JourneyWidget onClose={toggleWidgetVisibility} />}
+            {widgetVisible && <JourneyWrapper onClose={toggleWidgetVisibility} />}
         </div>
     );
 }
