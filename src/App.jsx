@@ -5,8 +5,7 @@ import Login from './pages/Login';
 import CreateNewUserTrip from './pages/CreateNewUserTrip';
 import MainJourneys from './pages/Journeys';
 import TripDetails from './pages/TripDetails';
-import CreateTripNewUser from '/src/pages/CreateTripNewUser';
-
+import CreateTripNewUser from './pages/CreateTripNewUser';
 
 export default function App() {
   return (
@@ -14,7 +13,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/login" element={<Login />} /> 
+          <Route path="/login" element={<Login />} />
           <Route path="/create-new-user-trip" element={<CreateNewUserTrip />} />
           <Route path="/journeys" element={<MainJourneys />} />
           <Route path="/create-new-user-trip/trip-details" element={<TripDetails />} />

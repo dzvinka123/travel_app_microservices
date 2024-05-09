@@ -1,0 +1,83 @@
+.recommend {
+    padding: 88px 0;
+    background-color: #141414;
+  }
+
+  .recommend__container {
+    max-width: 1232px;
+    margin: 0 auto;
+  }
+
+  .recommend__top {
+    margin: 0 auto 43px auto;
+  }
+
+  .recommend__topinfo {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    margin: 0 0 8px 0;
+  }
+
+  .recommend__title {
+    font-size: 36px;
+    line-height: 44px;
+    font-weight: 600;
+    color: #FAFAFA;
+    letter-spacing: 0.02em;
+    margin: 0 24px 0 0;
+  }
+
+  .recommend__buttons {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+
+  .recommend__button {
+    width: 48px;
+    height: 48px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    border-radius: 50%;
+    border-color: #FAFAFA;
+    border-width: 1px;
+    border-style: solid;
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+  }
+
+  .recommend__button:first-child {
+    margin: 0 16px 0 0;
+  }
+
+  .recommend__button:hover {
+    background-color: #005A44;
+    border: none;
+  }
+
+  .recommend__intro {
+    font-size: 20px;
+    line-height: 30px;
+    color: #FAFAFA;
+  }
+
+  .recommend__cards {
+    padding: 88px 0 0 0;
+  }
