@@ -865,7 +865,7 @@ body.ie ._ibg img {
   right: 0px;
   cursor: pointer;
   z-index: 30;
-  background: url("../img/icons/close.svg") 0 0 no-repeat;
+  background: url("../img/close.svg") 0 0 no-repeat;
 }
 
 .header {
@@ -944,14 +944,12 @@ body.ie ._ibg img {
   padding: 24px 0;
 }
 
-.no-webp .top__bgcont{
-  background: url("../img/landing_top/landing_top.jpg"); }
-
 .top__bgcont {
   padding: 168px 0 250px 0;
   border-radius: 24px;
   max-width: 1232px;
   margin: 0 auto;
+  background: url("../img/landing_top.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
 }
@@ -1157,4 +1155,3 @@ body.ie ._ibg img {
     }
   }
 
-  .webp .top__bgcont{ background: url(../img/landing_top/landing_top.webp); }

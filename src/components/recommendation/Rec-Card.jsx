@@ -1,17 +1,13 @@
 import React from 'react';
 import arrowdiag from '../../img/arrowdiag.svg';
 import star from '../../img/star.svg';
-import 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css?_v=20240415034008';
-import "./Card.css"
+import "./Rec-Card.css"
 
-const RecommendCard = ({country, title, num_of_coms, imageWebp, imageSpare}) => {
+const RecommendationCard = ({country, title, num_of_coms, imageSpare}) => {
     return (
-        <div className="recommend__card card swiper-slide">
+        <div className="recommend__card card">
             <div className="card__image">
-                <picture>
-                    <source srcSet={imageWebp} type="image/webp" />
-                    <img src={imageSpare} alt="" />
-                </picture>
+                <img src={imageSpare} alt="" />
             </div>
             <div className="card__country card__country_purple">{country}</div>
             <div className="card__titleinfo">
@@ -34,4 +30,4 @@ const RecommendCard = ({country, title, num_of_coms, imageWebp, imageSpare}) => 
     );
 };
 
-export default RecommendCard;
+export default RecommendationCard;

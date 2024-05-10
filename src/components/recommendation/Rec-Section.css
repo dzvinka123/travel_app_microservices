@@ -1,3 +1,8 @@
+._container {
+    max-width: 1024px;
+    margin: 0 auto;
+  }
+
 .recommend {
     padding: 88px 0;
     background-color: #141414;
@@ -24,7 +29,9 @@
             justify-content: space-between;
     margin: 0 0 8px 0;
   }
-
+.swiper-slide {
+    height: auto;
+}
   .recommend__title {
     font-size: 36px;
     line-height: 44px;
@@ -80,4 +87,31 @@
 
   .recommend__cards {
     padding: 88px 0 0 0;
+  }
+
+  @media (max-width: 1036px) {
+    ._container {
+      max-width: 970px;
+    }
+  }
+
+  @media (max-width: 991.98px) {
+    ._container {
+      max-width: 750px;
+    }
+
+    .select__title {
+      font-size: 18px;
+    }
+
+    .select__options {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    ._container {
+      max-width: none;
+      padding: 0 10px;
+    }
   }
