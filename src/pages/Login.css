@@ -1,0 +1,11 @@
+.login {
+    background-image: url('../img/loginMap.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 100%;
+    background-size: 70%;
+    background-position-x: center;
+    display: flex;
+    flex-direction: column;
+    /* background-position-y:center; */
+}

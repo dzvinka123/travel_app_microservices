@@ -1,0 +1,7 @@
+.form-login{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    background-color: gray;
+    gap: 24px;
+}

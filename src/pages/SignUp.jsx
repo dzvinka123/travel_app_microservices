@@ -1,12 +1,12 @@
-import FormLogin from "../components/forms/FormLogin";
+import FormSignUp from "../components/forms/FormSignUp";
 import NavbarLogin from "../components/navbar/NavbarLogin";
 import "./Login.css";
 
-export default function Login() {
+export default function SignUp() {
   return (
     <div className="login">
       <NavbarLogin />
-      <FormLogin />
+      <FormSignUp />
     </div>
   );
 }
