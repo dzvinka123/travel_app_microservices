@@ -1,7 +1,10 @@
-.form-login{
+
+.middle-item{
+    height: 556px;
+}
+.registration-pre-bottom {
     display: flex;
     flex-direction: column;
-    align-self: center;
-    background-color: gray;
-    gap: 24px;
+    align-items: center;
+    gap: 40px;
 }

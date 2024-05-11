@@ -1,5 +1,6 @@
 .login {
     background-image: url('../img/loginMap.svg');
+    background-color: black;
     background-repeat: no-repeat;
     background-size: cover;
     padding-bottom: 30%;
