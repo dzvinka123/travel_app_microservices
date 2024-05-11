@@ -11,10 +11,10 @@ import partner5 from "../img/5.png";
 import recImg1 from "../img/placeholder.png";
 import recImg2 from "../img/Image2.png";
 import recImg3 from "../img/Image3.png";
-import logo from "../img/logo_getaway.png"
 import dividor from "../img/dividor.svg";
 import search_but from "../img/search_but.svg";
-
+import WelcomeHeader from "../components/welcome-header/Welcome-Header.jsx";
+import WelcomeFormInput from "../components/welcome-form/welcome-form-input.jsx";
 export default function Welcome() {
     const recommendations = [
         {
@@ -57,25 +57,7 @@ export default function Welcome() {
     return (
         <>
         <div className="wrapper">
-            <header className="header">
-                <div className="header_wrapper">
-                    <div className="header__container _container">
-                        <div className="header__body">
-                            <div href="#" className="header__left">
-                                <a href="#" className="header__logo">
-                                    <img src={logo} alt=""></img>
-                                    <span>getaway</span>
-                                </a>
-                            </div>
-                            <div className="header__right">
-                                <a href="#" className="header__loginbutton">
-                                    Log in
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
+            <WelcomeHeader/>
             <main className="page">
                 <section className="page__top top">
                     <div className="top__bgcont">
@@ -87,32 +69,17 @@ export default function Welcome() {
                                 Start your journey today and unlock a world of possibilities with our Travel Planner app. Adventure awaits!
                             </div>
                             <div className="top__find find">
-                                <div className="find__information">
-                                    <div className="find__infoblolck">
-                                        <div className="find__name">
-                                            From
-                                        </div>
-                                        <input type="text" placeholder="Your location?" className="find__input"></input>
-                                    </div>
+                                <form className="find__information">
+                                    <WelcomeFormInput name={"From"} placeholder={"Your location?"}/>
                                     <div className="find__dividor">
                                         <img src={dividor} alt=""></img>
                                     </div>
-                                    <div className="find__infoblolck">
-                                        <div className="find__name">
-                                            To
-                                        </div>
-                                        <input type="text" placeholder="Where are you going?" className="find__input"></input>
-                                    </div>
+                                    <WelcomeFormInput name={"To"} placeholder={"Where are you going?"}/>
                                     <div className="find__dividor">
                                         <img src={dividor} alt=""></img>
                                     </div>
-                                    <div className="find__infoblolck">
-                                        <div className="find__name">
-                                            Date
-                                        </div>
-                                        <input type="text" placeholder="Add dates" className="find__input"></input>
-                                    </div>
-                                </div>
+                                    <WelcomeFormInput name={"Date"} placeholder={"Add dates"}/>
+                                </form>
                                 <div className="find__search">
                                     <a href="#" className="find__searchbut">
                                         <img src={search_but} alt=""></img>
@@ -138,7 +105,6 @@ export default function Welcome() {
                             <PartnerIMG imagePath={partner3}/>
                             <PartnerIMG imagePath={partner4}/>
                             <PartnerIMG imagePath={partner5}/>
-
                         </div>
                     </div>
                 </section>

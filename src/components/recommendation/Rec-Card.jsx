@@ -3,7 +3,7 @@ import arrowdiag from '../../img/arrowdiag.svg';
 import star from '../../img/star.svg';
 import "./Rec-Card.css"
 
-const RecommendationCard = ({country, title, num_of_coms, imageSpare}) => {
+export default function RecommendationCard ({country, title, num_of_coms, imageSpare}) {
     return (
         <div className="recommend__card card">
             <div className="card__image">
@@ -29,5 +29,3 @@ const RecommendationCard = ({country, title, num_of_coms, imageSpare}) => {
         </div>
     );
 };
-
-export default RecommendationCard;

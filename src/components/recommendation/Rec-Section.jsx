@@ -10,7 +10,7 @@ import arrowl from "../../img/arrowl.svg";
 import arrowr from "../../img/arrowr.svg";
 
 
-const RecommendationSection = ({ recommendations, title, intro, showIntro }) => {
+export default function RecommendationSection ({ recommendations, title, intro, showIntro })  {
     return (
         <section className="page__recommend recommend">
             <div className="recommend__container">
@@ -95,4 +95,4 @@ const RecommendationSection = ({ recommendations, title, intro, showIntro }) => 
     );
 };
 
-export default RecommendationSection;
+
