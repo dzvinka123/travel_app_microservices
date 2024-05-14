@@ -289,6 +289,16 @@ section {
     padding: 24px;
 }
 
+.journeys-empty-text {
+    color: #FAFAFA;
+    font-family: Inter;
+    padding: 10px;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
 /* Footer styles */
 
 .footer-content{
