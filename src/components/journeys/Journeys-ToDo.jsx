@@ -1,13 +1,15 @@
 import ToDoCard from './ToDo-Card';
+import CreateCard from './Create-ToDo-Card';
 import "./widgetstyles.css"
 
-// add input for ToDoCard
+// add inputs for ToDoCards, fix the checking of to do cards
 export default function ToDoList() {
     return (
         <section className="block to-do-block">
-            <h3 className="todo-list-header">To-Do List</h3>
+            <p className="todo-list-header">To-Do List</p>
             <div className="to-do-list">
                 <ToDoCard />
+                <CreateCard />
             </div>
         </section>
     )
