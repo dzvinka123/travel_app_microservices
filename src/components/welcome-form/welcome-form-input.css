@@ -12,4 +12,9 @@
 
   .find__input {
     background-color: #FAFAFA;
+    color: #141414;
+  }
+
+  .find__input::placeholder {
+    color: #141414;
   }
