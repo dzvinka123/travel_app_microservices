@@ -1,6 +1,6 @@
 import "./widgetstyles.css"
 import Map from "./Map"
-import ToDoList from './Journeys-ToDo';
+import ToDoList from './ToDo-List';
 
 export default function JourneyWidget({ onClose, destination }) {
 
@@ -10,14 +10,11 @@ export default function JourneyWidget({ onClose, destination }) {
                 <span className="close" onClick={onClose}>&times;</span>
                 <div className="container">
                     <div className="first-row-container">
-                        <div className="block">
+                        <div className="block first-block">
                             <p className="widget-header">Journey To <br /> {destination}</p>
                         </div>
-                        <div className="block"></div>
-                        <div className="smallblock-container">
-                            <div className="small-block"></div>
-                            <div className="small-block"></div>
-                        </div>
+                        <div className="block first-block"></div>
+                        <div className="block second-block"></div>
                     </div>
                     <div className="second-row-container">
                         <ToDoList />

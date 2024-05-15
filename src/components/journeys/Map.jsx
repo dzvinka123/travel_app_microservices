@@ -7,7 +7,6 @@ export default function Map() {
     const ref = useRef();
     const [map, setMap] = useState(null);
     const [mapLoaded, setMapLoaded] = useState(false);
-    const [infoWindow, setInfoWindow] = useState(null);
     const [marker, setMarker] = useState(null);
 
     useEffect(() => {
@@ -18,15 +17,6 @@ export default function Map() {
         }))
         setMapLoaded(true);
     }, []);
-
-    useEffect(() => {
-        if (mapLoaded) {
-            setInfoWindow(new google.maps.InfoWindow({
-                // change address according to the destination
-                content: '<div style="color: #141414;"><strong>Australia, Sydney</div></strong><div style="color: rgba(20, 20, 20, 0.74);">Sample Address</div>'
-            }))
-        }
-    }, [mapLoaded]);
 
     useEffect(() => {
         if (mapLoaded && !marker) {
