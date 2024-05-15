@@ -16,7 +16,7 @@ export default function ToDoList() {
             <p className="todo-list-header">To-Do List</p>
             <div className="to-do-list">
                 {cards.map((card, index) => (
-                    <ToDoCard key={index} input={card} />
+                    <ToDoCard key={index} checkboxIndex={index} input={card} />
                 ))}
                 <CreateCard addNewCard={addNewCard} />
             </div>
