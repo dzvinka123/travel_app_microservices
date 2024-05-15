@@ -11,7 +11,7 @@ export default function ToDoCard({ input }) {
                             <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
                         </svg>
                     </span>
-                    <span>{ input }</span>
+                    <span>{input}</span>
                 </label>
             </div>
         </div>

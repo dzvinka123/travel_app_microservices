@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
@@ -116,7 +117,8 @@ html, body {
     border-radius: 32px;
 }
 
-.first-row-container, .second-row-container {
+.first-row-container,
+.second-row-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -127,9 +129,11 @@ html, body {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
@@ -143,6 +147,7 @@ html, body {
 .cards-container {
     display: flex;
     padding: 12px;
+    margin: 10px 0px;
     align-items: center;
     gap: 8px;
     border-radius: 8px;
@@ -152,7 +157,8 @@ html, body {
 
 /* Styles for checked box */
 
-.to-do-list, .to-do-list-container {
+.to-do-list,
+.to-do-list-container {
     display: flex;
     flex-direction: column;
 }
@@ -163,7 +169,7 @@ html, body {
     font-size: 24px;
     font-style: normal;
     font-weight: 500;
-    line-height: 32px; 
+    line-height: 32px;
 }
 
 .card-wrapper {
@@ -176,7 +182,7 @@ html, body {
     border-radius: 8px;
     background: rgba(250, 250, 250, 0.08);
     box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.24);
-    flex-wrap: wrap; /* Allows content to wrap to a new line */
+    flex-wrap: wrap;
 }
 
 .checkbox-wrapper input[type="checkbox"] {
@@ -187,7 +193,7 @@ html, body {
 .checkbox-wrapper .cbx {
     display: flex;
     align-items: center;
-    gap: 8px; /* Adjust gap between checkbox and text */
+    gap: 8px;
 }
 
 .checkbox-wrapper .cbx span {
@@ -236,30 +242,30 @@ html, body {
     border-color: #460b70;
 }
 
-.checkbox-wrapper .inp-cbx:checked + .cbx span:first-child {
+.checkbox-wrapper .inp-cbx:checked+.cbx span:first-child {
     background: #460b70;
     border-color: #460b70;
     animation: wave-46 0.4s ease;
 }
 
-.checkbox-wrapper .inp-cbx:checked + .cbx span:first-child svg {
+.checkbox-wrapper .inp-cbx:checked+.cbx span:first-child svg {
     stroke-dashoffset: 0;
 }
 
-.checkbox-wrapper .inp-cbx:checked + .cbx span:first-child:before {
+.checkbox-wrapper .inp-cbx:checked+.cbx span:first-child:before {
     transform: scale(3.5);
     opacity: 0;
     transition: all 0.6s ease;
 }
 
 .checkbox-wrapper .cbx span:last-child {
-    line-height: 1; /* Ensures text height is minimal */
-    font-size: 16px; /* Adjust font size if needed */
+    line-height: 1;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: 20px;
     font-family: "Inter";
-    word-break: break-word; /* Allows text to break to the next line */
+    word-break: break-word;
     flex: 1;
 }
 

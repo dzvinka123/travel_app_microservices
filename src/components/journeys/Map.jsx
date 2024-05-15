@@ -2,23 +2,23 @@ import { useRef, useEffect, useState } from "react";
 import map_location_marker from '../../img/map_location_marker.png';
 import "./widgetstyles.css"
 
-const latlng = {lat: -34.397, lng: 150.644}; // change according to destination
+const latlng = { lat: -34.397, lng: 150.644 }; // change according to destination
 export default function Map() {
     const ref = useRef();
     const [map, setMap] = useState(null);
     const [mapLoaded, setMapLoaded] = useState(false);
     const [infoWindow, setInfoWindow] = useState(null);
     const [marker, setMarker] = useState(null);
-  
+
     useEffect(() => {
-      setMap(new window.google.maps.Map(ref.current, {
-        center: latlng,
-        zoom: 8,
-        mapId: 'wowMap'
-      }))
-      setMapLoaded(true);
+        setMap(new window.google.maps.Map(ref.current, {
+            center: latlng,
+            zoom: 8,
+            mapId: 'wowMap'
+        }))
+        setMapLoaded(true);
     }, []);
-  
+
     useEffect(() => {
         if (mapLoaded) {
             setInfoWindow(new google.maps.InfoWindow({
@@ -27,7 +27,7 @@ export default function Map() {
             }))
         }
     }, [mapLoaded]);
-  
+
     useEffect(() => {
         if (mapLoaded && !marker) {
             const markerImg = document.createElement("img");
@@ -42,8 +42,8 @@ export default function Map() {
             if (marker) {
                 marker.addListener("click", () => {
                     infoWindow.open({
-                    anchor: marker,
-                    map,
+                        anchor: marker,
+                        map,
                     });
                 });
             }

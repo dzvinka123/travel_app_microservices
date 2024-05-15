@@ -1,10 +1,11 @@
 :root {
     --background-item-color: #191C20;
     --text-color: #1B1C57;
-    --text-secondary: #626687; /* Fix root setting for project */
+    --text-secondary: #626687;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
@@ -29,7 +30,6 @@ html, body {
     display: flex;
     flex-direction: row;
     padding: 16px 24px;
-    /* margin: 24px; */
     border-radius: 32px;
     background: var(--background-item-color);
     box-shadow: 4px 4px 30.4px 0px rgba(7, 5, 5, 0.20);
@@ -50,7 +50,7 @@ html, body {
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
-    line-height: 32px; /* 133.333% */
+    line-height: 32px;
     text-transform: lowercase;
 }
 
@@ -143,7 +143,6 @@ html, body {
     display: flex;
     flex-direction: column;
     padding: 24px;
-    /* margin: 24px; */
     background-color: #191C20;
     border: none;
     border-radius: 32px;
@@ -158,7 +157,7 @@ html, body {
     font-size: 24px;
     font-style: normal;
     font-weight: 500;
-    line-height: 32px; /* 133.333% */
+    line-height: 32px;
 }
 
 .journeys-buttons {
@@ -198,17 +197,16 @@ html, body {
 section {
     display: flex;
     flex-direction: column;
-    /* margin: 48px 24px; */
 }
 
 .journeys-header {
     color: #FAFAFA;
-    margin-bottom: 24px;
+    margin: 24px 0px;
     font-family: 'Inter';
     font-size: 36px;
     font-style: normal;
     font-weight: 600;
-    line-height: 44px; /* 122.222% */
+    line-height: 44px;
     letter-spacing: -0.72px;
 }
 
@@ -240,7 +238,7 @@ section {
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
-    line-height: 20px; /* 142.857% */
+    line-height: 20px;
     margin-bottom: 12px;
 }
 
@@ -250,7 +248,7 @@ section {
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
-    line-height: 26px; /* 144.444% */
+    line-height: 26px;
     margin-bottom: 4px;
 }
 
@@ -260,7 +258,7 @@ section {
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 20px; /* 142.857% */
+    line-height: 20px;
 }
 
 .journey-preview-wrapper {
@@ -304,7 +302,7 @@ section {
 
 /* Footer styles */
 
-.footer-content{
+.footer-content {
     display: flex;
     padding: 48px 94px 24px 94px;
     flex-direction: column;
@@ -320,7 +318,7 @@ section {
 .footer-content-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;    
+    justify-content: space-between;
     align-items: flex-start;
 }
 
@@ -350,7 +348,7 @@ section {
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
-    line-height: 26px; /* 144.444% */
+    line-height: 26px;
     align-self: stretch;
 }
 
@@ -374,7 +372,7 @@ section {
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 20px; /* 142.857% */
+    line-height: 20px;
 }
 
 .logo-section {
@@ -391,6 +389,6 @@ section {
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
-    line-height: 32px; /* 133.333% */
+    line-height: 32px;
     text-transform: lowercase;
 }

@@ -1,5 +1,5 @@
 import './Journeys.css';
-import campingDark from '../../img/camping-dark.svg';
+import campingWhite from '../../img/camping-white.svg';
 
 export default function JourneysGreeting({ activeButton, setActiveButton }) {
   return (
@@ -11,14 +11,13 @@ export default function JourneysGreeting({ activeButton, setActiveButton }) {
           id="active-button"
           onClick={() => setActiveButton('active')}
         >
-          <img className="journeys-greeting-icon" src={campingDark} alt="Camping Icon" />
+          <img className="journeys-greeting-icon" src={campingWhite} alt="Camping Icon" />
           <span>Active</span>
         </button>
         <button
           className={`journeys-greeting-button ${activeButton === 'pending' ? 'active' : ''}`}
           onClick={() => setActiveButton('pending')}
         >
-          <img className="journeys-greeting-icon" src={campingDark} alt="Camping Icon" />
           <span>Pending</span>
         </button>
       </div>
