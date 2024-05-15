@@ -187,6 +187,9 @@ html, body {
 
 #active-button {
     border-radius: 8px 0px 0px 8px;
+}
+
+.active {
     background: #005A44;
 }
 
