@@ -59,9 +59,13 @@ async function fetchDays({ days_range, temperatures, start_day}) {
         try {
             const [startDateStr, endDateStr] = days_range.split(" - ");
 
-            const formatDate = (dateStr) => dateStr.includes('.')
-                ? dateStr.split('.').reverse().join('-')
-                : dateStr.split('/').reverse().join('-');
+            const formatDate = (dateStr) => {
+              const [month, day, year] = dateStr.split("/");
+              return `${year}-${month.padStart(2, "0")}-${day.padStart(
+                2,
+                "0"
+              )}`;
+            };
 
             const startDate = new Date(formatDate(startDateStr));
             const endDate = new Date(formatDate(endDateStr));
