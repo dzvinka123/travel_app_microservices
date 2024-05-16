@@ -2,7 +2,7 @@ import "./widgetstyles.css"
 import Map from "./Map"
 import ToDoList from './ToDo-List';
 
-export default function JourneyWidget({ onClose, destination }) {
+export default function JourneyWidget({ onClose, destination, description }) {
 
     return (
         <div className="modal-container">
@@ -12,6 +12,8 @@ export default function JourneyWidget({ onClose, destination }) {
                     <div className="first-row-container">
                         <div className="block first-block">
                             <p className="widget-header">Journey To <br /> {destination}</p>
+                            <p className="widget-description">{description}</p>
+                            {/* Add friends functionality */}
                         </div>
                         <div className="block first-block"></div>
                         <div className="block second-block"></div>

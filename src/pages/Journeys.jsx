@@ -10,6 +10,7 @@ export default function MainJourneys() {
       <Navbar />
       <RenderJourneys />
       <JourneysEmpty />
+      {/* <PlacesApiWrapper /> */}
       <Footer />
     </main>
   );
