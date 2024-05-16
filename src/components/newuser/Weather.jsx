@@ -113,7 +113,7 @@ export default function Weather({ days_range, city }) {
     return (
         <div className="weather-div">
             <div className="weather-nav">
-                <h2> Weather </h2>
+                <h2 className="weather-header"> Weather </h2>
                 <div className="slider-buttons">
                     <button className="slider-button left"><img src={left} /></button>
                     <button className="slider-button right"><img src={rigth} /></button>

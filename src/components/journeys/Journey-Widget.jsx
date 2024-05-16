@@ -1,8 +1,9 @@
 import "./widgetstyles.css"
 import Map from "./Map"
 import ToDoList from './ToDo-List';
+import Weather from "../newuser/Weather"
 
-export default function JourneyWidget({ onClose, destination, description }) {
+export default function JourneyWidget({ onClose, destination, description, daysRange }) {
 
     return (
         <div className="modal-container">
@@ -15,7 +16,7 @@ export default function JourneyWidget({ onClose, destination, description }) {
                             <p className="widget-description">{description}</p>
                             {/* Add friends functionality */}
                         </div>
-                        <div className="block first-block"></div>
+                        <Weather days_range={"18.05.2024 - 23.05.2024"} city={"Lviv"}/>
                         <div className="block second-block"></div>
                     </div>
                     <div className="second-row-container">
