@@ -1,10 +1,10 @@
 import './Journeys.css';
 import campingWhite from '../../img/camping-white.svg';
 
-export default function JourneysGreeting({ activeButton, setActiveButton }) {
+export default function JourneysGreeting({ activeButton, setActiveButton, userName }) {
   return (
     <section className="journeys-greeting">
-      <h3 className="journeys-greeting-text">Hi, UserName! Your Adventures Await!</h3>
+      <h3 className="journeys-greeting-text">Hi, {userName}! Your Adventures Await!</h3>
       <div className="journeys-buttons">
         <button
           className={`journeys-greeting-button ${activeButton === 'active' ? 'active' : ''}`}

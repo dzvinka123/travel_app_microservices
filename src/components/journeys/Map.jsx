@@ -3,7 +3,7 @@ import map_location_marker from '../../img/map_location_marker.png';
 import "./widgetstyles.css"
 
 const latlng = { lat: -34.397, lng: 150.644 }; // change according to destination
-export default function Map() {
+export default function Map({ destination }) {
     const ref = useRef();
     const [map, setMap] = useState(null);
     const [mapLoaded, setMapLoaded] = useState(false);

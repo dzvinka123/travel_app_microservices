@@ -11,7 +11,6 @@ import plus from "../img/add.svg"
 import person from "../img/person.png"
 import booking from "../img/booking.png"
 import "../components/newuser/createdTripUser.css";
-import Map from "../components/journeys/Map"
 
 
 export default function CreateTripNewUser() { 
@@ -25,7 +24,6 @@ export default function CreateTripNewUser() {
         <Search days={days} city={city} />
         {/* 2 block */}
 
-        <Map />
         <div className="ride-text">
             <h2>Secure Your Ride: Booking Transport</h2>
         </div>

@@ -4,7 +4,7 @@ import JourneyOption from './Journey-Option';
 import JourneyWidget from './Journey-Widget';
 import "./widgetstyles.css";
 
-export default function JourneyManager(country, title, date) {
+export default function JourneyManager(country, title, date, description) {
     const [widgetVisible, setWidgetVisible] = useState(false);
 
     const toggleWidgetVisibility = () => {
@@ -13,10 +13,10 @@ export default function JourneyManager(country, title, date) {
 
     return (
         <div>
-            <JourneyOption onButtonClick={toggleWidgetVisibility} />
+            <JourneyOption onButtonClick={toggleWidgetVisibility} country={country} title={title} date={date} />
             {widgetVisible && ReactDOM.createPortal(
                 <div className="journey-popup-overlay">
-                    <JourneyWidget onClose={toggleWidgetVisibility} />
+                    <JourneyWidget onClose={toggleWidgetVisibility} description={description} daysRange={date}/>
                 </div>,
                 document.body
             )}

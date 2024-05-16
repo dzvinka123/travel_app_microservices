@@ -18,13 +18,13 @@ export default function JourneyWidget({ onClose, destination, description, daysR
                                 <p className="widget-description">{description}</p>
                                 {/* Add friends functionality */}
                             </div>
-                            <Weather days_range={"18.05.2024 - 23.05.2024"} city={"Lviv"} />
+                            <Weather days_range={daysRange} city={destination} />
                             <div className="block second-block"></div>
                         </div>
                         <div className="second-row-container">
                             <ToDoList />
                             <div className="big-block">
-                                <Map />
+                                <Map destination={destination}/>
                             </div>
                         </div>
                     </div>
