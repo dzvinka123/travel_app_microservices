@@ -199,6 +199,37 @@ body {
 
 /* Journeys */
 
+.journeys-header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.slider-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.slider-button-journeys {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border-color: #FAFAFA;
+    background: rgba(0, 0, 0, 0.3);
+    border-width: 1px;
+    border-style: solid;
+}
+
+.slider-button-journeys:hover {
+    background-color: #005A44;
+    opacity: 70%;
+    border: none;
+}
+
 section {
     display: flex;
     flex-direction: column;

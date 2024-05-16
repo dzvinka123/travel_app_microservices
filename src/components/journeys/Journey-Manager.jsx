@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import JourneyOption from './Journey-Option';
 import JourneyWrapper from './Journey-Wrapper';
 import "./widgetstyles.css";
@@ -13,7 +14,12 @@ export default function JourneyManager() {
     return (
         <div>
             <JourneyOption onButtonClick={toggleWidgetVisibility} />
-            {widgetVisible && <JourneyWrapper onClose={toggleWidgetVisibility} />}
+            {widgetVisible && ReactDOM.createPortal(
+                <div className="journey-popup-overlay">
+                    <JourneyWrapper onClose={toggleWidgetVisibility} />
+                </div>,
+                document.body
+            )}
         </div>
     );
 }
