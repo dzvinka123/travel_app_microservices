@@ -136,3 +136,28 @@ html, body {
     font-weight: 500;
     line-height: 32px; /* 133.333% */
 }
+
+.header__loginbutton {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-grid-column-align: center;
+        justify-self: center;
+    border-radius: 24px;
+    background-color: #FAFAFA;
+    padding: 12px 24px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    color: #141414;
+    -webkit-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+  }
+
+  .header__loginbutton:hover {
+    background-color: #005A44;
+    color: #FAFAFA;
+  }
