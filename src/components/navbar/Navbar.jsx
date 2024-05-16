@@ -4,8 +4,10 @@ import commute from '../../img/commute.svg';
 import language from '../../img/language.svg';
 import campingDark from '../../img/camping-dark.svg';
 import user from '../../img/user.svg';
+import { useAuth } from "../../session/AuthContext";
 
 export default function Navbar() {
+  const { logout } = useAuth();
   return (
     <header className="header-container">
       <div className="header-left-elements">
@@ -44,7 +46,7 @@ export default function Navbar() {
             <option>Ua</option>
           </select>
         </div>
-        <button className="header-item-user-button">
+        <button onClick={logout} className="header-item-user-button">
           <img className="header-user-icon" src={user} alt="User Icon" aria-hidden="true" />
         </button>
       </div>

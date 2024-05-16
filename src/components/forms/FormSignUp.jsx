@@ -2,29 +2,39 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Eye from "../../img/eye.png";
 import "./FormSignUp.css";
+import axios from "axios";
+import { useAuth } from "../../session/AuthContext";
 
 function FormSignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
-
   const togglePassword = () => {
     setShowPassword(!showPassword);
   };
+  const { login } = useAuth();
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/" + name + " " + email + " " + password);
-    setEmail("");
-    setPassword("");
-    setName("");
+    axios.post('http://localhost:3001/register', { name, email, password })
+    .then(response => {
+      setEmail("");
+      setPassword("");
+      setName("");
+      setError("");
+      login(response.data)
+      navigate('/welcome');
+    }).catch(error => {
+        setError(error.response.data.message);
+    });
   };
 
   return (
     <div className="middle-item">
-      <div class="registration-top">
+      <div className="registration-top">
         <h2>Create Account</h2>
         <h5>Enter your credentials to access your account.</h5>
       </div>
@@ -70,14 +80,15 @@ function FormSignUp() {
               onChange={togglePassword}
               hidden
             ></input>
-            <label for="show-password">
+            <label htmlFor="show-password">
               <img src={Eye} alt="" />
             </label>
           </div>
         </div>
-        <div class="form-row terms-and-conditions">
+        {error && <p className="error">{error}</p>}
+        <div className="form-row terms-and-conditions">
           <input type="checkbox" id="agree" required />
-          <label for="agree">
+          <label htmlFor="agree">
             Agree with company{" "}
             <a href="/terms-and-conditions">terms and conditions.</a>
           </label>
@@ -86,7 +97,7 @@ function FormSignUp() {
           Sign Up
         </button>
       </form>
-      <div class="registration-bottom">
+      <div className="registration-bottom">
         <h2>Already have an Account?</h2>
         <a href="/login">Log In</a>
       </div>

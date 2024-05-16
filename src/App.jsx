@@ -8,10 +8,12 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import TripDetails from "./pages/TripDetails";
 import Welcome from "./pages/Welcome";
+import { AuthProvider } from "./session/AuthContext";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/welcome" element={<Welcome />} />
@@ -27,5 +29,6 @@ export default function App() {
         <Route path="/userpage" element={<CreateTripNewUser />} />
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
   );
 }

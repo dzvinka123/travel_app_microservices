@@ -2,25 +2,33 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Eye from "../../img/eye.png";
 import "./FormLogin.css";
+import axios from "axios";
+import { useAuth } from '../../session/AuthContext';
 
 function FormLogin() {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [error, setError] = useState("")
+  const { login } = useAuth();
   const navigate = useNavigate();
-
   const togglePassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/" + name + " " + email + " " + password);
-    setEmail("");
-    setPassword("");
-    setName("");
+    axios.post('http://localhost:3001/login', { email, password })
+    .then(response => {
+      setEmail("");
+      setPassword("");
+      setError("");
+      login(response.data);
+      navigate('/welcome');
+    }).catch(error => {
+        setError(error.response.data.message);
+    });
   };
 
   const rememberUser = (e) => {
@@ -29,7 +37,7 @@ function FormLogin() {
 
   return (
     <div className="middle-item">
-      <div class="registration-top">
+      <div className="registration-top">
         <h2>Welcome Back</h2>
         <h5>Enter your credentials to access your account.</h5>
       </div>
@@ -64,25 +72,26 @@ function FormLogin() {
               onChange={togglePassword}
               hidden
             />
-            <label for="show-password">
+            <label htmlFor="show-password">
               <img src={Eye} alt="" />
             </label>
           </div>
         </div>
-        <div class="form-row terms-and-conditions">
+        {error && <p className="error">{error}</p>}
+        <div className="form-row terms-and-conditions">
           <input
             type="checkbox"
             id="agree"
             checked={rememberMe}
             onChange={(e) => setRememberMe(e.target.checked)}
           />
-          <label for="agree">Remember me</label>
+          <label htmlFor="agree">Remember me</label>
         </div>
         <button className="sign-up-button" type="submit">
           Log In
         </button>
       </form>
-      <div class="registration-pre-bottom">
+      <div className="registration-pre-bottom">
         <a href="/forgot-password">Forgot Password?</a>
         <div className="registration-bottom">
           <h2>Don't have an account?</h2>
