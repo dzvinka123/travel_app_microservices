@@ -1,0 +1,64 @@
+.friends {
+    margin: 0 0 48px 0;
+    padding: 48px 0;
+}
+
+._container {
+    max-width: 1024px;
+    margin: 0 auto;
+  }
+
+.friends__title {
+    font-size: 36px;
+    line-height: 44px;
+    color: #FAFAFA;
+    margin: 0 0 17px 0;
+    font-weight: 600;
+    position: relative;
+    left: 24px;
+}
+
+.friends__info {
+    padding: 24px;
+    background-color: #191C20;
+    border-radius: 32px;
+}
+
+.friends__descr {
+    font-size: 24px;
+    line-height: 32px;
+    color: #FAFAFA;
+    font-weight: 500;
+    margin: 0 0 24px 0;
+}
+
+.friends__friends {
+    display: flex;
+    align-items: center;
+}
+
+.friends__friend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #FAFAFA;
+    border-radius: 5px;
+    width: 44px;
+    height: 44px;
+    margin: 0 8px 0 0;
+}
+
+.friends__friend img {
+    width: 100%;
+    height: 100%;
+}
+
+.friends__plus {
+    background: #005A44;
+    border-radius: 5px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

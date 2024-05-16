@@ -49,15 +49,17 @@ const db = new sqlite3.Database(dbPath, (err) => {
     );
     db.run(
       `CREATE TABLE if not exists travel_card
-        (
-            id         integer
-                constraint travel_card_pk
-                    primary key autoincrement,
-            "from"     TEXT not null,
-            "to"       TEXT not null,
-            start_date TEXT not null,
-            end_date   TEXT not null
-        , description TEXT)
+      (
+          id         integer
+              constraint travel_card_pk
+                  primary key autoincrement,
+          "from"     TEXT not null,
+          "to"       TEXT not null,
+          start_date TEXT not null,
+          end_date   TEXT not null
+      , description TEXT, active integer)
+      
+      
         `,
       (err) => {
         if (err) {
@@ -108,6 +110,10 @@ const db = new sqlite3.Database(dbPath, (err) => {
     );
   }
 });
+
+db.run("DELETE from travel_card")
+db.run("DELETE from user_card")
+db.run("DELETE from todo_list")
 
 app.get("/users", (req, res) => {
   db.all("SELECT * FROM users", [], (err, rows) => {
@@ -233,7 +239,7 @@ app.post("/add-friend", async (req, res) => {
 });
 
 app.post("/add-travel-card", (req, res) => {
-  const { from, to, start_date, end_date, emails, tasks } = req.body;
+  const { from, to, start_date, end_date, active, emails, tasks } = req.body;
 
   if (
     !from ||
@@ -256,8 +262,8 @@ app.post("/add-travel-card", (req, res) => {
 
   db.serialize(() => {
     // Insert new travel card
-    const cardQuery = `INSERT INTO travel_card ("from", "to", start_date, end_date) VALUES (?, ?, ?, ?)`;
-    db.run(cardQuery, [from, to, start_date, end_date], function (err) {
+    const cardQuery = `INSERT INTO travel_card ("from", "to", start_date, end_date, active) VALUES (?, ?, ?, ?, ?)`;
+    db.run(cardQuery, [from, to, start_date, end_date, active], function (err) {
       if (err) {
         console.error("Database error:", err);
         return res
