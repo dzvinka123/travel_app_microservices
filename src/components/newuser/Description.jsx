@@ -3,13 +3,13 @@ import "./createdTripUser.css";
 
 export default function Description() {
     return (
-        <div class="description-box">
-            <div class="empty"></div>
-            <div class="descriptor">
+        <div className="description-box">
+            <div className="empty"></div>
+            <div className="descriptor">
                 <div>
                     <h3>Description/Notes</h3>
                 </div>
-                <div class="descriptor-list">
+                <div className="descriptor-list">
                     <div>
                         <span>Write your thoughts here</span>
                         <input type="text" />
