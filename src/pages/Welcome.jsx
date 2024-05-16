@@ -19,6 +19,7 @@ import { AuthContext } from "../session/AuthContext";
 import Navbar from "../components/navbar/Navbar.jsx";
 export default function Welcome() {
     const { user } = useContext(AuthContext);
+    console.log(user)
     const recommendations = [
         {
             country: 'Ukraine',
