@@ -8,8 +8,61 @@ import Search from "../components/newuser/Search";
 import plus from "../img/add.svg";
 import { Wrapper } from "@googlemaps/react-wrapper";
 import "../components/newuser/createdTripUser.css";
+import { useState } from "react";
+import Friends from "../components/friends/Friends";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function CreateTripNewUser() {
+  const [tasks, setTasks] = useState([]);
+  const [friends, setFriends] = useState([]);
+  const [description, setDescription] = useState("");
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [startDate, setStart] = useState("");
+  const [endDate, setEnd] = useState("");
+  const navigate = useNavigate()
+
+  const handleFriendsUpdate = (newFriendsList) => {
+      setFriends(newFriendsList);
+  };
+  const handleData = (newData) => {
+    setFrom(newData.from);
+    setTo(newData.to);
+    const [start, end] = newData.date.split(' - ');
+    setStart(start);
+    setEnd(end);
+  };
+  const handleDescriptinion = (newDescription) => {
+    setDescription(newDescription);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(tasks)
+    console.log(friends)
+    console.log(from)
+    console.log(to)
+    console.log(startDate)
+    console.log(endDate)
+    console.log(description)
+
+    try {
+      const response = await axios.post(`http://localhost:3001/add-travel-card`, {
+        from: from,
+        to: to,
+        start_date: startDate,
+        end_date: endDate,
+        active: 0,
+        description: description,
+        emails: friends,
+        tasks: tasks
+      });
+      console.log('Travel card created:', response.data);
+      navigate('/journeys');
+    } catch (error) {
+      console.error('Error creating travel card:', error.response ? error.response.data : error.message);
+    }
+  };
   return (
     <>
       <Wrapper
@@ -19,7 +72,7 @@ export default function CreateTripNewUser() {
         <Navbar />
         {/* search block */}
 
-        <Search />
+        <Search onDataUpdate={handleData}/>
         {/* 3 block */}
         <section className="interesting-place">
           <h2>
@@ -66,13 +119,12 @@ export default function CreateTripNewUser() {
               </div>
             </div>
           </div>
-          <Description />
+          <Description  onDescriptionUpdate={handleDescriptinion}/>
         </section>
-
-        <button>
+        <Friends onFriendsUpdate={handleFriendsUpdate}></Friends>
+        <button onClick={handleSubmit}>
           SAVE ALL
         </button>
-
         <Footer />
       </Wrapper>
     </>

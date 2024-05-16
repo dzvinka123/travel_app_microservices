@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Weather from "./Weather";
 import Map from "../journeys/Map";
@@ -14,7 +14,7 @@ import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { format } from 'date-fns'
 
-export default function Search() {
+export default function Search(props) {
   const location = useLocation();
   const { from, to, date } = location.state;
 
@@ -30,7 +30,9 @@ export default function Search() {
   //     loadPlaces(to).then(setPlaces).catch(console.error);
   //   }
   // }, [to]); 
-
+  useEffect(() => {
+    props.onDataUpdate(formData);
+  }, [formData, props.onDataUpdate]);
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prev) => ({ ...prev, [name]: value }));

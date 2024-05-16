@@ -1,7 +1,11 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "./createdTripUser.css";
 
-export default function Description() {
+export default function Description(props) {
+    const [description, setDescription] = useState("");
+    useEffect(() => {
+        props.onDescriptionUpdate(description);
+      }, [description, props.onDescriptionUpdate]);
     return (
         <div className="description-box">
             <div className="empty"></div>
@@ -12,7 +16,7 @@ export default function Description() {
                 <div className="descriptor-list">
                     <div>
                         <span>Write your thoughts here</span>
-                        <input type="text" />
+                        <input onChange={(e) => setDescription(e.target.value)} type="text" />
                     </div>
                 </div>
             </div>

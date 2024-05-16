@@ -250,17 +250,13 @@ app.post("/add-friend", async (req, res) => {
 });
 
 app.post("/add-travel-card", (req, res) => {
-  const { from, to, start_date, end_date, active, emails, tasks } = req.body;
+  const { from, to, start_date, end_date, description, active, emails, tasks } = req.body;
 
   if (
     !from ||
     !to ||
     !start_date ||
-    !end_date ||
-    !emails ||
-    !emails.length ||
-    !tasks ||
-    !tasks.length
+    !end_date
   ) {
     return res
       .status(400)
@@ -273,8 +269,8 @@ app.post("/add-travel-card", (req, res) => {
 
   db.serialize(() => {
     // Insert new travel card
-    const cardQuery = `INSERT INTO travel_card ("from", "to", start_date, end_date, active) VALUES (?, ?, ?, ?, ?)`;
-    db.run(cardQuery, [from, to, start_date, end_date, active], function (err) {
+    const cardQuery = `INSERT INTO travel_card ("from", "to", start_date, end_date, description, active) VALUES (?, ?, ?, ?, ?, ?)`;
+    db.run(cardQuery, [from, to, start_date, end_date, description, active], function (err) {
       if (err) {
         console.error("Database error:", err);
         return res
