@@ -1,22 +1,35 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Weather from "./Weather";
 import Map from "../journeys/Map";
 import FormInput from "../formInput/Form-Input";
 import PlacesWrapper from "../place-photos/Places-Wrapper";
 import ActionButton from "../action-button/ActionButton";
 import "./createdTripUser.css";
-import { Wrapper } from "@googlemaps/react-wrapper";
 import distance from "../../img/distance.svg";
 import calendar_clock from "../../img/calendar_clock.svg";
 
-export default function Search({ days, city }) {
+import { DateRangePicker } from "react-date-range"; // for date
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import { format } from 'date-fns'
+
+export default function Search() {
+  const location = useLocation();
+  const { from, to, date } = location.state;
+
   const [formData, setFormData] = useState({
-    from: "",
-    to: "",
-    date: "",
+    from: from,
+    to: to,
+    date: date,
   });
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   if (to) {
+  //     loadPlaces(to).then(setPlaces).catch(console.error);
+  //   }
+  // }, [to]); 
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -25,57 +38,87 @@ export default function Search({ days, city }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate("/create-new-user-trip/trip-details", {
-      state: { ...formData },
+    navigate("/create-trip", { state: { ...formData } });
+  };
+
+  const [openDate, setOpenDate] = useState(false);
+
+  const [selectionRange, setDate] = useState({
+    startDate: new Date(),
+    endDate: new Date(),
+    key: "selection",
+  });
+
+  const handleDate = (ranges) => {
+    const { startDate, endDate } = ranges.selection;
+    const formattedStartDate = format(startDate, "MM/dd/yyyy");
+    const formattedEndDate = format(endDate, "MM/dd/yyyy");
+    setDate({ ...selectionRange, ...ranges.selection });
+    setFormData({
+      ...formData,
+      date: `${formattedStartDate} - ${formattedEndDate}`,
     });
   };
 
+  const handleClickDate = () => {
+    setOpenDate((prev) => !prev);
+  };
+
+    // const city = "Lviv";
+    // const days = "18.05.2024 - 23.05.2024";
+
   return (
-    <Wrapper
-      apiKey={import.meta.env.VITE_REACT_APP_GOOGLE_API}
-      libraries={["marker", "places"]}
-    >
-      <section className="search-container">
-        <div className="search-div">
-          <form className="search-container" onSubmit={handleSubmit}>
-            <FormInput
-              icon={distance}
-              placeholder="Your Location?"
-              text="From"
-              name="from"
-              onChange={handleChange}
+    <section className="search-container">
+      <div className="search-div">
+        <form className="search-container" onSubmit={handleSubmit}>
+          <FormInput
+            icon={distance}
+            placeholder="Your Location?"
+            text="From"
+            name="from"
+            value={formData.from}
+            onChange={handleChange}
+          />
+          <FormInput
+            icon={distance}
+            placeholder="Where are you going?"
+            text="To"
+            name="to"
+            value={formData.to}
+            onChange={handleChange}
+          />
+          <FormInput
+            icon={calendar_clock}
+            placeholder="Add date"
+            text="Date"
+            name="date"
+            onChange={handleChange}
+            onClick={handleClickDate}
+            className="last-field"
+            value={formData.date}
+          />
+          {openDate && (
+            <DateRangePicker
+              ranges={[selectionRange]}
+              onChange={handleDate}
+              minDate={new Date()}
             />
-            <FormInput
-              icon={distance}
-              placeholder="Where are you going?"
-              text="To"
-              name="to"
-              onChange={handleChange}
-            />
-            <FormInput
-              icon={calendar_clock}
-              placeholder="Add date"
-              text="Date"
-              name="date"
-              onChange={handleChange}
-              className="last-field"
-            />
-            <ActionButton text="Create Your Journey" onClick={handleSubmit} />
-          </form>
+          )}
+          <ActionButton text="Create Your Journey" onClick={handleSubmit} />
+        </form>
 
-          <div className="search-elements-div">
-            <div className="photo-slider">
-              <PlacesWrapper />
-            </div>
-
-            <div className="search-map">
-              <Map />
-            </div>
-
-            <Weather days_range={days} city={city} />
+        <div className="search-elements-div">
+          <div className="photo-slider">
+            <PlacesWrapper input={to} />
           </div>
+
+          <div className="search-map">
+            <Map destination={to} />
+          </div>
+
+          <Weather days_range={date} city={to} />
         </div>
-      </section>
-    </Wrapper>
+      </div>
+    </section>
   );
 }
