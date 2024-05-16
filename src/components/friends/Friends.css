@@ -35,18 +35,22 @@
 .friends__friends {
     display: flex;
     align-items: center;
+    margin: 0 0 24px 0;
 }
 
 .friends__friend {
+    position: relative;
+    margin: 0 8px 0 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    transition: 1s linear;
     border: 3px solid #FAFAFA;
     border-radius: 5px;
     width: 44px;
     height: 44px;
-    margin: 0 8px 0 0;
 }
+
 
 .friends__friend img {
     width: 100%;
@@ -61,4 +65,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.friends__input {
+    border: rgba(255, 255, 255, 0.15) solid 2px;
+    font-size: 16px;
+    line-height: 24px;
+    border-radius: 5px;
+    width: 100%;
+    padding: 10px;
+    background-color: #191C20;
+}
+
+.friends__error {
+    font-size: 13.5px;
+    color: red;
+    margin: 8px 0 0 0;
 }

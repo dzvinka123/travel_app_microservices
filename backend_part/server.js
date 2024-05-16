@@ -111,9 +111,9 @@ const db = new sqlite3.Database(dbPath, (err) => {
   }
 });
 
-db.run("DELETE from travel_card")
-db.run("DELETE from user_card")
-db.run("DELETE from todo_list")
+// db.run("DELETE from travel_card")
+// db.run("DELETE from user_card")
+// db.run("DELETE from todo_list")
 
 app.get("/users", (req, res) => {
   db.all("SELECT * FROM users", [], (err, rows) => {
@@ -123,6 +123,17 @@ app.get("/users", (req, res) => {
     }
     res.json({ success: true, users: rows });
   });
+});
+
+app.get('/get-user', async (req, res) => {
+  const email  = req.query.email;
+  const userExists = await checkUserExists(email);
+  if (userExists) {
+    const user = getUser(email)
+    res.json({ exists: userExists,  email: user.email, name: user.name, message: "User found succesfully!"});
+  } else {
+    res.json({ exists: userExists,  email: null, name: null, message: "User not found!"});
+  }
 });
 
 // Registration endpoint
