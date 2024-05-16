@@ -225,6 +225,8 @@ body {
 }
 
 .slider-button-journeys:hover {
+    transform: scale(1.1);
+    transition: all .5s ease;
     background-color: #005A44;
     opacity: 70%;
     border: none;

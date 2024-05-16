@@ -1035,6 +1035,8 @@ html, body {
 }
 
 .slider-button:hover {
+    transform: scale(1.1);
+    transition: all .5s ease;
     background-color: #460b70;
     opacity: 70%;
     border: none;
