@@ -5,6 +5,7 @@ import HotelCard from "../components/newuser/HotelCard";
 import ToDos from "../components/newuser/ToDos";
 import AddButton from "../components/newuser/AddButton";
 import Description from "../components/newuser/Description";
+import Weather from "../components/newuser/Weather";
 import plus from "../img/add.svg"
 import person from "../img/person.png"
 import booking from "../img/booking.png"
@@ -12,24 +13,17 @@ import "../components/newuser/createdTripUser.css";
 
 
 export default function CreateTripNewUser() {
+    const city = 'Lviv';
+    const days = "18.05.2024 - 23.05.2024";
+    
     return (
       <>
         <Navbar />
+        {/* weather block */}
+        <Weather days_range={days} city={city} />
         {/* 2 block */}
         <div class="ride-text">
             <h2>Secure Your Ride: Booking Transport</h2>
-        </div>
-            
-        <div className="driver-block">
-            <h3>Available cars for ride</h3>
-            <span>Fri, Apr 26 2024</span> {/* this span will be dynamic */}
-            <div className="drivers-container">
-                <div className="driver-col">
-                    {/* change css to make it cols with 2 elements */}
-                    <Driver person={person} plus={plus} />
-                    <Driver person={person} plus={plus}/>
-                </div>
-            </div>
         </div>
             
         {/* 3 block */}
