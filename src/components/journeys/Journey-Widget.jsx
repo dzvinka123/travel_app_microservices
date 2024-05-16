@@ -4,7 +4,7 @@ import ToDoList from './ToDo-List';
 import Weather from "../newuser/Weather"
 import { Wrapper } from "@googlemaps/react-wrapper";
 
-export default function JourneyWidget({ onClose, destination, description, daysRange }) {
+export default function JourneyWidget({ onClose, destination, description, date }) {
 
     return (
         <Wrapper apiKey={import.meta.env.VITE_REACT_APP_GOOGLE_API} libraries={['marker']}>
@@ -18,7 +18,7 @@ export default function JourneyWidget({ onClose, destination, description, daysR
                                 <p className="widget-description">{description}</p>
                                 {/* Add friends functionality */}
                             </div>
-                            <Weather days_range={daysRange} city={destination} />
+                            <Weather days_range={date} city={destination} />
                             <div className="block second-block"></div>
                         </div>
                         <div className="second-row-container">

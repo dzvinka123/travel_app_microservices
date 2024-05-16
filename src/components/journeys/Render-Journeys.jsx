@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import JourneysActive from "./Journeys-Active"
 import JourneysPending from "./Journeys-Pending"
 import JourneysGreeting from "./Journeys-Greeting"
+import { AuthContext } from '../../session/AuthContext';
 
 export default function RenderJourneys() {
+    const { user } = useContext(AuthContext);
     const [activeButton, setActiveButton] = useState('active');
 
     const renderComponent = () => {
@@ -16,7 +18,7 @@ export default function RenderJourneys() {
 
     return (
         <div>
-            <JourneysGreeting activeButton={activeButton} setActiveButton={setActiveButton} />
+            <JourneysGreeting activeButton={activeButton} setActiveButton={setActiveButton} userName={user.name}/>
             <div className="component-display">
                 {renderComponent()}
             </div>
