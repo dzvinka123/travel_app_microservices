@@ -41,8 +41,6 @@ export default function Map() {
     }, [mapLoaded, marker]);
 
     return (
-        <div className="big-block">
-            <div ref={ref} id="map"></div>
-        </div>
+        <div ref={ref} id="map"></div>
     )
 }
