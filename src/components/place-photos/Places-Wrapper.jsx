@@ -7,11 +7,7 @@ export default function PlacesWrapper({ input }) {
     const [needsUpdate, setNeedsUpdate] = useState(true);
 
     useEffect(() => {
-        var map = new window.google.maps.Map(document.createElement('div'), {
-            zoom: 8,
-            mapId: 'wowMap1'
-        });
-        var service = new google.maps.places.PlacesService(map);
+        var service = new google.maps.places.PlacesService(document.createElement('div'));
         if (needsUpdate) {
             setNeedsUpdate(false);
 
@@ -45,5 +41,4 @@ export default function PlacesWrapper({ input }) {
 
     return (<Carousel images={images} />)
 }
-
 

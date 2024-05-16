@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import JourneyOption from './Journey-Option';
-import JourneyWrapper from './Journey-Wrapper';
+import JourneyWidget from './Journey-Widget';
 import "./widgetstyles.css";
 
-export default function JourneyManager() {
+export default function JourneyManager(country, title, date) {
     const [widgetVisible, setWidgetVisible] = useState(false);
 
     const toggleWidgetVisibility = () => {
@@ -16,7 +16,7 @@ export default function JourneyManager() {
             <JourneyOption onButtonClick={toggleWidgetVisibility} />
             {widgetVisible && ReactDOM.createPortal(
                 <div className="journey-popup-overlay">
-                    <JourneyWrapper onClose={toggleWidgetVisibility} />
+                    <JourneyWidget onClose={toggleWidgetVisibility} />
                 </div>,
                 document.body
             )}
