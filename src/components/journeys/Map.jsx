@@ -1,46 +1,87 @@
 import { useRef, useEffect, useState } from "react";
-import map_location_marker from '../../img/map_location_marker.png';
-import "./widgetstyles.css"
+import map_location_marker from "../../img/map_location_marker.png";
+import "./widgetstyles.css";
 
-const latlng = { lat: -34.397, lng: 150.644 }; // change according to destination
+async function fetchCoords(city) {
+  const apiUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${city}`;
+
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error("Failed to fetch city coordinates");
+    }
+    const data = await response.json();
+
+    return {
+      latitude: data.results[0].latitude,
+      longitude: data.results[0].longitude,
+    };
+  } catch (error) {
+    console.error("Error fetching city coordinates:", error);
+    return null;
+  }
+}
+
 export default function Map({ destination }) {
-    const ref = useRef();
-    const [map, setMap] = useState(null);
-    const [mapLoaded, setMapLoaded] = useState(false);
-    const [marker, setMarker] = useState(null);
+  const ref = useRef();
+  const [coords, setCoords] = useState(null);
+  const [map, setMap] = useState(null);
+  const [marker, setMarker] = useState(null);
 
-    useEffect(() => {
-        setMap(new window.google.maps.Map(ref.current, {
-            center: latlng,
-            zoom: 8,
-            mapId: 'wowMap'
-        }))
-        setMapLoaded(true);
-    }, []);
+  useEffect(() => {
+    if (destination) {
+      fetchCoords(destination)
+        .then((coords) => {
+          setCoords(coords);
+        })
+        .catch(console.error);
+    }
+  }, [destination]);
 
-    useEffect(() => {
-        if (mapLoaded && !marker) {
-            const markerImg = document.createElement("img");
-            markerImg.src = map_location_marker;
+  useEffect(() => {
+    if (coords && ref.current) {
+      if (!map) {
+        const googleMap = new window.google.maps.Map(ref.current, {
+          center: { lat: coords.latitude, lng: coords.longitude },
+          zoom: 8,
+          mapId: "wowMap",
+        });
+        setMap(googleMap);
+      } else {
+        map.setCenter({ lat: coords.latitude, lng: coords.longitude });
+      }
+    }
+  }, [coords]);
 
-            setMarker(new google.maps.marker.AdvancedMarkerElement({
-                map: map,
-                position: latlng,
-                content: markerImg
-            }))
+  useEffect(() => {
+    if (map && coords) {
+      if (!marker) {
+        const markerImg = {
+          url: map_location_marker,
+          scaledSize: new google.maps.Size(50, 50),
+        };
 
-            if (marker) {
-                marker.addListener("click", () => {
-                    infoWindow.open({
-                        anchor: marker,
-                        map,
-                    });
-                });
-            }
-        }
-    }, [mapLoaded, marker]);
+        const newMarker = new google.maps.Marker({
+          map: map,
+          position: { lat: coords.latitude, lng: coords.longitude },
+          icon: markerImg,
+        });
 
-    return (
-        <div ref={ref} id="map"></div>
-    )
+        newMarker.addListener("click", () => {
+          const infoWindow = new google.maps.InfoWindow({
+            content: "<div>Some info about the location</div>", // Customize as needed
+          });
+          infoWindow.open(map, newMarker);
+        });
+
+        setMarker(newMarker);
+      } else {
+        marker.setPosition({ lat: coords.latitude, lng: coords.longitude });
+      }
+    }
+  }, [map, coords]);
+
+  return (
+    <div ref={ref} id="map" style={{ width: "100%", height: "400px" }}></div>
+  );
 }
