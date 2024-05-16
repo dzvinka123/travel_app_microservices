@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./Welcome.css"
 import RecommendationSection from "../components/recommendation/Rec-Section";
 import Footer from "../components/footer/Footer.jsx"
@@ -15,7 +15,10 @@ import dividor from "../img/dividor.svg";
 import search_but from "../img/search_but.svg";
 import WelcomeHeader from "../components/welcome-header/Welcome-Header.jsx";
 import WelcomeFormInput from "../components/welcome-form/welcome-form-input.jsx";
+import { AuthContext } from "../session/AuthContext";
+import Navbar from "../components/navbar/Navbar.jsx";
 export default function Welcome() {
+    const { user } = useContext(AuthContext);
     const recommendations = [
         {
             country: 'Ukraine',
@@ -57,7 +60,7 @@ export default function Welcome() {
     return (
         <>
         <div className="wrapper">
-            <WelcomeHeader/>
+            {user ? <Navbar /> : <WelcomeHeader />}
             <main className="page">
                 <section className="page__top top">
                     <div className="top__bgcont">

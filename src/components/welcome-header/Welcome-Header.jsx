@@ -1,8 +1,10 @@
 import React from "react";
 import logo from "../../img/logo_getaway.png"
+import { Link } from "react-router-dom";
 import "./Welcome-Header.css"
 
 export default function WelcomeHeader() {
+    const path = "/login"
     return (
             <header className="header">
                 <div className="header_wrapper">
@@ -15,9 +17,7 @@ export default function WelcomeHeader() {
                                 </a>
                             </div>
                             <div className="header__right">
-                                <a href="#" className="header__loginbutton">
-                                    Log in
-                                </a>
+                                <Link to={path} className="header__loginbutton">Log in</Link>
                             </div>
                         </div>
                     </div>

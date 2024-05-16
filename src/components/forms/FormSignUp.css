@@ -123,3 +123,8 @@
     margin-left: -40px;
     cursor: pointer;
 }
+
+.error {
+    font-size: 13.5px;
+    color: red;
+}
