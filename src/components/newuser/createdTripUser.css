@@ -1081,3 +1081,9 @@ html, body {
     width: 25px;
     height: 25px;
 }
+
+.search-map {
+    width: 293px;
+    height: 230px;
+    border-radius: 24px 0px 0px 0px;
+}
