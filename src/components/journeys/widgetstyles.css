@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
@@ -6,6 +7,31 @@ html, body {
     overflow-x: hidden;
     background-color: #141414;
     color: #FAFAFA;
+}
+
+.widget-header {
+    color: #FAFAFA;
+    font-family: "Inter";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 40px;
+    letter-spacing: -0.64px;
+    text-align: left;
+}
+
+.widget-description {
+    height: 40px;
+    align-self: stretch;
+    overflow: hidden;
+    color: #FAFAFA;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: "Inter";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
 }
 
 .modal-container {
@@ -48,8 +74,6 @@ html, body {
 }
 
 .block {
-    flex: 0 0 30%;
-    width: 395px;
     height: 230px;
     padding: 24px;
     margin: 10px;
@@ -63,20 +87,13 @@ html, body {
     box-shadow: 4px 4px 30.4px 0px rgba(7, 5, 5, 0.20);
 }
 
-.small-block {
-    display: flex;
-    height: 105px;
-    width: 330px;
-    padding: 12px;
-    margin: 10px;
-    text-align: center;
-    border-radius: 32px;
-    line-height: 70px;
-    font-size: 18px;
-    background: linear-gradient(-45deg, #5b39a2, #134b41, #422343);
-    box-shadow: 4px 4px 30.4px 0px rgba(7, 5, 5, 0.20);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
+.first-block {
+    width: 395px;
+}
+
+.second-block {
+    /* width: 330px; */
+    width: 267px;
 }
 
 .big-block {
@@ -96,6 +113,8 @@ html, body {
     width: 395px;
     padding: 24px;
     height: 400px;
+    overflow-y: scroll;
+    overflow-wrap: break-word;
 }
 
 #map {
@@ -104,10 +123,11 @@ html, body {
     border-radius: 32px;
 }
 
-.first-row-container, .second-row-container {
+.first-row-container,
+.second-row-container {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -115,26 +135,27 @@ html, body {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
 }
 
 .smallblock-container {
-    /* flex: 0 0 30%; */
     display: flex;
     flex-direction: column;
 }
 
-.card-container {
+.cards-container {
     display: flex;
     padding: 12px;
+    margin: 10px 0px;
     align-items: center;
     gap: 8px;
-    align-self: stretch;
     border-radius: 8px;
     background: rgba(250, 250, 250, 0.08);
     box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.24);
@@ -142,78 +163,10 @@ html, body {
 
 /* Styles for checked box */
 
-.container {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    color: #FAFAFA;
-    font-family: Inter;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 20px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-}
-
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #EEEEEE;
-}
-
-.container:hover input ~ .checkmark {
-    background-color: #CCCCCC;
-}
-
-.container input:checked ~ .checkmark {
-    background-color: #6711a5;
-}
-
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-.container input:checked ~ .checkmark:after {
-    display: block;
-}
-
-.container .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-
-.to-do-list, .to-do-list-container {
+.to-do-list,
+.to-do-list-container {
     display: flex;
     flex-direction: column;
-}
-
-.to-do-list {
-    overflow-y: scroll;
 }
 
 .todo-list-header {
@@ -222,5 +175,147 @@ html, body {
     font-size: 24px;
     font-style: normal;
     font-weight: 500;
-    line-height: 32px; 
+    line-height: 32px;
+    text-align: left;
+}
+
+.card-wrapper {
+    display: flex;
+    flex-direction: row;
+    padding: 12px;
+    margin: 10px 0px;
+    align-items: flex-start;
+    gap: 8px;
+    border-radius: 8px;
+    background: rgba(250, 250, 250, 0.08);
+    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.24);
+    flex-wrap: wrap;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    display: none;
+    visibility: hidden;
+}
+
+.checkbox-wrapper .cbx {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkbox-wrapper .cbx span {
+    display: flex;
+    align-items: center;
+    transform: translate3d(0, 0, 0);
+}
+
+.checkbox-wrapper .cbx span:first-child {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    transform: scale(1);
+    border: 1px solid #9098A9;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox-wrapper .cbx span:first-child svg {
+    position: absolute;
+    top: 3px;
+    left: 2px;
+    fill: none;
+    stroke: #FFFFFF;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 16px;
+    stroke-dashoffset: 16px;
+    transition: all 0.3s ease;
+    transition-delay: 0.1s;
+    transform: translate3d(0, 0, 0);
+}
+
+.checkbox-wrapper .cbx span:first-child:before {
+    content: "";
+    background: #460b70;
+    transform: scale(0);
+    opacity: 1;
+    border-radius: 50%;
+}
+
+.checkbox-wrapper .cbx:hover span:first-child {
+    border-color: #460b70;
+}
+
+.checkbox-wrapper .inp-cbx:checked+.cbx span:first-child {
+    background: #460b70;
+    border-color: #460b70;
+    animation: wave-46 0.4s ease;
+}
+
+.checkbox-wrapper .inp-cbx:checked+.cbx span:first-child svg {
+    stroke-dashoffset: 0;
+}
+
+.checkbox-wrapper .inp-cbx:checked+.cbx span:first-child:before {
+    transform: scale(3.5);
+    opacity: 0;
+    transition: all 0.6s ease;
+}
+
+.checkbox-wrapper .cbx span:last-child {
+    line-height: 1;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    font-family: "Inter";
+    word-break: break-word;
+    flex: 1;
+}
+
+@keyframes wave-46 {
+    50% {
+        transform: scale(0.9);
+    }
+}
+
+.create-cards-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.create-cards-input {
+    width: 100%;
+    font-size: 16px;
+    color: rgba(250, 250, 250, 0.74);
+    background: transparent;
+    border: none;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+}
+
+::placeholder {
+    color: rgba(250, 250, 250, 0.74);
+}
+
+.journey-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
 }

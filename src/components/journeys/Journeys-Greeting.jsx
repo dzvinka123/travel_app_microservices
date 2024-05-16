@@ -1,17 +1,23 @@
 import './Journeys.css';
-import campingDark from '../../img/camping-dark.svg';
+import campingWhite from '../../img/camping-white.svg';
 
-export default function JourneysGreeting() {
+export default function JourneysGreeting({ activeButton, setActiveButton }) {
   return (
     <section className="journeys-greeting">
       <h3 className="journeys-greeting-text">Hi, UserName! Your Adventures Await!</h3>
       <div className="journeys-buttons">
-        <button className="journeys-greeting-button" id="active-button">
-          <img className="journeys-greeting-icon" src={campingDark} alt="Camping Icon" />
+        <button
+          className={`journeys-greeting-button ${activeButton === 'active' ? 'active' : ''}`}
+          id="active-button"
+          onClick={() => setActiveButton('active')}
+        >
+          <img className="journeys-greeting-icon" src={campingWhite} alt="Camping Icon" />
           <span>Active</span>
         </button>
-        <button className="journeys-greeting-button">
-          <img className="journeys-greeting-icon" src={campingDark} alt="Camping Icon" />
+        <button
+          className={`journeys-greeting-button ${activeButton === 'pending' ? 'active' : ''}`}
+          onClick={() => setActiveButton('pending')}
+        >
           <span>Pending</span>
         </button>
       </div>

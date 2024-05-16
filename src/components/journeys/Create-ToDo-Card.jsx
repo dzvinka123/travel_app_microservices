@@ -1,13 +1,30 @@
-import add from '../../img/add.svg';
 
-// button onclick -> take text -> create new ToDoCard with that text
-export default function CreateCard() {
+import React, { useState } from 'react';
+import add from '../../img/add.svg';
+import "./widgetstyles.css";
+
+export default function CreateCard({ addNewCard }) {
+    const [inputValue, setInputValue] = useState('');
+
+    const handleAddCard = () => {
+        if (inputValue.trim() !== '') {
+            addNewCard(inputValue.trim());
+            setInputValue('');
+        }
+    };
+
     return (
-        <div className="card-container">
-            <button>
+        <div className="cards-container">
+            <button className="create-cards-button" onClick={handleAddCard}>
                 <img src={add} alt="Add Card icon" />
             </button>
-            <input value="Add your tasks here..." id="newCard"></input>
+            <input
+                placeholder="Add your tasks here..."
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                className="create-cards-input"
+                type="text"
+            />
         </div>
-    )
+    );
 }
