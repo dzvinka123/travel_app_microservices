@@ -26,7 +26,7 @@ export default function App() {
           path="/create-new-user-trip/trip-details"
           element={<TripDetails />}
         />
-        <Route path="/userpage" element={<CreateTripNewUser />} />
+        <Route path="/create-trip" element={<CreateTripNewUser />} />
       </Routes>
     </BrowserRouter>
     </AuthProvider>
