@@ -6,7 +6,7 @@ export default function NavbarLogin() {
   return (
     <header className="header-container-login">
       <div className="header-left-elements">
-        <a className="logo-section" href="/home">
+        <a className="logo-section" href="/welcome">
           <img className="header-logo" src={logo} alt="Logo" />
           <span className="logo-text">getaway</span>
         </a>
