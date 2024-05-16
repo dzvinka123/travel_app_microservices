@@ -17,18 +17,21 @@ function FormLogin() {
     setShowPassword(!showPassword);
   };
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3001/login', { email, password })
-    .then(response => {
-      setEmail("");
-      setPassword("");
-      setError("");
-      login(response.data);
-      navigate('/welcome');
-    }).catch(error => {
+    axios
+      .post(`http://localhost:3001/login`, { email, password })
+      .then((response) => {
+        setEmail("");
+        setPassword("");
+        setError("");
+        login(response.data);
+        navigate("/welcome");
+      })
+      .catch((error) => {
         setError(error.response.data.message);
-    });
+      });
   };
 
   const rememberUser = (e) => {
