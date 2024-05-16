@@ -3,7 +3,6 @@ import "./App.css";
 import Terms from "./components/terms/Terms";
 import CreateNewUserTrip from "./pages/CreateNewUserTrip";
 import CreateTripNewUser from "./pages/CreateTripNewUser";
-import Home from "./pages/Home";
 import MainJourneys from "./pages/Journeys";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -14,7 +13,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Welcome />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
