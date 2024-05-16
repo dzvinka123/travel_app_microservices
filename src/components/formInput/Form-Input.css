@@ -4,7 +4,7 @@
     background-color: transparent;
     gap: 16px;
 }
-  
+
 .search-container-input {
     display: flex;
     flex-direction: row;
@@ -15,15 +15,15 @@
     padding: 5px;
 }
 
-.search-container-input:hover{
+.search-container-input:hover {
     background-color: #212429;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
 
 .search-container-input.last-field {
     border: none;
 }
-  
+
 .search-field {
     display: flex;
     flex-direction: column;
@@ -39,7 +39,7 @@
     -moz-appearance: none;
     appearance: none;
 }
-  
+
 .search-field input::placeholder {
     color: var(--White---Medium-Empathy, rgba(250, 250, 250, 0.74));
     font-family: 'Inter';
@@ -58,4 +58,3 @@
     line-height: normal;
     text-transform: capitalize;
 }
-  
