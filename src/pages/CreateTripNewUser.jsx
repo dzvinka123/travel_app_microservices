@@ -93,7 +93,7 @@ export default function CreateTripNewUser() {
         </section>
 
         <section className="additional-container">
-          <ToDoList />
+          <ToDoList cardId={null} toDos={[]} handleToDoUpdate={()=>{}}/>
           <Description  onDescriptionUpdate={handleDescriptinion}/>
         </section>
         <div className="submit-button-endpage">
