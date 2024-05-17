@@ -6,7 +6,6 @@ import CreateTripNewUser from "./pages/CreateTripNewUser";
 import MainJourneys from "./pages/Journeys";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import TripDetails from "./pages/TripDetails";
 import Welcome from "./pages/Welcome";
 import { AuthProvider } from "./session/AuthContext";
 
@@ -22,10 +21,6 @@ export default function App() {
         <Route path="/terms-and-conditions" element={<Terms />} />
         <Route path="/create-new-user-trip" element={<CreateNewUserTrip />} />
         <Route path="/journeys" element={<MainJourneys />} />
-        <Route
-          path="/create-new-user-trip/trip-details"
-          element={<TripDetails />}
-        />
         <Route path="/create-trip" element={<CreateTripNewUser />} />
       </Routes>
     </BrowserRouter>
