@@ -5,7 +5,7 @@ import Map from "../journeys/Map";
 import FormInput from "../formInput/Form-Input";
 import PlacesWrapper from "../place-photos/Places-Wrapper";
 import ActionButton from "../action-button/ActionButton";
-import "./createdTripUser.css";
+import "./Search.css";
 import distance from "../../img/distance.svg";
 import calendar_clock from "../../img/calendar_clock.svg";
 
@@ -25,11 +25,6 @@ export default function Search(props) {
   });
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (to) {
-  //     loadPlaces(to).then(setPlaces).catch(console.error);
-  //   }
-  // }, [to]); 
   useEffect(() => {
     props.onDataUpdate(formData);
   }, [formData, props.onDataUpdate]);
@@ -70,7 +65,7 @@ export default function Search(props) {
     // const days = "18.05.2024 - 23.05.2024";
 
   return (
-    <section className="search-container">
+    <section className="search-block">
       <div className="search-div">
         <form className="search-container" onSubmit={handleSubmit}>
           <FormInput
