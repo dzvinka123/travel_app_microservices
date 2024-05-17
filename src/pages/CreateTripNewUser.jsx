@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import left from "../img/left.svg";
 import "./VisitPlace.css";
+import "./removeCheckbox.css"
 import rigth from "../img/rigth.svg";
 import ActionButton from "../components/action-button/ActionButton";
 
@@ -27,6 +28,10 @@ export default function CreateTripNewUser() {
   const handleFriendsUpdate = (newFriendsList) => {
       setFriends(newFriendsList);
   };
+  const handleToDoUpdate = (newTasks) => {
+    setTasks(newTasks);
+    console.log(tasks);
+  }
   const handleData = (newData) => {
     setFrom(newData.from);
     setTo(newData.to);
@@ -37,16 +42,9 @@ export default function CreateTripNewUser() {
   const handleDescriptinion = (newDescription) => {
     setDescription(newDescription);
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(tasks)
-    console.log(friends)
-    console.log(from)
-    console.log(to)
-    console.log(startDate)
-    console.log(endDate)
-    console.log(description)
-
+  const handleSubmit = async () => {
+    //e.preventDefault();
+    console.log("g")
     try {
       const response = await axios.post(`http://localhost:3001/add-travel-card`, {
         from: from,
@@ -93,12 +91,12 @@ export default function CreateTripNewUser() {
         </section>
 
         <section className="additional-container">
-          <ToDoList cardId={null} toDos={[]} handleToDoUpdate={()=>{}}/>
+          <ToDoList cardId={null} toDos={[]} handleToDoUpdate={handleToDoUpdate}/>
           <Description  onDescriptionUpdate={handleDescriptinion}/>
         </section>
         <div className="submit-button-endpage">
           <Friends onFriendsUpdate={handleFriendsUpdate}></Friends>
-          <ActionButton text="Save Trip" className="submit-button-endpage"/>
+          <ActionButton handleSubmit={handleSubmit} text="Save Trip" className="submit-button-endpage"/>
         </div>
         <Footer />
       </Wrapper>
