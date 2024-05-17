@@ -7,19 +7,21 @@ import "./widgetstyles.css"
 export default function ToDoList(props) {
     const [cards, setCards] = useState(props.toDos);
     const addNewCard = (newCard) => {
-        console.log("New card to be added:", newCard);
-        setCards(prevCards => {
+            console.log("New card to be added:", newCard);
+            setCards(prevCards => {
             const updatedCards = [...prevCards, newCard];
             //console.log("Updated cards list:", updatedCards);
             return updatedCards;
         });
     };
     const handleOnCheck = (done, id) => {
-        setCards(prevCards => 
-            prevCards.map(card => 
-                card.id === id ? { ...card, done } : card
-            )
-        );
+        if (props.cardId) {
+            setCards(prevCards => 
+                prevCards.map(card => 
+                    card.id === id ? { ...card, done } : card
+                )
+            );
+        }
     };
     useEffect(() => {
         props.handleToDoUpdate(cards);
