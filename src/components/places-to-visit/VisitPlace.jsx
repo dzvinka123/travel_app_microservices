@@ -64,8 +64,8 @@ export default function VisitPlace({ city }) {
                 <div className="place-card-info">
                   <h3>{place.name}</h3>
                   <span>{place.address}</span>
-                  <span>{city ? null : place.hours}</span>
-                  <span className="rating-place">{city ? null : place.rating}</span>
+                  <span>{place.hours}</span>
+                  <span className="rating-place">{place.rating}</span>
                 </div>
               </div>
             </SwiperSlide>

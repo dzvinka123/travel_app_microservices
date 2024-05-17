@@ -14,16 +14,16 @@ import { AuthContext } from "../../session/AuthContext";
 
 
 export default function JourneyWidget({ handleJourneyUpdate, onClose, id, destination, description, startDate, endDate, toDos, emails }) {
-    const { user } = useContext(AuthContext)
-    const date = `${startDate} - ${endDate}`
-    const [todos, setToDos] = useState(toDos)
+    const { user } = useContext(AuthContext);
+    const date = `${startDate} - ${endDate}`;
+    const [todos, setToDos] = useState(toDos);
     const handleToDoUpdate = (newToDoList) => {
         setToDos(newToDoList);
     };
     useEffect(() => {
         handleJourneyUpdate(todos);
-        //console.log(cards)
-    }, [todos, handleJourneyUpdate])
+    }, [todos, handleJourneyUpdate]);
+
     return (
         <Wrapper apiKey={import.meta.env.VITE_REACT_APP_GOOGLE_API} libraries={['marker', 'places']}>
             <div className="modal-container">
@@ -39,15 +39,16 @@ export default function JourneyWidget({ handleJourneyUpdate, onClose, id, destin
                                         <Friend key={index} email={email.user_email} onDelete={() => { }} />
                                     ))}
                                 </div>
-                                {/* Add friends functionality */}
                             </div>
                             <Weather days_range={date} city={destination} />
                             <div className="block second-block">
-                                <div className="swiper-button-prev">
-                                    <img src={left} />
-                                </div>
-                                <div className="swiper-button-next">
-                                    <img src={right} />
+                                <div className="swiper-buttons">
+                                    <button className="swiper-button sbprev">
+                                        <img src={left} alt="Previous" />
+                                    </button>
+                                    <button className="swiper-button sbnext">
+                                        <img src={right} alt="Next" />
+                                    </button>
                                 </div>
                                 <VisitPlace city={destination} />
                             </div>
@@ -62,5 +63,5 @@ export default function JourneyWidget({ handleJourneyUpdate, onClose, id, destin
                 </div>
             </div>
         </Wrapper>
-    )
+    );
 }
