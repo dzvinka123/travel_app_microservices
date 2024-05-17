@@ -1,0 +1,136 @@
+._container {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.recommend {
+  padding: 88px 0;
+  border-radius: 32px;
+  background-color: #141414;
+}
+
+.recommend__container {
+  max-width: 1232px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 43px;
+}
+
+.recommend__top {
+  margin: 0 auto 43px auto;
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
+.recommend__topinfo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin: 0 0 8px 0;
+  display: flex;
+  flex-direction: column;
+  width: 888px;
+  height: 82px;
+  gap: 8px;
+}
+
+.swiper-slide {
+  height: auto;
+}
+
+.recommend__title {
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 600;
+  color: #FAFAFA;
+  letter-spacing: 0.02em;
+  margin: 0 24px 0 0;
+}
+
+.recommend__buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.recommend__button {
+  width: 48px;
+  height: 48px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 50%;
+  border-color: #FAFAFA;
+  border-width: 1px;
+  border-style: solid;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.recommend__button:first-child {
+  margin: 0 16px 0 0;
+}
+
+.recommend__button:hover {
+  transform: scale(1.1);
+  transition: all .5s ease;
+  background-color: #460b70;
+  opacity: 70%;
+  border: none;
+}
+
+.recommend__intro {
+  font-size: 20px;
+  line-height: 30px;
+  color: #FAFAFABD;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.recommend__cards {
+  padding: 88px 0 0 0;
+}
+
+@media (max-width: 1036px) {
+  ._container {
+    max-width: 970px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  ._container {
+    max-width: 750px;
+  }
+
+  .select__title {
+    font-size: 18px;
+  }
+
+  .select__options {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  ._container {
+    max-width: none;
+    padding: 0 10px;
+  }
+}

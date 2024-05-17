@@ -1,0 +1,19 @@
+.search-button {
+    display: flex;
+    width: 240px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 48px;
+    background: var(--Accent-1, #005A44);
+    margin-left: 16px;
+    border: none;
+
+    /* Style for text*/
+    color: var(--White---High-Empathy, #FAFAFA);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 48px;
+    cursor: pointer;
+}

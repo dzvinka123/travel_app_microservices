@@ -1,0 +1,20 @@
+.find__infoblolck {
+  padding: 0 0 0 30px;
+}
+
+.find__name {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 17px;
+  color: #141414;
+  margin: 0 0 4px 0;
+}
+
+.find__input {
+  background-color: #FAFAFA;
+  color: #141414;
+}
+
+.find__input::placeholder {
+  color: #141414;
+}

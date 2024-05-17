@@ -1,0 +1,62 @@
+.place-card {
+    display: flex;
+    width: auto;
+    max-width: 100%;
+    padding: 12px;
+    flex-direction: row;
+    align-items: center;
+    gap: 13px;
+    border-radius: 8px;
+    background: var(--stroke-bg, rgba(250, 250, 250, 0.08));
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.place-card-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.place-card-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 4px;
+    max-width: 269px;
+}
+
+.place-card-info h3 {
+    margin: 0;
+    color: var(--White---Hight-Empathy, #FAFAFA);
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.place-card-info span {
+    color: var(--White---Medium-Empathy, rgba(250, 250, 250, 0.74));
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.place-card-button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: var(--Accent-1, #005A44);
+    color: var(--White---Hight-Empathy, #FAFAFA);
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.place-card-button {
+    width: 120px;
+    justify-content: center;
+}

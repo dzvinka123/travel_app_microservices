@@ -1,0 +1,81 @@
+.search-container {
+    display: flex;
+    flex-direction: row;
+    background-color: #191C20;
+    gap: 16px;
+    border-radius: 8px;
+    box-shadow: 4px 4px 30.4px 0px rgba(7, 5, 5, 0.20);
+    padding: 24px;
+    height: 100px
+}
+
+.search-container-input {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: flex-start;
+    border-right: 1px solid rgba(250, 250, 250, 0.08);
+    width: 288px;
+    padding: 5px;
+}
+
+.search-container-input:hover {
+    background-color: #212429;
+    border-radius: 10px;
+}
+
+.search-container-input.last-field {
+    border: none;
+}
+
+
+.search-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.date-input-wrapper {
+    position: relative;
+    /* Creates a positioning context */
+    width: 100%;
+    /* Ensure it spans the width needed */
+}
+
+.date-picker-container {
+    position: absolute;
+    top: 100%;
+    left: -200px;
+    width: 100%;
+    z-index: 1000;
+}
+
+
+.search-field input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    margin: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.search-field input::placeholder {
+    color: var(--White---Medium-Empathy, rgba(250, 250, 250, 0.74));
+    font-family: 'Inter';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.search-field label {
+    color: var(--White---Hight-Empathy, #FAFAFA);
+    font-family: 'Inter';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: capitalize;
+}

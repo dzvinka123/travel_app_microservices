@@ -1,0 +1,71 @@
+:root {
+    --background-item-color: #191C20;
+    --text-color: #1B1C57;
+    --text-secondary: #626687;
+    /* Fix root setting for project */
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header-container-login {
+    border: none;
+    display: flex;
+    flex-direction: row;
+    padding: 16px 24px;
+    border-radius: 32px;
+    background: transparent;
+    box-shadow: 4px 4px 30.4px 0px rgba(7, 5, 5, 0.20);
+    justify-content: space-between;
+}
+
+.header-left-elements {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+}
+
+.header-center-elements {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    size: 100%;
+    background-color: green;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+
+}
+
+.logo-section .logo-text {
+    color: var(--White---Hight-Empathy, #FAFAFA);
+    font-family: 'Inter';
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px;
+    /* 133.333% */
+    text-transform: lowercase;
+}
+
+.header-language-select {
+    background-color: transparent;
+    border: none;
+}
+
+.header-center-elements {
+    size: 100%;
+}

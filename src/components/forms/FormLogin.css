@@ -1,0 +1,15 @@
+.middle-item {
+    height: 556px;
+}
+
+.registration-pre-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.error {
+    font-size: 13.5px;
+    color: red;
+}
