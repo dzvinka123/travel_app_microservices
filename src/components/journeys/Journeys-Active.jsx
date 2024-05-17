@@ -8,7 +8,7 @@ import arrowr from '../../img/arrowr.svg';
 import JourneyManager from './Journey-Manager';
 import "./Journeys.css"
 
-export default function JourneysActive() {
+export default function JourneysActive(journeys) {
   return (
     <section className="journeys-active">
       <div className='journeys-header-container'>
@@ -27,10 +27,13 @@ export default function JourneysActive() {
           prevEl: ".left"
         }}
       >
-        <SwiperSlide><JourneyManager /></SwiperSlide>
-        <SwiperSlide><JourneyManager /></SwiperSlide>
-        <SwiperSlide><JourneyManager /></SwiperSlide>
-        <SwiperSlide><JourneyManager /></SwiperSlide>
+          {journeys.journeys.map((journey, index) => (
+          <SwiperSlide key={index}>
+            <JourneyManager
+             journey={journey}
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </section>
   );
