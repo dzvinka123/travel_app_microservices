@@ -1,5 +1,4 @@
 import React from "react";
-import "./createdTripUser.css";
 
 import sunIcon from "../../img/icons/sun.png";
 import cloudSunIcon from "../../img/icons/cloud-sun.png";
