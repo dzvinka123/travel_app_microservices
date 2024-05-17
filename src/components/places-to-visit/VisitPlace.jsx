@@ -46,8 +46,8 @@ export default function VisitPlace() {
           slidesPerView={2}
           spaceBetween={30}
           navigation={{
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+            nextEl: ".sbnext",
+            prevEl: ".sbprev",
           }}
         >
           {places.map((place) => (
