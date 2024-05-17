@@ -2,7 +2,6 @@ import './Journeys.css';
 import campingWhite from '../../img/camping-white.svg';
 import { AuthContext } from '../../session/AuthContext';
 import { useContext } from 'react';
-
 export default function JourneysGreeting({ fetchActive, fetchPending, activeButton, userName }) {
   const { user } = useContext(AuthContext);
   return (
