@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./createdTripUser.css";
 import left from "../../img/left.svg"
 import rigth from "../../img/rigth.svg"
 import WeatherDay from "./WeatherDay";
