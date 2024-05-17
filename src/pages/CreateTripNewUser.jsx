@@ -12,6 +12,7 @@ import Friends from "../components/friends/Friends";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import left from "../img/left.svg";
+import "./VisitPlace.css";
 import rigth from "../img/rigth.svg";
 
 export default function CreateTripNewUser() {

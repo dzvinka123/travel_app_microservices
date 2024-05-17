@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import "../places-to-visit/VisitPlace.css";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -40,8 +39,6 @@ export default function VisitPlace({ city }) {
   }, [city, to]);
 
   const slidesPerView = city ? 1 : 2;
-  const hours = city ? null : place.hours;
-  const rating = city ? null : place.rating;
 
   return (
     <div className="test1">
@@ -66,8 +63,8 @@ export default function VisitPlace({ city }) {
                 <div className="place-card-info">
                   <h3>{place.name}</h3>
                   <span>{place.address}</span>
-                  <span>{hours}</span>
-                  <span className="rating-place">{rating}</span>
+                  <span>{city ? null : place.hours}</span>
+                  <span className="rating-place">{city ? null : place.rating}</span>
               </div>
               <button className="place-card-button">Add to list</button>
             </div>
