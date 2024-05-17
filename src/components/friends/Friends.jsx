@@ -1,11 +1,13 @@
-    import React, {useState, useEffect} from 'react';
+    import React, {useState, useEffect, useContext} from 'react';
     import plus from "../../img/add.svg"
     import Friend from './Friend';
     import "./Friends.css"
     import axios from 'axios';
+    import { AuthContext } from '../../session/AuthContext';
 
     export default function Friends (props) {
-        const [friends, setFriends] = useState([]);
+        const { user } = useContext(AuthContext)
+        const [friends, setFriends] = useState([user.email]);
         const [email, setEmail] = useState("");
         const [error, setError] = useState("");
         const handleDeleteFriend = (emailToDelete) => {
@@ -52,7 +54,7 @@
                 <div className="friends__info">
                     <div className="friends__descr">Members/Friends</div>
                     <div className="friends__friends">
-                            {friends.map((email, index) => (
+                            {friends.slice(1).map((email, index) => (
                                 <Friend key={index} email={email} onDelete={handleDeleteFriend}/>
                             ))}
                         <button onClick={handleAddFriend} className="friends__plus">
