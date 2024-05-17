@@ -31,9 +31,11 @@
 
 .interesting-place {
     width: 1232px;
-    padding: 24px;
     display: flex;
     gap: 24px;
+    margin-left: calc((100vw - 1240px) / 2);
+    margin-right: calc((100vw - 1240px) / 2);
+    margin-top: 70px;
 }
 
 .interesting-place h2 {
