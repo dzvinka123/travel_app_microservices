@@ -9,7 +9,8 @@ export default function CreateCard({ card_id, addNewCard }) {
     //const [newCard, setNewCard] = useState();
     const handleAddCard = () => {
         if (inputValue.trim() !== '') {
-            axios.post(`http://localhost:3001/todo-list`, {task: inputValue.trim(), done: 0, card_id: card_id})
+            if (card_id) {
+                axios.post(`http://localhost:3001/todo-list`, {task: inputValue.trim(), done: 0, card_id: card_id})
                 .then(response => {
                     const { success, message, taskId } = response.data;
                     if (success) {
@@ -23,6 +24,11 @@ export default function CreateCard({ card_id, addNewCard }) {
                 .catch(error => {
                     console.error("Failed to fetch journeys:", error);
                 });
+            } else {
+                addNewCard(inputValue.trim());
+                setInputValue('');   
+            }
+            
         }
     };
     // useEffect(() => {
