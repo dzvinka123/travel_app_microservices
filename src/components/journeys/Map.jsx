@@ -82,6 +82,6 @@ export default function Map({ destination }) {
   }, [map, coords]);
 
   return (
-    <div ref={ref} id="map" style={{ width: "100%", height: "400px" }}></div>
+    <div ref={ref} id="map" style={{ width: "100%", height: "130px" }}></div>
   );
 }
