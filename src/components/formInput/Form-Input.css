@@ -3,6 +3,9 @@
     flex-direction: row;
     background-color: transparent;
     gap: 16px;
+     border-radius: 8px;
+    box-shadow: 4px 4px 30.4px 0px rgba(7, 5, 5, 0.20);
+    padding: 24px;
 }
 
 .search-container-input {
