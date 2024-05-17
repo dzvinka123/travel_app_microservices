@@ -4,11 +4,6 @@ import JourneyOption from './Journey-Option';
 import JourneyWidget from './Journey-Widget';
 import "./widgetstyles.css";
 
-// destination
-// date 
-// title -- "From {source} To {destination}"
-// to-do cards 
-
 export default function JourneyManager(country, title, date, description) {
     const [widgetVisible, setWidgetVisible] = useState(false);
 

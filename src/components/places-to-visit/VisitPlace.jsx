@@ -26,24 +26,29 @@ async function fetchCoords(city) {
   }
 }
 
-export default function VisitPlace() {
+export default function VisitPlace({ city }) {
   const location = useLocation();
   const { from, to, date } = location.state || {}; // Default to empty object to prevent errors if state is undefined
 
   const [places, setPlaces] = useState([]);
 
   useEffect(() => {
-    if (to) {
-      loadPlaces(to).then(setPlaces).catch(console.error);
+    const loadCity = city || to;
+    if (loadCity) {
+      loadPlaces(loadCity).then(setPlaces).catch(console.error);
     }
-  }, [to]); 
+  }, [city, to]);
+
+  const slidesPerView = city ? 1 : 2;
+  const hours = city ? null : place.hours;
+  const rating = city ? null : place.rating;
 
   return (
     <div className="test1">
       {places.length > 0 ? (
         <Swiper
           modules={[Navigation]}
-          slidesPerView={2}
+          slidesPerView={slidesPerView}
           spaceBetween={30}
           navigation={{
             nextEl: ".sbnext",
@@ -61,8 +66,8 @@ export default function VisitPlace() {
                 <div className="place-card-info">
                   <h3>{place.name}</h3>
                   <span>{place.address}</span>
-                  <span>{place.hours}</span>
-                  <span className="rating-place">{place.rating}</span>
+                  <span>{hours}</span>
+                  <span className="rating-place">{rating}</span>
               </div>
               <button className="place-card-button">Add to list</button>
             </div>
