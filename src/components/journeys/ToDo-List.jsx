@@ -1,24 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ToDoCard from './ToDo-Card';
 import CreateCard from './Create-ToDo-Card';
 import "./widgetstyles.css"
 
 // add inputs for ToDoCards, fix the checking of to do cards
-export default function ToDoList() {
-    const [cards, setCards] = useState([]);
-
-    const addNewCard = (newCardText) => {
-        setCards([...cards, newCardText]);
+export default function ToDoList(props) {
+    const [cards, setCards] = useState(props.toDos);
+    const addNewCard = (newCard) => {
+        console.log("New card to be added:", newCard);
+        setCards(prevCards => {
+            const updatedCards = [...prevCards, newCard];
+            //console.log("Updated cards list:", updatedCards);
+            return updatedCards;
+        });
     };
-
+    const handleOnCheck = (done, id) => {
+        setCards(prevCards => 
+            prevCards.map(card => 
+                card.id === id ? { ...card, done } : card
+            )
+        );
+    };
+    useEffect(() => {
+        props.handleToDoUpdate(cards);
+        console.log(cards)
+      }, [cards, props.handleToDoUpdate])
     return (
         <section className="block to-do-block">
             <p className="todo-list-header">To-Do List</p>
             <div className="to-do-list">
                 {cards.map((card, index) => (
-                    <ToDoCard key={index} checkboxIndex={index} input={card} />
+                    <ToDoCard handleOnCheck={handleOnCheck} key={index} checkboxIndex={index} input={card} />
                 ))}
-                <CreateCard addNewCard={addNewCard} />
+                <CreateCard card_id={props.cardId} addNewCard={addNewCard} />
             </div>
         </section>
     );
