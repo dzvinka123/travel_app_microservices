@@ -6,6 +6,8 @@
      border-radius: 8px;
     box-shadow: 4px 4px 30.4px 0px rgba(7, 5, 5, 0.20);
     padding: 24px;
+    height: 100px
+
 }
 
 .search-container-input {
@@ -27,11 +29,25 @@
     border: none;
 }
 
+
 .search-field {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
+.date-input-wrapper {
+    position: relative; /* Creates a positioning context */
+    width: 100%; /* Ensure it spans the width needed */
+  }
+  
+  .date-picker-container {
+    position: absolute;
+    top: 100%;
+    left: -200px;
+    width: 100%;
+    z-index: 1000;
+  }
+
 
 .search-field input {
     background-color: transparent;

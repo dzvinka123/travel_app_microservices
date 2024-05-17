@@ -109,12 +109,27 @@ export default function CreateNewUserTrip() {
                     <form className="search-container" onSubmit={handleSubmit}>
                         <FormInput icon={distance} placeholder="Your Location?" text="From" name="from" onChange={handleChange} />
                         <FormInput icon={distance} placeholder="Where are you going?" text="To" name="to" onChange={handleChange} />
-                        <FormInput icon={calendar_clock} placeholder="Add date" text="Date" name="date" onChange={handleChange} onClick={handleClickDate} className="last-field" value={formData.date} />
-                        {openDate && <DateRangePicker
-                            ranges={[selectionRange]}
-                            onChange={handleDate}
-                            minDate={new Date()}
-                        />}
+                        <div className="date-input-wrapper">
+                        <FormInput
+                            icon={calendar_clock}
+                            placeholder="Add date"
+                            text="Date"
+                            name="date"
+                            onChange={handleChange}
+                            onClick={handleClickDate}
+                            className="last-field"
+                            value={formData.date}
+                        />
+                        {openDate && (
+                            <div className="date-picker-container">
+                            <DateRangePicker
+                                ranges={[selectionRange]}
+                                onChange={handleDate}
+                                minDate={new Date()}
+                            />
+                            </div>
+                        )}
+                        </div>
                         <ActionButton text="Create Your Journey" onClick={handleSubmit} />
                     </form>
                 </section>

@@ -10,8 +10,6 @@
     gap: 32px;
     border-radius: 32px;
     background: var(--BG---Secondary, #191C20);
-    margin-left: calc((100vw - 1240px) / 2);
-    margin-right: calc((100vw - 1240px) / 2);
 }
 
 .search-elements-div {

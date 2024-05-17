@@ -74,13 +74,16 @@ export default function CreateTripNewUser() {
         <Search onDataUpdate={handleData}/>
         {/* 3 block */}
         <section className="interesting-place">
-          <h2>
-            Add a touch of magic to your list — discover a world of
-            unforgettable places!
-          </h2>
-          <span>Things to do</span>
-          <div className="swiper-button-prev">Prev</div>
-          <div className="swiper-button-next">Next</div>
+          <div className="text-and-buttons">
+            <h2>
+                Add a touch of magic to your list — discover a world of unforgettable places!
+            </h2>
+            <span>Things to do</span>
+            <div className="swiper-buttons">
+                <div className="swiper-button-prev">Prev</div>
+                <div className="swiper-button-next">Next</div>
+            </div>
+          </div>
           <VisitPlace />
         </section>
 

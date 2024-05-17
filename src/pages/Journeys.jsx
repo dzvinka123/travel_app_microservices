@@ -8,7 +8,6 @@ export default function MainJourneys() {
     <main className="main-journeys">
       <Navbar />
       <RenderJourneys />
-      <JourneysEmpty />
       <Footer />
     </main>
   );

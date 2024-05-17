@@ -21,8 +21,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    margin-left: calc((100vw - 1240px) / 2);
-    margin-right: calc((100vw - 1240px) / 2);
     margin-top: 24px;
 }
 
@@ -149,6 +147,8 @@ body {
     justify-content: center;
     align-items: flex-start;
     box-shadow: 4px 4px 30.4px 0px rgba(7, 5, 5, 0.20);
+    margin-left: calc((100vw - 1240px) / 2);
+    margin-right: calc((100vw - 1240px) / 2);
 }
 
 .journeys-greeting-text {
@@ -203,6 +203,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-top: 30px;
 }
 
 .slider-buttons {
@@ -235,6 +236,8 @@ body {
 section {
     display: flex;
     flex-direction: column;
+    margin-left: calc((100vw - 1240px) / 2);
+    margin-right: calc((100vw - 1240px) / 2);
 }
 
 .journeys-header {
