@@ -362,7 +362,7 @@ app.get("/user-travel-cards", (req, res) => {
 
   db.serialize(() => {
     const travelCardQuery = `
-        SELECT travel_card.id, travel_card."from", travel_card."to", travel_card.start_date, travel_card.end_date, travel_card.description
+        SELECT travel_card.id, travel_card."from", travel_card."to", travel_card.start_date, travel_card.end_date, travel_card.description, travel_card.active
         FROM travel_card
         JOIN user_card ON travel_card.id = user_card.card_id
         WHERE user_card.user_email = ?
@@ -393,13 +393,31 @@ app.get("/user-travel-cards", (req, res) => {
             .status(500)
             .json({ success: false, message: "Failed to retrieve todo lists" });
         }
-
         // Combine travel cards and their todo-lists
         const result = travelCards.map((card) => ({
           ...card,
           todoList: todoLists.filter((task) => task.card_id === card.id),
         }));
+        travelCards = result;
+      });
+      const emailsListQuery = `
+      SELECT user_email, card_id
+      FROM user_card
+      WHERE card_id IN (${travelCardIds.map(() => "?").join(",")})
+      `;
+      db.all(emailsListQuery, travelCardIds, (err, emails) => {
+        if (err) {
+          console.error("Database error:", err);
+          return res
+            .status(500)
+            .json({ success: false, message: "Failed to retrieve emails" });
+        }
 
+        // Combine travel cards and their todo-lists
+        const result = travelCards.map((card) => ({
+          ...card,
+          emails: emails.filter((email) => email.card_id === card.id),
+        }));
         res.status(200).json({ success: true, travelCards: result });
       });
     });
@@ -408,7 +426,8 @@ app.get("/user-travel-cards", (req, res) => {
 
 app.put("/todo-list", (req, res) => {
   const { taskId , done } = req.body;
-  db.run(
+  console.log(done);
+  db.run( 
     `UPDATE todo_list SET done = ? WHERE id = ?`,
     [done ? 1 : 0, taskId],
     function (err) {
