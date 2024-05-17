@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import "./createdTripUser.css";
 
 export default function Description(props) {
     const [description, setDescription] = useState("");
