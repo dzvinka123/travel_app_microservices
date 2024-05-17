@@ -3,8 +3,6 @@
     flex-direction: column;
     gap: 24px;
     margin-top: 24px;
-    margin-left: calc((100vw - 1240px) / 2);
-    margin-right: calc((100vw - 1240px) / 2);
 
 }
 
