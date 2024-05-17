@@ -1,7 +1,8 @@
 .carousel {
-    position: relative;
-    max-width: 100%;
+    max-width: 448px;
+    max-height: 230px;
     overflow: hidden;
+    border-radius: 16px;
 }
 
 .carousel__btn {

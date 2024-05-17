@@ -52,23 +52,21 @@ export default function VisitPlace() {
         >
           {places.map((place) => (
             <SwiperSlide key={place.id}>
-              <div className="place-card">
-                <div className="place-card-left">
-                  <img
-                    src={place.imageUrl}
-                    alt={place.name}
-                    className="place-card-image"
-                  />
-                  <div className="place-card-info">
-                    <h3>{place.name}</h3>
-                    <span>{place.address}</span>
-                    <span>{place.hours}</span>
-                    <span className="rating-place">{place.rating}</span>
-                    <button className="place-card-button">Add to list</button>
-                  </div>
-                </div>
+            <div className="place-card">
+               <img
+                  src={place.imageUrl}
+                  alt={place.name}
+                  className="place-card-image"
+                />
+                <div className="place-card-info">
+                  <h3>{place.name}</h3>
+                  <span>{place.address}</span>
+                  <span>{place.hours}</span>
+                  <span className="rating-place">{place.rating}</span>
               </div>
-            </SwiperSlide>
+              <button className="place-card-button">Add to list</button>
+            </div>
+          </SwiperSlide>
           ))}
         </Swiper>
       ) : (

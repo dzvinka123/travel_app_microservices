@@ -1,3 +1,4 @@
+import "./Description.css"
 import React, {useState, useEffect} from "react";
 
 export default function Description(props) {
@@ -15,7 +16,7 @@ export default function Description(props) {
                 <div className="descriptor-list">
                     <div>
                         <span>Write your thoughts here</span>
-                        <input onChange={(e) => setDescription(e.target.value)} type="text" />
+                        <textarea onChange={(e) => setDescription(e.target.value)} type="text" />
                     </div>
                 </div>
             </div>

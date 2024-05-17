@@ -7,7 +7,6 @@ import Description from "../components/newuser/Description";
 import Search from "../components/newuser/Search";
 import plus from "../img/add.svg";
 import { Wrapper } from "@googlemaps/react-wrapper";
-import "../components/newuser/createdTripUser.css";
 import { useState } from "react";
 import Friends from "../components/friends/Friends";
 import { useNavigate } from "react-router-dom";
