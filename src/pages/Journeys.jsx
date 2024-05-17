@@ -1,5 +1,4 @@
 import Navbar from "../components/navbar/Navbar";
-import JourneysEmpty from "../components/journeys/Journeys-Empty";
 import Footer from "../components/footer/Footer";
 import RenderJourneys from "../components/journeys/Render-Journeys";
 

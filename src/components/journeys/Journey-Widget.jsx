@@ -23,7 +23,7 @@ export default function JourneyWidget({ handleJourneyUpdate, onClose, id, destin
     useEffect(() => {
         handleJourneyUpdate(todos);
         //console.log(cards)
-      }, [todos, handleJourneyUpdate])
+    }, [todos, handleJourneyUpdate])
     return (
         <Wrapper apiKey={import.meta.env.VITE_REACT_APP_GOOGLE_API} libraries={['marker', 'places']}>
             <div className="modal-container">
@@ -36,26 +36,26 @@ export default function JourneyWidget({ handleJourneyUpdate, onClose, id, destin
                                 <p className="widget-description">{description}</p>
                                 <div className="friends__friends">
                                     {emails.filter(email => email.user_email !== user.email).map((email, index) => (
-                                        <Friend key={index} email={email.user_email} onDelete={() => {}}/>
-                                        ))}
+                                        <Friend key={index} email={email.user_email} onDelete={() => { }} />
+                                    ))}
                                 </div>
                                 {/* Add friends functionality */}
                             </div>
                             <Weather days_range={date} city={destination} />
                             <div className="block second-block">
-                            <div className="swiper-button-prev">
-                                <img src={left} />
-                            </div>
-                            <div className="swiper-button-next">
-                                <img src={right} />
-                            </div>
-                                <VisitPlace city={destination}/>
+                                <div className="swiper-button-prev">
+                                    <img src={left} />
+                                </div>
+                                <div className="swiper-button-next">
+                                    <img src={right} />
+                                </div>
+                                <VisitPlace city={destination} />
                             </div>
                         </div>
                         <div className="second-row-container">
-                            <ToDoList handleToDoUpdate={handleToDoUpdate} cardId={id} toDos={todos}/>
+                            <ToDoList handleToDoUpdate={handleToDoUpdate} cardId={id} toDos={todos} />
                             <div className="big-block">
-                                <Map destination={destination}/>
+                                <Map destination={destination} />
                             </div>
                         </div>
                     </div>

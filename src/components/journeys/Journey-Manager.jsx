@@ -4,13 +4,7 @@ import JourneyOption from './Journey-Option';
 import JourneyWidget from './Journey-Widget';
 import "./widgetstyles.css";
 
-// destination
-// date 
-// title -- "From {source} To {destination}"
-// to-do cards 
-
 export default function JourneyManager(journey) {
-    //console.log(journey.journey.todoList)
     const [widgetVisible, setWidgetVisible] = useState(false);
     const toggleWidgetVisibility = () => {
         setWidgetVisible(!widgetVisible);
@@ -23,7 +17,7 @@ export default function JourneyManager(journey) {
             <JourneyOption onButtonClick={toggleWidgetVisibility} to={journey.journey.to} from={journey.journey.from} startDate={journey.journey.start_date} endDate={journey.journey.end_date} />
             {widgetVisible && ReactDOM.createPortal(
                 <div className="journey-popup-overlay">
-                    <JourneyWidget handleJourneyUpdate={handleJourneyUpdate} onClose={toggleWidgetVisibility} id={journey.journey.id} destination={journey.journey.to} description={journey.journey.description} startDate={journey.journey.start_date} endDate={journey.journey.end_date} toDos={journey.journey.todoList} emails={journey.journey.emails}/>
+                    <JourneyWidget handleJourneyUpdate={handleJourneyUpdate} onClose={toggleWidgetVisibility} id={journey.journey.id} destination={journey.journey.to} description={journey.journey.description} startDate={journey.journey.start_date} endDate={journey.journey.end_date} toDos={journey.journey.todoList} emails={journey.journey.emails} />
                 </div>,
                 document.body
             )}

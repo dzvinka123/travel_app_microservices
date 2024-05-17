@@ -55,8 +55,8 @@ export default function VisitPlace({ city }) {
         >
           {places.map((place) => (
             <SwiperSlide key={place.id}>
-            <div className="place-card">
-               <img
+              <div className="place-card">
+                <img
                   src={place.imageUrl}
                   alt={place.name}
                   className="place-card-image"
@@ -66,9 +66,9 @@ export default function VisitPlace({ city }) {
                   <span>{place.address}</span>
                   <span>{city ? null : place.hours}</span>
                   <span className="rating-place">{city ? null : place.rating}</span>
+                </div>
               </div>
-            </div>
-          </SwiperSlide>
+            </SwiperSlide>
           ))}
         </Swiper>
       ) : (
@@ -79,56 +79,56 @@ export default function VisitPlace({ city }) {
 }
 
 const loadPlaces = async (city) => {
-    const service = new google.maps.places.PlacesService(document.createElement('div'));
-    const coords = fetchCoords(city);
-    const request = {
-      location: { lat: (await coords).latitude, lng: (await coords).longitude },
-      radius: "500",
-      type: ["tourist_attraction"],
-    };
+  const service = new google.maps.places.PlacesService(document.createElement('div'));
+  const coords = fetchCoords(city);
+  const request = {
+    location: { lat: (await coords).latitude, lng: (await coords).longitude },
+    radius: "500",
+    type: ["tourist_attraction"],
+  };
 
-    return new Promise((resolve, reject) => {
-        service.nearbySearch(request, async (results, status) => {
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
-                const placesDetails = await Promise.all(results.map(async place => {
-                    const detail = await getPlaceDetails(service, place.place_id);
-                    const photoUrl = place.photos && place.photos.length > 0 ? place.photos[0].getUrl() : 'placeholder-image-url';
-                    const rating = place.rating ? `Rating: ${place.rating} (${place.user_ratings_total} reviews)` : "Rating not available";
-                    
-                    return {
-                        id: place.place_id,
-                        name: place.name,
-                        address: place.vicinity,
-                        rating: rating,
-                        hours: detail.hours,
-                        imageUrl: photoUrl
-                    };
-                }));
-                resolve(placesDetails);
-            } else {
-                reject(status);
-            }
-        });
+  return new Promise((resolve, reject) => {
+    service.nearbySearch(request, async (results, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        const placesDetails = await Promise.all(results.map(async place => {
+          const detail = await getPlaceDetails(service, place.place_id);
+          const photoUrl = place.photos && place.photos.length > 0 ? place.photos[0].getUrl() : 'placeholder-image-url';
+          const rating = place.rating ? `Rating: ${place.rating} (${place.user_ratings_total} reviews)` : "Rating not available";
+
+          return {
+            id: place.place_id,
+            name: place.name,
+            address: place.vicinity,
+            rating: rating,
+            hours: detail.hours,
+            imageUrl: photoUrl
+          };
+        }));
+        resolve(placesDetails);
+      } else {
+        reject(status);
+      }
     });
+  });
 };
 
 const getPlaceDetails = async (service, placeId) => {
-    const request = {
-        placeId: placeId,
-        fields: ['rating', 'user_ratings_total', 'opening_hours']
-    };
+  const request = {
+    placeId: placeId,
+    fields: ['rating', 'user_ratings_total', 'opening_hours']
+  };
 
-    return new Promise(resolve => {
-        service.getDetails(request, (result, status) => {
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
-                let hours = "Work hours not available";
-                if (result.opening_hours) {
-                    hours = result.opening_hours['weekday_text'][new Date().getDay() - 1]
-                }
-                resolve({ hours });
-            } else {
-                resolve({ hours: "Work hours not available" });
-            }
-        });
+  return new Promise(resolve => {
+    service.getDetails(request, (result, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        let hours = "Work hours not available";
+        if (result.opening_hours) {
+          hours = result.opening_hours['weekday_text'][new Date().getDay() - 1]
+        }
+        resolve({ hours });
+      } else {
+        resolve({ hours: "Work hours not available" });
+      }
     });
+  });
 };

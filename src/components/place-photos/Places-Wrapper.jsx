@@ -7,7 +7,6 @@ export default function PlacesWrapper({ input }) {
   const [needsUpdate, setNeedsUpdate] = useState(true);
 
   useEffect(() => {
-    // Set needsUpdate to true when input changes
     setNeedsUpdate(true);
   }, [input]);
 

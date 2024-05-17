@@ -6,7 +6,7 @@ import 'swiper/css/navigation';
 import arrowl from '../../img/arrowl.svg';
 import arrowr from '../../img/arrowr.svg';
 import JourneyManager from './Journey-Manager';
-import "./Journeys.css" // Adjust the import path as necessary
+import "./Journeys.css"
 
 export default function JourneysPending(journeys) {
   return (
@@ -30,7 +30,7 @@ export default function JourneysPending(journeys) {
         {journeys.journeys.map((journey, index) => (
           <SwiperSlide key={index}>
             <JourneyManager
-             journey={journey}
+              journey={journey}
             />
           </SwiperSlide>
         ))}

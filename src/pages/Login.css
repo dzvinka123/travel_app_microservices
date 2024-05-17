@@ -8,6 +8,6 @@
     background-position-x: center;
     display: flex;
     flex-direction: column;
-    background-attachment:local ;
+    background-attachment: local;
     background-position: absolute;
 }

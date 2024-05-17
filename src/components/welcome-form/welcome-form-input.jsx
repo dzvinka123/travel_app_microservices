@@ -2,7 +2,7 @@ import React from "react";
 import "../../pages/Welcome"
 import "./welcome-form-input.css"
 
-export default function WelcomeFormInput({name, placeholder, onChange}) {
+export default function WelcomeFormInput({ name, placeholder, onChange }) {
     return (
         <div className="find__infoblolck">
             <div className="find__name">
@@ -11,4 +11,4 @@ export default function WelcomeFormInput({name, placeholder, onChange}) {
             <input type="text" placeholder={placeholder} className="find__input" onChange={onChange} ></input>
         </div>
     );
-  }
+}

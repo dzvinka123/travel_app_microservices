@@ -126,13 +126,13 @@ app.get("/users", (req, res) => {
 });
 
 app.get('/get-user', async (req, res) => {
-  const email  = req.query.email;
+  const email = req.query.email;
   const userExists = await checkUserExists(email);
   if (userExists) {
     const user = getUser(email)
-    res.json({ exists: userExists,  email: user.email, name: user.name, message: "User found succesfully!"});
+    res.json({ exists: userExists, email: user.email, name: user.name, message: "User found succesfully!" });
   } else {
-    res.json({ exists: userExists,  email: null, name: null, message: "User not found!"});
+    res.json({ exists: userExists, email: null, name: null, message: "User not found!" });
   }
 });
 
@@ -425,9 +425,9 @@ app.get("/user-travel-cards", (req, res) => {
 });
 
 app.put("/todo-list", (req, res) => {
-  const { taskId , done } = req.body;
+  const { taskId, done } = req.body;
   console.log(done);
-  db.run( 
+  db.run(
     `UPDATE todo_list SET done = ? WHERE id = ?`,
     [done ? 1 : 0, taskId],
     function (err) {
@@ -448,22 +448,22 @@ app.put("/todo-list", (req, res) => {
 });
 
 app.post('/todo-list', (req, res) => {
-    const { task, done, card_id } = req.body;
-  
-    if (!task || !card_id) {
-      return res.status(400).json({ success: false, message: 'Missing required fields' });
+  const { task, done, card_id } = req.body;
+
+  if (!task || !card_id) {
+    return res.status(400).json({ success: false, message: 'Missing required fields' });
+  }
+
+  db.run(`INSERT INTO todo_list (task, done, card_id) VALUES (?, ?, ?)`, [task, done ? 1 : 0, card_id], function (err) {
+    if (err) {
+      console.error('Database error:', err);
+      return res.status(500).json({ success: false, message: 'Failed to add new task' });
     }
-  
-    db.run(`INSERT INTO todo_list (task, done, card_id) VALUES (?, ?, ?)`, [task, done ? 1 : 0, card_id], function (err) {
-      if (err) {
-        console.error('Database error:', err);
-        return res.status(500).json({ success: false, message: 'Failed to add new task' });
-      }
-  
-      res.status(200).json({ success: true, message: 'Task added successfully', taskId: this.lastID });
-    });
+
+    res.status(200).json({ success: true, message: 'Task added successfully', taskId: this.lastID });
   });
-  
+});
+
 
 function getUser(email) {
   return new Promise((resolve, reject) => {

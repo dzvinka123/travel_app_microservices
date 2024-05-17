@@ -3,21 +3,19 @@ import ToDoCard from './ToDo-Card';
 import CreateCard from './Create-ToDo-Card';
 import "./widgetstyles.css"
 
-// add inputs for ToDoCards, fix the checking of to do cards
 export default function ToDoList(props) {
     const [cards, setCards] = useState(props.toDos);
     const addNewCard = (newCard) => {
-            console.log("New card to be added:", newCard);
-            setCards(prevCards => {
+        console.log("New card to be added:", newCard);
+        setCards(prevCards => {
             const updatedCards = [...prevCards, newCard];
-            //console.log("Updated cards list:", updatedCards);
             return updatedCards;
         });
     };
     const handleOnCheck = (done, id) => {
         if (props.cardId) {
-            setCards(prevCards => 
-                prevCards.map(card => 
+            setCards(prevCards =>
+                prevCards.map(card =>
                     card.id === id ? { ...card, done } : card
                 )
             );
@@ -26,7 +24,7 @@ export default function ToDoList(props) {
     useEffect(() => {
         props.handleToDoUpdate(cards);
         console.log(cards)
-      }, [cards, props.handleToDoUpdate])
+    }, [cards, props.handleToDoUpdate])
     return (
         <section className="block to-do-block">
             <p className="todo-list-header">To-Do List</p>

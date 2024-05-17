@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import left from "../img/left.svg";
 import "./VisitPlace.css";
-import "./removeCheckbox.css"
 import rigth from "../img/rigth.svg";
 import ActionButton from "../components/action-button/ActionButton";
 
@@ -26,7 +25,7 @@ export default function CreateTripNewUser() {
   const navigate = useNavigate()
 
   const handleFriendsUpdate = (newFriendsList) => {
-      setFriends(newFriendsList);
+    setFriends(newFriendsList);
   };
   const handleToDoUpdate = (newTasks) => {
     setTasks(newTasks);
@@ -71,7 +70,7 @@ export default function CreateTripNewUser() {
         <Navbar />
         {/* search block */}
 
-        <Search onDataUpdate={handleData}/>
+        <Search onDataUpdate={handleData} />
 
         <section className="interesting-place">
           <h2>
@@ -91,12 +90,12 @@ export default function CreateTripNewUser() {
         </section>
 
         <section className="additional-container">
-          <ToDoList cardId={null} toDos={[]} handleToDoUpdate={handleToDoUpdate}/>
-          <Description  onDescriptionUpdate={handleDescriptinion}/>
+          <ToDoList cardId={null} toDos={[]} handleToDoUpdate={handleToDoUpdate} />
+          <Description onDescriptionUpdate={handleDescriptinion} />
         </section>
         <div className="submit-button-endpage">
           <Friends onFriendsUpdate={handleFriendsUpdate}></Friends>
-          <ActionButton handleSubmit={handleSubmit} text="Save Trip" className="submit-button-endpage"/>
+          <ActionButton handleSubmit={handleSubmit} text="Save Trip" className="submit-button-endpage" />
         </div>
         <Footer />
       </Wrapper>

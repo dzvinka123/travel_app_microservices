@@ -11,14 +11,9 @@ import { DateRangePicker } from 'react-date-range'; // for date
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { format } from 'date-fns'
- 
-
-
-import "./CreateNewUserTrip.css" // delete after create final css file
-
+import "./CreateNewUserTrip.css"
 import distance from "../img/distance.svg"
-import calendar_clock  from "../img/calendar_clock.svg"
-
+import calendar_clock from "../img/calendar_clock.svg"
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -110,32 +105,32 @@ export default function CreateNewUserTrip() {
                         <FormInput icon={distance} placeholder="Your Location?" text="From" name="from" onChange={handleChange} />
                         <FormInput icon={distance} placeholder="Where are you going?" text="To" name="to" onChange={handleChange} />
                         <div className="date-input-wrapper">
-                        <FormInput
-                            icon={calendar_clock}
-                            placeholder="Add date"
-                            text="Date"
-                            name="date"
-                            onChange={handleChange}
-                            onClick={handleClickDate}
-                            className="last-field"
-                            value={formData.date}
-                        />
-                        {openDate && (
-                            <div className="date-picker-container">
-                            <DateRangePicker
-                                ranges={[selectionRange]}
-                                onChange={handleDate}
-                                minDate={new Date()}
+                            <FormInput
+                                icon={calendar_clock}
+                                placeholder="Add date"
+                                text="Date"
+                                name="date"
+                                onChange={handleChange}
+                                onClick={handleClickDate}
+                                className="last-field"
+                                value={formData.date}
                             />
-                            </div>
-                        )}
+                            {openDate && (
+                                <div className="date-picker-container">
+                                    <DateRangePicker
+                                        ranges={[selectionRange]}
+                                        onChange={handleDate}
+                                        minDate={new Date()}
+                                    />
+                                </div>
+                            )}
                         </div>
                         <ActionButton text="Create Your Journey" onClick={handleSubmit} />
                     </form>
                 </section>
                 <JourneysEmpty />
-                <RecommendationSection recommendations={recommendations} title={"Find places that suit your lifestyle"} intro={"Discover destinations tailored to your unique lifestyle with our Travel Planner app."} showIntro={true}/>
-             </main>
+                <RecommendationSection recommendations={recommendations} title={"Find places that suit your lifestyle"} intro={"Discover destinations tailored to your unique lifestyle with our Travel Planner app."} showIntro={true} />
+            </main>
             <Footer />
         </div>
     );

@@ -6,35 +6,30 @@ import axios from 'axios';
 
 export default function CreateCard({ card_id, addNewCard }) {
     const [inputValue, setInputValue] = useState('');
-    //const [newCard, setNewCard] = useState();
     const handleAddCard = () => {
         if (inputValue.trim() !== '') {
             if (card_id) {
-                axios.post(`http://localhost:3001/todo-list`, {task: inputValue.trim(), done: 0, card_id: card_id})
-                .then(response => {
-                    const { success, message, taskId } = response.data;
-                    if (success) {
-                        const newCard = { id: taskId, task: inputValue.trim(), done: 0, card_id: card_id };
-                        addNewCard(newCard);
-                        setInputValue('');   
-                    } else {
-                        console.error("Failed to fetch journeys:", response.data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error("Failed to fetch journeys:", error);
-                });
+                axios.post(`http://localhost:3001/todo-list`, { task: inputValue.trim(), done: 0, card_id: card_id })
+                    .then(response => {
+                        const { success, message, taskId } = response.data;
+                        if (success) {
+                            const newCard = { id: taskId, task: inputValue.trim(), done: 0, card_id: card_id };
+                            addNewCard(newCard);
+                            setInputValue('');
+                        } else {
+                            console.error("Failed to fetch journeys:", response.data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Failed to fetch journeys:", error);
+                    });
             } else {
                 addNewCard(inputValue.trim());
-                setInputValue('');   
+                setInputValue('');
             }
-            
+
         }
     };
-    // useEffect(() => {
-    //     addNewCard(newCard);
-    //   }, [newCard, addNewCard])
-
 
     return (
         <div className="cards-container">

@@ -20,16 +20,16 @@ function FormSignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios.post('http://localhost:3001/register', { name, email, password })
-    .then(response => {
-      setEmail("");
-      setPassword("");
-      setName("");
-      setError("");
-      login(response.data)
-      navigate("/create-new-user-trip");
-    }).catch(error => {
+      .then(response => {
+        setEmail("");
+        setPassword("");
+        setName("");
+        setError("");
+        login(response.data)
+        navigate("/create-new-user-trip");
+      }).catch(error => {
         setError(error.response.data.message);
-    });
+      });
   };
 
   return (

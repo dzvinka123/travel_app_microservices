@@ -1,6 +1,6 @@
 /* Footer styles */
 
-.footer-content{
+.footer-content {
     display: flex;
     padding: 48px 94px 24px 94px;
     flex-direction: column;
@@ -16,7 +16,7 @@
 .footer-content-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;    
+    justify-content: space-between;
     align-items: flex-start;
 }
 
@@ -46,7 +46,8 @@
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
-    line-height: 26px; /* 144.444% */
+    line-height: 26px;
+    /* 144.444% */
     align-self: stretch;
 }
 
@@ -70,5 +71,6 @@
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: 20px; /* 142.857% */
+    line-height: 20px;
+    /* 142.857% */
 }

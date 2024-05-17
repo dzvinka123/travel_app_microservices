@@ -1,11 +1,11 @@
 import "./Description.css"
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Description(props) {
     const [description, setDescription] = useState("");
     useEffect(() => {
         props.onDescriptionUpdate(description);
-      }, [description, props.onDescriptionUpdate]);
+    }, [description, props.onDescriptionUpdate]);
     return (
         <div className="description-box">
             <div className="empty"></div>

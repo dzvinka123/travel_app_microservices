@@ -61,8 +61,8 @@ export default function Search(props) {
     setOpenDate((prev) => !prev);
   };
 
-    // const city = "Lviv";
-    // const days = "18.05.2024 - 23.05.2024";
+  // const city = "Lviv";
+  // const days = "18.05.2024 - 23.05.2024";
 
   return (
     <section className="search-block">
@@ -85,26 +85,26 @@ export default function Search(props) {
             onChange={handleChange}
           />
           <div className="date-input-wrapper">
-              <FormInput
-                icon={calendar_clock}
-                placeholder="Add date"
-                text="Date"
-                name="date"
-                onChange={handleChange}
-                onClick={handleClickDate}
-                className="last-field"
-                value={formData.date}
-              />
-              {openDate && (
-                <div className="date-picker-container">
-                  <DateRangePicker
-                    ranges={[selectionRange]}
-                    onChange={handleDate}
-                    minDate={new Date()}
-                  />
-                </div>
-              )}
-            </div>
+            <FormInput
+              icon={calendar_clock}
+              placeholder="Add date"
+              text="Date"
+              name="date"
+              onChange={handleChange}
+              onClick={handleClickDate}
+              className="last-field"
+              value={formData.date}
+            />
+            {openDate && (
+              <div className="date-picker-container">
+                <DateRangePicker
+                  ranges={[selectionRange]}
+                  onChange={handleDate}
+                  minDate={new Date()}
+                />
+              </div>
+            )}
+          </div>
           <ActionButton text="Save Changes" onClick={handleSubmit} />
         </form>
 

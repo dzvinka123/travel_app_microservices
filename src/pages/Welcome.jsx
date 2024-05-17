@@ -88,7 +88,7 @@ export default function Welcome() {
     } else {
       navigate("/login");
     }
-  
+
   };
 
   const [openDate, setOpenDate] = useState(false);
@@ -128,47 +128,47 @@ export default function Welcome() {
                   Start your journey today and unlock a world of possibilities
                   with our Travel Planner app. Adventure awaits!
                 </div>
-                  <form className="search-container" onSubmit={handleSubmit}>
-                    <FormInput
-                      icon={distance}
-                      placeholder="Your Location?"
-                      text="From"
-                      name="from"
-                      onChange={handleChange}
-                    />
-                    <FormInput
-                      icon={distance}
-                      placeholder="Where are you going?"
-                      text="To"
-                      name="to"
-                      onChange={handleChange}
-                    />
-              <div className="date-input-wrapper">
-              <FormInput
-                icon={calendar_clock}
-                placeholder="Add date"
-                text="Date"
-                name="date"
-                onChange={handleChange}
-                onClick={handleClickDate}
-                className="last-field"
-                value={formData.date}
-              />
-              {openDate && (
-                <div className="date-picker-container">
-                  <DateRangePicker
-                    ranges={[selectionRange]}
-                    onChange={handleDate}
-                    minDate={new Date()}
+                <form className="search-container" onSubmit={handleSubmit}>
+                  <FormInput
+                    icon={distance}
+                    placeholder="Your Location?"
+                    text="From"
+                    name="from"
+                    onChange={handleChange}
                   />
-                </div>
-              )}
-            </div>
-                    <ActionButton
-                      text="Create Your Journey"
-                      onClick={handleSubmit}
+                  <FormInput
+                    icon={distance}
+                    placeholder="Where are you going?"
+                    text="To"
+                    name="to"
+                    onChange={handleChange}
+                  />
+                  <div className="date-input-wrapper">
+                    <FormInput
+                      icon={calendar_clock}
+                      placeholder="Add date"
+                      text="Date"
+                      name="date"
+                      onChange={handleChange}
+                      onClick={handleClickDate}
+                      className="last-field"
+                      value={formData.date}
                     />
-                  </form>
+                    {openDate && (
+                      <div className="date-picker-container">
+                        <DateRangePicker
+                          ranges={[selectionRange]}
+                          onChange={handleDate}
+                          minDate={new Date()}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <ActionButton
+                    text="Create Your Journey"
+                    onClick={handleSubmit}
+                  />
+                </form>
               </div>
             </div>
           </section>

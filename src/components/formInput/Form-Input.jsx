@@ -19,14 +19,14 @@ export default function FormInput({ icon, placeholder, text, name, onChange, onC
             <img className="search-icon" src={icon} alt={`${text} Icon`} />
             <div className="search-field">
                 <label htmlFor={name}>{text}</label>
-                <input ref={inputRef} 
-                    type="text" 
-                    id={name} 
-                    name={name} 
-                    placeholder={placeholder} 
+                <input ref={inputRef}
+                    type="text"
+                    id={name}
+                    name={name}
+                    placeholder={placeholder}
                     onChange={onChange}
                     value={value}
-                    required 
+                    required
                 />
             </div>
         </div>

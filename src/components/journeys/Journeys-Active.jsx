@@ -27,10 +27,10 @@ export default function JourneysActive(journeys) {
           prevEl: ".left"
         }}
       >
-          {journeys.journeys.map((journey, index) => (
+        {journeys.journeys.map((journey, index) => (
           <SwiperSlide key={index}>
             <JourneyManager
-             journey={journey}
+              journey={journey}
             />
           </SwiperSlide>
         ))}

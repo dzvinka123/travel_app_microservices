@@ -1,15 +1,18 @@
 :root {
     --background-item-color: #191C20;
     --text-color: #1B1C57;
-    --text-secondary: #626687; /* Fix root setting for project */
+    --text-secondary: #626687;
+    /* Fix root setting for project */
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: inherit;
 }
 
 a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 .header-container-login {
@@ -22,12 +25,14 @@ a {
     box-shadow: 4px 4px 30.4px 0px rgba(7, 5, 5, 0.20);
     justify-content: space-between;
 }
+
 .header-left-elements {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 24px;
 }
+
 .header-center-elements {
     display: flex;
     flex-direction: row;
@@ -51,14 +56,16 @@ a {
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
-    line-height: 32px; /* 133.333% */
+    line-height: 32px;
+    /* 133.333% */
     text-transform: lowercase;
 }
 
-.header-language-select{
+.header-language-select {
     background-color: transparent;
     border: none;
 }
-.header-center-elements{
+
+.header-center-elements {
     size: 100%;
 }

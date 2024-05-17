@@ -46,7 +46,7 @@ export default function RenderJourneys() {
                 if (filtered.length != 0) {
                     return <JourneysActive journeys={filtered} />;
                 } else {
-                    return <JourneysEmpty/>;
+                    return <JourneysEmpty />;
                 }
             }
             return <JourneysEmpty />;
@@ -56,7 +56,7 @@ export default function RenderJourneys() {
                 if (filtered.length != 0) {
                     return <JourneysPending journeys={filtered} />;
                 } else {
-                    return <JourneysEmpty/>;
+                    return <JourneysEmpty />;
                 }
             }
             return <JourneysEmpty />;

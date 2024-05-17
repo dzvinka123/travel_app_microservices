@@ -13,17 +13,17 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Welcome />} />
-        <Route path="/welcome" element={<Welcome />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/terms-and-conditions" element={<Terms />} />
-        <Route path="/create-new-user-trip" element={<CreateNewUserTrip />} />
-        <Route path="/journeys" element={<MainJourneys />} />
-        <Route path="/create-trip" element={<CreateTripNewUser />} />
-      </Routes>
-    </BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Welcome />} />
+          <Route path="/welcome" element={<Welcome />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/terms-and-conditions" element={<Terms />} />
+          <Route path="/create-new-user-trip" element={<CreateNewUserTrip />} />
+          <Route path="/journeys" element={<MainJourneys />} />
+          <Route path="/create-trip" element={<CreateTripNewUser />} />
+        </Routes>
+      </BrowserRouter>
     </AuthProvider>
   );
 }

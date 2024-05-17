@@ -28,7 +28,7 @@ async function fetchCoords(city) {
     }
 }
 
-async function fetchTemp( latitude, longitude ) {
+async function fetchTemp(latitude, longitude) {
     const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m&daily=weather_code&forecast_days=14`;
 
     try {
@@ -53,17 +53,17 @@ async function fetchTemp( latitude, longitude ) {
     }
 };
 
-async function fetchDays({ days_range, temperatures, start_day}) {
+async function fetchDays({ days_range, temperatures, start_day }) {
     if (days_range) {
         try {
             const [startDateStr, endDateStr] = days_range.split(" - ");
 
             const formatDate = (dateStr) => {
-              const [month, day, year] = dateStr.split("/");
-              return `${year}-${month.padStart(2, "0")}-${day.padStart(
-                2,
-                "0"
-              )}`;
+                const [month, day, year] = dateStr.split("/");
+                return `${year}-${month.padStart(2, "0")}-${day.padStart(
+                    2,
+                    "0"
+                )}`;
             };
 
             const startDate = new Date(formatDate(startDateStr));
@@ -76,8 +76,8 @@ async function fetchDays({ days_range, temperatures, start_day}) {
 
             while (currentDate <= endDate) {
                 if (currentDate >= startDate && currentDate <= endDate) {
-                    
-                    dates.push({ [currentDate.toISOString().split('T')[0]]: [temperatures[count][0], temperatures[count][1] ]});
+
+                    dates.push({ [currentDate.toISOString().split('T')[0]]: [temperatures[count][0], temperatures[count][1]] });
                 }
                 currentDate.setDate(currentDate.getDate() + 1);
                 count += 1;
@@ -85,7 +85,7 @@ async function fetchDays({ days_range, temperatures, start_day}) {
 
             return (
                 {
-                    temps: dates, 
+                    temps: dates,
                 }
             );
 
@@ -132,7 +132,7 @@ export default function Weather({ days_range, city }) {
                         nextEl: ".right",
                         prevEl: ".left"
                     }}
-                    >
+                >
                     {Array.isArray(temperatureData.temps) && temperatureData.temps.length > 0 ? (
                         temperatureData.temps.map((temp, index) => {
                             const [date, temperature] = Object.entries(temp)[0];
@@ -144,7 +144,7 @@ export default function Weather({ days_range, city }) {
                     ) : (
                         <p>No weather data available.</p>
                     )}
-                 </Swiper>
+                </Swiper>
             </div>
 
             <a href="https://open-meteo.com/">OpenMeteo.com</a>

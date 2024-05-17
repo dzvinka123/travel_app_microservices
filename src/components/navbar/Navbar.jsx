@@ -1,9 +1,7 @@
 import './Navbar.css';
 import logo from '../../img/getawaylogo.svg';
-import commute from '../../img/commute.svg';
 import language from '../../img/language.svg';
 import campingDark from '../../img/camping-dark.svg';
-// import user from '../../img/user.svg';
 import { useAuth } from "../../session/AuthContext";
 import { Link } from 'react-router-dom';
 

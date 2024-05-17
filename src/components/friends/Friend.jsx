@@ -1,7 +1,7 @@
 import React from 'react';
 import user from "../../img/user.svg"
 
-export default function Friend (props) {
+export default function Friend(props) {
     const handleDel = () => {
         props.onDelete(props.email);
     }
