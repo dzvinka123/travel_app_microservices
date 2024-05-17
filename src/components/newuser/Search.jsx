@@ -105,7 +105,7 @@ export default function Search(props) {
                 </div>
               )}
             </div>
-          <ActionButton text="Create Your Journey" onClick={handleSubmit} />
+          <ActionButton text="Save Changes" onClick={handleSubmit} />
         </form>
 
         <div className="search-elements-div">

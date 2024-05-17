@@ -158,3 +158,16 @@
     flex-direction: row;
     gap:8px;
 }
+
+.additional-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 96px 0px;
+}
+
+.submit-button-endpage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

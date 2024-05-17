@@ -12,6 +12,7 @@ import axios from "axios";
 import left from "../img/left.svg";
 import "./VisitPlace.css";
 import rigth from "../img/rigth.svg";
+import ActionButton from "../components/action-button/ActionButton";
 
 export default function CreateTripNewUser() {
   const [tasks, setTasks] = useState([]);
@@ -95,10 +96,10 @@ export default function CreateTripNewUser() {
           <ToDoList />
           <Description  onDescriptionUpdate={handleDescriptinion}/>
         </section>
-        <Friends onFriendsUpdate={handleFriendsUpdate}></Friends>
-        <button onClick={handleSubmit}>
-          SAVE ALL
-        </button>
+        <div className="submit-button-endpage">
+          <Friends onFriendsUpdate={handleFriendsUpdate}></Friends>
+          <ActionButton text="Save Trip" className="submit-button-endpage"/>
+        </div>
         <Footer />
       </Wrapper>
     </>
