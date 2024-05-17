@@ -16,6 +16,7 @@
 
   .recommend__card:last-child {
     margin: 0;
+    margin: 10px;
   }
 
   .card__image {
