@@ -26,14 +26,6 @@ export default function Navbar() {
             />
             <span className="nav-text">Journeys</span>
           </a>
-          <a href="/create-trip" className="header-nav-link active-page">
-            <img
-              className="header-nav-img"
-              src={commute}
-              alt="Journey Icon"
-            />
-            <span className="nav-text active-text">Create Your Journey</span>
-          </a>
         </nav>
       </div>
       <div className="header-right-elements">
