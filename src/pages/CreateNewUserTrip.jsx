@@ -33,7 +33,7 @@ export default function CreateNewUserTrip() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        navigate('/create-new-user-trip', { state: { ...formData } });
+        navigate('/create-trip', { state: { ...formData } });
     };
 
     const [openDate, setOpenDate] = useState(false);
