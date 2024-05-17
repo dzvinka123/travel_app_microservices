@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Welcome.css";
 import RecommendationSection from "../components/recommendation/Rec-Section";
 import Footer from "../components/footer/Footer.jsx";
 import PartnerIMG from "../components/partners/Partner.jsx";
@@ -12,10 +11,7 @@ import partner5 from "../img/5.png";
 import recImg1 from "../img/placeholder.png";
 import recImg2 from "../img/Image2.png";
 import recImg3 from "../img/Image3.png";
-import dividor from "../img/dividor.svg";
-import search_but from "../img/search_but.svg";
 import WelcomeHeader from "../components/welcome-header/Welcome-Header.jsx";
-// import WelcomeFormInput from "../components/welcome-form/welcome-form-input.jsx";
 import FormInput from "../components/formInput/Form-Input.jsx";
 import ActionButton from "../components/action-button/ActionButton.jsx";
 import { AuthContext } from "../session/AuthContext";
@@ -24,6 +20,7 @@ import { DateRangePicker } from "react-date-range"; // for date
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
+import "./Welcome.css";
 
 import distance from "../img/distance.svg";
 import calendar_clock from "../img/calendar_clock.svg";
@@ -70,47 +67,6 @@ export default function Welcome() {
       imageSpare: recImg3,
     },
   ];
-  // if (AuthContext)
-
-  // const [formData, setFormData] = useState({
-  //   from: "",
-  //   to: "",
-  //   date: "",
-  // });
-
-  // const navigate = useNavigate();
-
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setFormData((prev) => ({ ...prev, [name]: value }));
-  // };
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   navigate("/create-new-user-trip/trip-details", {
-  //     state: { ...formData },
-  //   });
-  // };
-
-  // const [openDate, setOpenDate] = useState(false);
-
-  // const [selectionRange, setDate] = useState({
-  //   startDate: new Date(),
-  //   endDate: new Date(),
-  //   key: "selection",
-  // });
-
-  // const handleDate = (ranges) => {
-  //     const { startDate, endDate } = ranges.selection;
-  //     const formattedStartDate = format(startDate, 'MM/dd/yyyy');
-  //     const formattedEndDate = format(endDate, 'MM/dd/yyyy');
-  //     setDate({ ...selectionRange, ...ranges.selection });
-  //     setFormData({ ...formData, date: `${formattedStartDate} - ${formattedEndDate}` });
-  // };
-
-  // const handleClickDate = () => {
-  //   setOpenDate((prev) => !prev);
-  // };
   const [formData, setFormData] = useState({
     from: "",
     to: "",
@@ -172,75 +128,44 @@ export default function Welcome() {
                   Start your journey today and unlock a world of possibilities
                   with our Travel Planner app. Adventure awaits!
                 </div>
-                {/* <div className="top__find find"> */}
-                {/* <form className="find__information" onSubmit={handleSubmit}>
-                      <WelcomeFormInput
-                        name={"From"}
-                        placeholder={"Your location?"}
-                        onChange={handleChange}
-                      />
-                      <div className="find__dividor">
-                        <img src={dividor} alt=""></img>
-                      </div>
-                      <WelcomeFormInput
-                        name={"To"}
-                        placeholder={"Where are you going?"}
-                        onChange={handleChange}
-                      />
-                      <div className="find__dividor">
-                        <img src={dividor} alt=""></img>
-                      </div>
-                      <WelcomeFormInput
-                        name={"Date"}
-                        placeholder={"Add dates"}
-                        onChange={handleChange}
-                        onClick={handleClickDate}
-                                        />
-                            {openDate && <DateRangePicker
-                            ranges={[selectionRange]}
-                            onChange={handleDate}
-                            minDate={new Date()}
-                        />}
-                    </form> */}
-                <form className="search-container" onSubmit={handleSubmit}>
-                  <FormInput
-                    icon={distance}
-                    placeholder="Your Location?"
-                    text="From"
-                    name="from"
-                    onChange={handleChange}
-                  />
-                  <FormInput
-                    icon={distance}
-                    placeholder="Where are you going?"
-                    text="To"
-                    name="to"
-                    onChange={handleChange}
-                  />
-                  <FormInput
-                    icon={calendar_clock}
-                    placeholder="Add date"
-                    text="Date"
-                    name="date"
-                    onChange={handleChange}
-                    onClick={handleClickDate}
-                    className="last-field"
-                    value={formData.date}
-                  />
-                  {openDate && (
-                    <DateRangePicker
-                      ranges={[selectionRange]}
-                      onChange={handleDate}
-                      minDate={new Date()}
+                  <form className="search-container" onSubmit={handleSubmit}>
+                    <FormInput
+                      icon={distance}
+                      placeholder="Your Location?"
+                      text="From"
+                      name="from"
+                      onChange={handleChange}
                     />
-                  )}
-                  <ActionButton
-                    text="Create Your Journey"
-                    onClick={handleSubmit}
-                  />
-                </form>
+                    <FormInput
+                      icon={distance}
+                      placeholder="Where are you going?"
+                      text="To"
+                      name="to"
+                      onChange={handleChange}
+                    />
+                    <FormInput
+                      icon={calendar_clock}
+                      placeholder="Add date"
+                      text="Date"
+                      name="date"
+                      onChange={handleChange}
+                      onClick={handleClickDate}
+                      className="last-field"
+                      value={formData.date}
+                    />
+                    {openDate && (
+                      <DateRangePicker
+                        ranges={[selectionRange]}
+                        onChange={handleDate}
+                        minDate={new Date()}
+                      />
+                    )}
+                    <ActionButton
+                      text="Create Your Journey"
+                      onClick={handleSubmit}
+                    />
+                  </form>
               </div>
-              {/* </div> */}
             </div>
           </section>
           <section className="page__partners partners">
