@@ -3,6 +3,6 @@ import './ActionButton.css';
 
 export default function ActionButton(props) {
     return(
-        <button type="submit" className="search-button">{props.text}</button>
+        <button onClick={props.handleSubmit} type="submit" className="search-button">{props.text}</button>
     )
 }
