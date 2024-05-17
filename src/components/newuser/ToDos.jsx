@@ -1,5 +1,4 @@
 import React from "react";
-import "./createdTripUser.css";
 
 export default function ToDos({text, id}) {
     return (
