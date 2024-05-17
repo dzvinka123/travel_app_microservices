@@ -11,6 +11,8 @@ import { useState } from "react";
 import Friends from "../components/friends/Friends";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import left from "../img/left.svg";
+import rigth from "../img/rigth.svg";
 
 export default function CreateTripNewUser() {
   const [tasks, setTasks] = useState([]);
@@ -73,7 +75,7 @@ export default function CreateTripNewUser() {
 
         <Search onDataUpdate={handleData}/>
         {/* 3 block */}
-        <section className="interesting-place">
+{/*         <section className="interesting-place">
           <div className="text-and-buttons">
             <h2>
                 Add a touch of magic to your list — discover a world of unforgettable places!
@@ -83,6 +85,23 @@ export default function CreateTripNewUser() {
                 <div className="swiper-button-prev">Prev</div>
                 <div className="swiper-button-next">Next</div>
             </div>
+          </div>
+          <VisitPlace />
+        </section> */}
+
+        <section className="interesting-place">
+          <h2>
+            Add a touch of magic to your list — discover a world of
+            unforgettable places!
+          </h2>
+          <span>Things to do</span>
+          <div className="swipper-buttons">
+            <button className="swiper-button sbprev">
+              <img src={left} />
+            </button>
+            <button className="swiper-button sbnext">
+              <img src={rigth} />
+            </button>
           </div>
           <VisitPlace />
         </section>
