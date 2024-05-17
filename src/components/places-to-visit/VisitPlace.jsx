@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
+import "../../pages/VisitPlace.css"
 import { useLocation } from "react-router-dom";
 
 async function fetchCoords(city) {
@@ -38,7 +39,7 @@ export default function VisitPlace({ city }) {
     }
   }, [city, to]);
 
-  const slidesPerView = city ? 1 : 2;
+  const slidesPerView = city ? 1 : 4;
 
   return (
     <div className="test1">
@@ -66,7 +67,6 @@ export default function VisitPlace({ city }) {
                   <span>{city ? null : place.hours}</span>
                   <span className="rating-place">{city ? null : place.rating}</span>
               </div>
-              <button className="place-card-button">Add to list</button>
             </div>
           </SwiperSlide>
           ))}
