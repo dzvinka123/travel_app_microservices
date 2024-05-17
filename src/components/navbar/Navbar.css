@@ -23,14 +23,16 @@ html, body {
 }
 
 .header-container {
-    display: flex;
-    flex-direction: row;
-    padding: 16px 24px;
-    border-radius: 32px;
-    background: var(--background-item-color);
-    box-shadow: 4px 4px 30.4px 0px rgba(7, 5, 5, 0.20);
-    justify-content: space-between;
-}
+	display: flex;
+	flex-direction: row;
+	padding: 16px 24px;
+	border-radius: 32px;
+	background: var(--background-item-color);
+	box-shadow: 4px 4px 30.4px 0px rgba(7, 5, 5, 0.20);
+	justify-content: space-between;
+	margin-left: calc((100vw - 1240px) / 2);
+	margin-right: calc((100vw - 1240px) / 2);
+	}
 
 .logo-section {
     display: flex;
