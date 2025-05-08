@@ -13,7 +13,7 @@ With two official plugins are available:
 
 # Dependencies and run
 
-The project significantly relies on the Google API key, so it is required that you create a ```.env``` file with the key defined as VITE_REACT_APP_GOOGLE_API.
+The project significantly relies on the Google API key, so it is required that you create a ```.env``` file with the key defined as `VITE_REACT_APP_GOOGLE_API`.
 
 To start project:
 
