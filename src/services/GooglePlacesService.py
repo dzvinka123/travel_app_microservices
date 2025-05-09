@@ -12,28 +12,6 @@ VITE_REACT_APP_GOOGLE_API = os.getenv("VITE_REACT_APP_GOOGLE_API")
 app = Flask(__name__)
 
 
-async def fetch_coords(city):
-    """
-    Fetching coordinates for fetch_temp function according to given destination.
-    """
-    api_url = f"https://geocoding-api.open-meteo.com/v1/search?name={city}"
-
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.get(api_url)
-            response.raise_for_status()
-            data = response.json()
-
-            return (
-                data["results"][0]["latitude"],
-                data["results"][0]["longitude"],
-            )
-
-    except (httpx.HTTPError, KeyError, IndexError) as e:
-        print("Error fetching city coordinates:", e)
-        raise
-
-
 def get_place_details(place_id):
     """Get details for a place using Place Details API"""
     url = "https://maps.googleapis.com/maps/api/place/details/json"
