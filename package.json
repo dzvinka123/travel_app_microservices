@@ -29,6 +29,19 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "react-router-dom": "^6.23.0",
-    "vite": "^5.2.0"
-  }
+    "vite": "^6.3.5"
+  },
+  "description": "GetAway is a project developed for the Web Development course. This web application enables users to create personalized trips with features such as recommendations, to-do lists, maps, and weather forecasts. The project aims to expand its capabilities to include booking accommodations and selecting transportation options for the trip (in the future).",
+  "main": "test.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dzvinka123/travel_app_microservices.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dzvinka123/travel_app_microservices/issues"
+  },
+  "homepage": "https://github.com/dzvinka123/travel_app_microservices#readme"
 }

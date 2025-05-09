@@ -89,7 +89,7 @@ export default function Welcome() {
       navigate("/login");
     }
 
-  };
+  }; // add fetch for sever trip planer
 
   const [openDate, setOpenDate] = useState(false);
 
