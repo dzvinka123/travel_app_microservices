@@ -1,9 +1,11 @@
 import httpx
+import requests
 from flask import jsonify
 from flask import Flask, request
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
+
 
 @app.route("/weather-service", methods=["GET"])
 def get():
@@ -11,12 +13,23 @@ def get():
     Handling GET request from API Facade service.
     """
     city = request.args.get("city")
+    if not city:
+        return jsonify({"error": "City parameter is required"}), 400
+
+    coords_response = requests.get(
+        "http://localhost:5000/coords-service", params={"city": city}
+    )
+    if coords_response.status_code != 200:
+        return jsonify({"error": "Failed to get coordinates"}), 500
+
+    coords = coords_response.json()
+    latitude, longitude = coords["latitude"], coords["longitude"]
+
     days_range = request.args.get("days_range")
     # request_data = request.get_json()
     # destination = request_data["destination"]
     # days = request_data["days"]
 
-    latitude, longitude = fetch_coords(city)
     temps, start_day = fetch_temp(latitude, longitude)
     dates = fetch_days(days_range, temps, start_day)
 
