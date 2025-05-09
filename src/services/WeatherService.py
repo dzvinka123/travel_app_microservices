@@ -43,28 +43,6 @@ def post():
     """
 
 
-async def fetch_coords(city):
-    """
-    Fetching coordinates for fetch_temp function according to given destination.
-    """
-    api_url = f"https://geocoding-api.open-meteo.com/v1/search?name={city}"
-
-    try:
-        async with httpx.AsyncClient() as client:
-            response = await client.get(api_url)
-            response.raise_for_status()
-            data = response.json()
-
-            return (
-                data["results"][0]["latitude"],
-                data["results"][0]["longitude"],
-            )
-
-    except (httpx.HTTPError, KeyError, IndexError) as e:
-        print("Error fetching city coordinates:", e)
-        raise
-
-
 async def fetch_temp(latitude, longitude):
     """
     Fetching temperature for given coordinates.
