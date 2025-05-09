@@ -1,0 +1,121 @@
+import httpx
+from flask import jsonify
+from flask import Flask, request
+from datetime import datetime, timedelta
+
+app = Flask(__name__)
+
+@app.route("/weather-service", methods=["GET"])
+def get():
+    """
+    Handling GET request from API Facade service.
+    """
+    city = request.args.get("city")
+    days_range = request.args.get("days_range")
+    # request_data = request.get_json()
+    # destination = request_data["destination"]
+    # days = request_data["days"]
+
+    latitude, longitude = fetch_coords(city)
+    temps, start_day = fetch_temp(latitude, longitude)
+    dates = fetch_days(days_range, temps, start_day)
+
+    return jsonify(dates)
+
+
+@app.route("/weather-service", methods=["POST"])
+def post():
+    """
+    Handling POST request from API Facade service.
+    """
+
+
+async def fetch_coords(city):
+    """
+    Fetching coordinates for fetch_temp function according to given destination.
+    """
+    api_url = f"https://geocoding-api.open-meteo.com/v1/search?name={city}"
+
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.get(api_url)
+            response.raise_for_status()
+            data = response.json()
+
+            return (
+                data["results"][0]["latitude"],
+                data["results"][0]["longitude"],
+            )
+
+    except (httpx.HTTPError, KeyError, IndexError) as e:
+        print("Error fetching city coordinates:", e)
+        raise
+
+
+async def fetch_temp(latitude, longitude):
+    """
+    Fetching temperature for given coordinates.
+    """
+    api_url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&hourly=temperature_2m&daily=weather_code&forecast_days=14"
+
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.get(api_url)
+            response.raise_for_status()
+            data = response.json()
+
+            hourly_temps = data["hourly"]["temperature_2m"]
+            daily_codes = data["daily"]["weather_code"]
+
+            days = []
+            for i in range(14):
+                day_temps = hourly_temps[i * 24 : (i + 1) * 24]
+                avg_temp = round(sum(day_temps) / len(day_temps)) if day_temps else None
+                days.append([avg_temp, daily_codes[i]])
+
+            return (days, data["daily"]["time"][0])
+
+    except (httpx.HTTPError, KeyError, IndexError) as e:
+        print("Error fetching weather data:", e)
+        return None
+
+
+def format_date(date_str):
+    """
+    Formats the date string.
+    """
+    month, day, year = date_str.split("/")
+    return f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+
+
+async def fetch_days(days_range: str, temperatures: list, start_day: str):
+    """
+    Fetching days to form final data.
+    """
+    if not days_range:
+        return None
+
+    try:
+        start_date_str, end_date_str = days_range.split(" - ")
+
+        start_date = datetime.strptime(format_date(start_date_str), "%Y-%m-%d")
+        end_date = datetime.strptime(format_date(end_date_str), "%Y-%m-%d")
+        current_date = datetime.strptime(start_day, "%Y-%m-%d")
+
+        dates = []
+        count = 0
+
+        while current_date <= end_date and count < len(temperatures):
+            if start_date <= current_date <= end_date:
+                date_str = current_date.strftime("%Y-%m-%d")
+                dates.append(
+                    {date_str: [temperatures[count][0], temperatures[count][1]]}
+                )
+            current_date += timedelta(days=1)
+            count += 1
+
+        return dates
+
+    except Exception as e:
+        print("Error in fetch_days:", e)
+        return None
