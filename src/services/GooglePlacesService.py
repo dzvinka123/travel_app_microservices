@@ -1,16 +1,21 @@
 import httpx
 import os
+import atexit
 import requests
 from dotenv import load_dotenv
 from flask import jsonify
 from flask import Flask, request
-from datetime import datetime, timedelta
+from cassandra.cluster import Cluster
+from datetime import datetime
 
 load_dotenv()
 
+CLUSTER_IP = os.getenv("CASSANDRA_CLUSTER_IP")
 VITE_REACT_APP_GOOGLE_API = os.getenv("VITE_REACT_APP_GOOGLE_API")
 app = Flask(__name__)
 
+cluster = Cluster([CLUSTER_IP])
+session = cluster.connect()
 
 def get_place_details(place_id):
     """Get details for a place using Place Details API"""
@@ -43,7 +48,7 @@ def load_places():
         return jsonify({"error": "City parameter is required"}), 400
 
     coords_response = requests.get(
-        "http://localhost:5000/coords-service", params={"city": city}
+        "http://localhost:5000/coords-service", params={"city": city}, timeout=5
     )
     if coords_response.status_code != 200:
         return jsonify({"error": "Failed to get coordinates"}), 500
@@ -95,3 +100,26 @@ def load_places():
         )
 
     return jsonify(places_details)
+
+
+def update_db(city_name, place_id, name, address, latitude, longitude):
+    """
+    Updating the Cassandra cluster.
+    """
+    session.execute(
+    f"""
+    INSERT INTO places_table (city_name, place_id, name, address, latitude, longitude)
+    VALUES ({city_name}, {place_id}, {name}, {address}, {latitude}, {longitude})
+    """
+    )
+
+
+def shutdown_cluster():
+    """
+    Shutting down Cassandra cluster.
+    """
+    print("Shutting down Cassandra cluster...")
+    cluster.shutdown()
+
+
+atexit.register(shutdown_cluster)

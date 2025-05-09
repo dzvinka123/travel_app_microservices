@@ -1,11 +1,22 @@
+import os
+import time
 import httpx
+import atexit
 import requests
+from dotenv import load_dotenv
 from flask import jsonify
 from flask import Flask, request
+from cassandra.cluster import Cluster
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
+load_dotenv()
+
+CLUSTER_IP = os.getenv("CASSANDRA_CLUSTER_IP")
+
+cluster = Cluster([CLUSTER_IP])
+session = cluster.connect()
 
 @app.route("/weather-service", methods=["GET"])
 def get():
@@ -17,7 +28,7 @@ def get():
         return jsonify({"error": "City parameter is required"}), 400
 
     coords_response = requests.get(
-        "http://localhost:5000/coords-service", params={"city": city}
+        "http://localhost:5000/coords-service", params={"city": city}, timeout=5
     )
     if coords_response.status_code != 200:
         return jsonify({"error": "Failed to get coordinates"}), 500
@@ -26,21 +37,12 @@ def get():
     latitude, longitude = coords["latitude"], coords["longitude"]
 
     days_range = request.args.get("days_range")
-    # request_data = request.get_json()
-    # destination = request_data["destination"]
-    # days = request_data["days"]
-
     temps, start_day = fetch_temp(latitude, longitude)
     dates = fetch_days(days_range, temps, start_day)
 
+    update_db(city, latitude, longitude)
+
     return jsonify(dates)
-
-
-@app.route("/weather-service", methods=["POST"])
-def post():
-    """
-    Handling POST request from API Facade service.
-    """
 
 
 async def fetch_temp(latitude, longitude):
@@ -110,3 +112,25 @@ async def fetch_days(days_range: str, temperatures: list, start_day: str):
     except Exception as e:
         print("Error in fetch_days:", e)
         return None
+
+
+def update_db(city, latitude, longitude):
+    """
+    Updating the Cassandra cluster.
+    """
+    session.execute(
+    f"""
+    INSERT INTO weather_table (city, latitude, longitude, timestamp)
+    VALUES ({city}, {latitude}, {longitude}, {time.time()})
+    """
+    )
+
+
+def shutdown_cluster():
+    """
+    Shutting down Cassandra cluster.
+    """
+    print("Shutting down Cassandra cluster...")
+    cluster.shutdown()
+
+atexit.register(shutdown_cluster)
