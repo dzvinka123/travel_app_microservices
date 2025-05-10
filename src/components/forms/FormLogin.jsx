@@ -21,7 +21,7 @@ function FormLogin() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:3001/login`, { email, password })
+      .post(`http://localhost:8001/login`, { email, password })
       .then((response) => {
         setEmail("");
         setPassword("");
@@ -30,7 +30,7 @@ function FormLogin() {
         navigate("/welcome");
       })
       .catch((error) => {
-        setError(error.response.data.message);
+        setError(error.response.data.detail);
       });
   };
 

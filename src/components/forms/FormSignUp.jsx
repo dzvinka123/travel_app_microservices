@@ -19,7 +19,7 @@ function FormSignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3001/register', { name, email, password })
+    axios.post('http://localhost:8001/register', { name, email, password })
       .then(response => {
         setEmail("");
         setPassword("");
@@ -28,7 +28,7 @@ function FormSignUp() {
         login(response.data)
         navigate("/create-new-user-trip");
       }).catch(error => {
-        setError(error.response.data.message);
+        setError(error.response.data.detail);
       });
   };
 

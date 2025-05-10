@@ -45,8 +45,8 @@ export default function CreateTripNewUser() {
     //e.preventDefault();
     console.log("g")
     try {
-      const response = await axios.post(`http://localhost:3001/add-travel-card`, {
-        from: from,
+      const response = await axios.post(`http://localhost:8002/add-travel-card`, {
+        from_: from,
         to: to,
         start_date: startDate,
         end_date: endDate,
