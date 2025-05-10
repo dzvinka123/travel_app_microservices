@@ -8,15 +8,34 @@ import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 
+async function fetchWeatherViaTripPlanner({ city, days_range}) { ///////// !!!!!!!
+    const apiServiceUrl = `http://localhost:8000/retrieve`; /// add variable in env
+    try {
+        const response = await fetch(apiServiceUrl, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            service: "WeatherService",
+            payload: { city: city, date:days_range },
+          }),
+        });
+    
+        const data = await response.json();
+        return {data};
+    
+      } catch (error) {
+          console.error("Error via TripPlanner:", error);
+          return null;
+        }
+    }
+
 export default function Weather({ days_range, city }) {
     const [temperatureData, setTemperatureData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // const { latitude, longitude } = await fetchCoords(city);
-                // const { temps, start_day } = await fetchTemp(latitude, longitude);
-                // const data = await fetchDays({ days_range, temperatures: temps, start_day: start_day });
+                const data = fetchWeatherViaTripPlanner(city, days_range);
                 setTemperatureData(data);
             } catch (error) {
                 console.error("Error fetching weather data:", error);
@@ -64,3 +83,4 @@ export default function Weather({ days_range, city }) {
         </div>
     );
 }
+
