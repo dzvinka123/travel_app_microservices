@@ -14,6 +14,7 @@ import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { format } from 'date-fns'
 
+
 export default function Search(props) {
   const location = useLocation();
   const { from, to, date } = location.state;
@@ -60,9 +61,6 @@ export default function Search(props) {
   const handleClickDate = () => {
     setOpenDate((prev) => !prev);
   };
-
-  // const city = "Lviv";
-  // const days = "18.05.2024 - 23.05.2024";
 
   return (
     <section className="search-block">

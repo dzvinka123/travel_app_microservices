@@ -7,9 +7,15 @@ import 'swiper/swiper-bundle.css';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+// Load environment variables from .env file
+require('dotenv').config();
+
+const API_TRIP_PLANNER = process.env.REACT_APP_API_TRIP_PLANNER;
+
+
 
 async function fetchWeatherViaTripPlanner({ city, days_range}) { ///////// !!!!!!!
-    const apiServiceUrl = `http://localhost:8000/retrieve`; /// add variable in env
+    const apiServiceUrl = API_TRIP_PLANNER;
     try {
         const response = await fetch(apiServiceUrl, {
           method: "GET",

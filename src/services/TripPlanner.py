@@ -1,10 +1,19 @@
+import os
 from flask import Flask, request, jsonify
 import logging
 
+
+from dotenv import load_dotenv
 import requests
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 trip_planner = Flask(__name__)
+
+load_dotenv()
+SERVICE_API_WEATHER = os.getenv('REACT_APP_API_WEATHER')
+SERVICE_API_MAPS = os.getenv('REACT_APP_API_MAPS')
+SERVICE_API_PLACES = os.getenv('REACT_APP_API_PLACES')
+
 
 
 def post_to_Service(payload, serviceUrl):
@@ -25,15 +34,15 @@ def retrieve_travel_data():
     payload = request_data.get('payload')
 
     if service == 'MapService':
-        result = post_to_Service(payload, "http://localhost:8000/retrieve") # change url
+        result = post_to_Service(payload, SERVICE_API_MAPS)
         return jsonify({result}), 200
     
     elif service == 'WeatherService':
-        result = post_to_Service(payload, "http://localhost:8000/retrieve")  # change url
+        result = post_to_Service(payload, SERVICE_API_WEATHER)
         return jsonify({result}), 200
 
     elif service == 'VisitPlaceService':
-        result = post_to_Service(payload, "http://localhost:8000/retrieve")  # change url
+        result = post_to_Service(payload, SERVICE_API_PLACES)
         return jsonify({result}), 200
 
     return jsonify({'error': 'Unknown service'}), 400

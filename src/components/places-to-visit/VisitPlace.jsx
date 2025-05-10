@@ -6,9 +6,14 @@ import { Navigation } from 'swiper/modules';
 import "../../pages/VisitPlace.css"
 import { useLocation } from "react-router-dom";
 
+// Load environment variables from .env file
+require('dotenv').config();
+
+const API_TRIP_PLANNER = process.env.REACT_APP_API_TRIP_PLANNER;
+
 
 async function fetchVisitPlacesViaTripPlanner({ city }) { ///////// !!!!!!!
-  const apiServiceUrl = `http://localhost:8000/retrieve`; /// add variable in env
+  const apiServiceUrl = API_TRIP_PLANNER;
   try {
       const response = await fetch(apiServiceUrl, {
         method: "GET",

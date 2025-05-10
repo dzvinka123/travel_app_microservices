@@ -2,9 +2,14 @@ import { useRef, useEffect, useState } from "react";
 import map_location_marker from "../../img/map_location_marker.png";
 import "./widgetstyles.css";
 
+// Load environment variables from .env file
+require('dotenv').config();
+
+const API_TRIP_PLANNER = process.env.REACT_APP_API_TRIP_PLANNER;
+
 
 async function fetchCoordsViaTripPlanner(city) { /////////// !!!!!!!!!!!!!!!!!!!!
-  const apiServiceUrl = `http://localhost:8000/retrieve`; /// add variable in env
+  const apiServiceUrl = API_TRIP_PLANNER;
   try {
     const response = await fetch(apiServiceUrl, {
       method: "GET",
