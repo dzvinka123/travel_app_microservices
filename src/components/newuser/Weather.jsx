@@ -9,6 +9,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 const API_TRIP_PLANNER = import.meta.env.VITE_REACT_APP_API_TRIP_PLANNER;
 
+
+
 async function fetchWeatherViaTripPlanner({ city, days_range }) {
   try {
       const response = await fetch(API_TRIP_PLANNER + "/retrieve", {

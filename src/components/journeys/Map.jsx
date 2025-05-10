@@ -5,23 +5,22 @@ import "./widgetstyles.css";
 const API_TRIP_PLANNER = import.meta.env.VITE_REACT_APP_API_TRIP_PLANNER;
 
 
-async function fetchCoordsViaTripPlanner(city) { /////////// !!!!!!!!!!!!!!!!!!!!
-  const apiServiceUrl = API_TRIP_PLANNER;
+async function fetchCoordsViaTripPlanner(city) {
   try {
-    const response = await fetch(apiServiceUrl, {
-      method: "",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    const response = await fetch(API_TRIP_PLANNER + "/retrieve", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
         service: "MapService",
-        payload: { name: city },
+        payload: { city: city },
       }),
     });
 
     const data = await response.json();
 
     return {
-      latitude: data.results[0].latitude,
-      longitude: data.results[0].longitude,
+      latitude: data.latitude,
+      longitude: data.longitude,
     };
 
   } catch (error) {
