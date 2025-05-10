@@ -2,17 +2,14 @@ import { useRef, useEffect, useState } from "react";
 import map_location_marker from "../../img/map_location_marker.png";
 import "./widgetstyles.css";
 
-// Load environment variables from .env file
-require('dotenv').config();
-
-const API_TRIP_PLANNER = process.env.REACT_APP_API_TRIP_PLANNER;
+const API_TRIP_PLANNER = import.meta.env.VITE_REACT_APP_API_TRIP_PLANNER;
 
 
 async function fetchCoordsViaTripPlanner(city) { /////////// !!!!!!!!!!!!!!!!!!!!
   const apiServiceUrl = API_TRIP_PLANNER;
   try {
     const response = await fetch(apiServiceUrl, {
-      method: "GET",
+      method: "",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         service: "MapService",
@@ -21,6 +18,7 @@ async function fetchCoordsViaTripPlanner(city) { /////////// !!!!!!!!!!!!!!!!!!!
     });
 
     const data = await response.json();
+
     return {
       latitude: data.results[0].latitude,
       longitude: data.results[0].longitude,

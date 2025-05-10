@@ -7,48 +7,45 @@ import 'swiper/swiper-bundle.css';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-// Load environment variables from .env file
-require('dotenv').config();
-
-const API_TRIP_PLANNER = process.env.REACT_APP_API_TRIP_PLANNER;
+const API_TRIP_PLANNER = import.meta.env.VITE_REACT_APP_API_TRIP_PLANNER;
 
 
 
-async function fetchWeatherViaTripPlanner({ city, days_range}) { ///////// !!!!!!!
-    const apiServiceUrl = API_TRIP_PLANNER;
-    try {
-        const response = await fetch(apiServiceUrl, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            service: "WeatherService",
-            payload: { city: city, date:days_range },
-          }),
-        });
-    
-        const data = await response.json();
-        return {data};
-    
-      } catch (error) {
-          console.error("Error via TripPlanner:", error);
-          return null;
-        }
-    }
+async function fetchWeatherViaTripPlanner({ city, days_range }) {
+  const response = await fetch(API_TRIP_PLANNER + "/retrieve", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      service: "WeatherService",
+      payload: { city: "Lviv", days_range: days_range },
+    }),
+  });
+  
+  const raw = await response.text();
+  console.error("Raw response:", raw);
+  const data = JSON.parse(raw);
+  return data;
+  }
 
 export default function Weather({ days_range, city }) {
-    const [temperatureData, setTemperatureData] = useState([]);
+const [temperatureData, setTemperatureData] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const data = fetchWeatherViaTripPlanner(city, days_range);
-                setTemperatureData(data);
-            } catch (error) {
-                console.error("Error fetching weather data:", error);
-                setTemperatureData([]);
+        if (days_range && city) {
+        fetchWeatherViaTripPlanner({ city, days_range })
+            .then((res) => {
+              console.error("Data Weather:", res.data);
+            if (res?.data) {
+                setTemperatureData({ temps: res.data });
+            } else {
+                setTemperatureData({ temps: [] });
             }
-        };
-        fetchData();
+            })
+            .catch((error) => {
+            console.error("Error fetching weather data:", error);
+            setTemperatureData({ temps: [] });
+            });
+        }
     }, [days_range, city]);
 
     return (
@@ -72,18 +69,22 @@ export default function Weather({ days_range, city }) {
                     }}
                 >
                     {Array.isArray(temperatureData.temps) && temperatureData.temps.length > 0 ? (
-                        temperatureData.temps.map((temp, index) => {
+                            temperatureData.temps.map((temp, index) => {
                             const [date, temperature] = Object.entries(temp)[0];
-                            const newDate = date.split("-").reverse()[0] + "." + date.split("-").reverse()[1] + ".";
+                            const [year, month, day] = date.split("-");
+                            const newDate = `${day}.${month}`;
                             return (
-                                <SwiperSlide key={index}><WeatherDay key={index} day={newDate} temp={temperature[0]} icon={temperature[1]} />  </SwiperSlide >
+                                <SwiperSlide key={index}>
+                                <WeatherDay key={index} day={newDate} temp={temperature[0]} icon={temperature[1]} />
+                                </SwiperSlide>
                             );
-                        })
-                    ) : (
-                        <p>No weather data available.</p>
-                    )}
-                </Swiper>
-            </div>
+                            })
+                        ) : (
+                            <p>No weather data available.</p>
+                        )}
+                        </Swiper>
+                    </div>
+
 
             <a href="https://open-meteo.com/">OpenMeteo.com</a>
         </div>

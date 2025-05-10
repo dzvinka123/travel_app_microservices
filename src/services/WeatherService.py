@@ -1,34 +1,39 @@
+import asyncio
 import os
 import time
 import httpx
 import atexit
 import requests
+import logging
 from dotenv import load_dotenv
 from flask import jsonify
 from flask import Flask, request
 from cassandra.cluster import Cluster
 from datetime import datetime, timedelta
 
-app = Flask(__name__)
+weather_service = Flask(__name__)
 
-load_dotenv()
+load_dotenv("/Users/dzvina/Desktop/travel_app_microservices/.env")
 
-CLUSTER_IP = os.getenv("CASSANDRA_CLUSTER_IP")
+# CLUSTER_IP = os.getenv("CASSANDRA_CLUSTER_IP")
+# COORDS_IP = os.getenv("VITE_REACT_APP_API_COORDS")
+# COORDS_IP = "http://localhost:8002"
 
-cluster = Cluster([CLUSTER_IP])
-session = cluster.connect()
 
-@app.route("/weather-service", methods=["GET"])
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
+
+# cluster = Cluster([CLUSTER_IP])
+# session = cluster.connect()
+
+@weather_service.route("/weather-service", methods=["GET"])
 def get():
-    """
-    Handling GET request from API Facade service.
-    """
     city = request.args.get("city")
     if not city:
         return jsonify({"error": "City parameter is required"}), 400
 
     coords_response = requests.get(
-        "http://localhost:5000/coords-service", params={"city": city}, timeout=5
+        "http://localhost:8002/coords-service", params={"city": city}, timeout=5
     )
     if coords_response.status_code != 200:
         return jsonify({"error": "Failed to get coordinates"}), 500
@@ -37,12 +42,10 @@ def get():
     latitude, longitude = coords["latitude"], coords["longitude"]
 
     days_range = request.args.get("days_range")
-    temps, start_day = fetch_temp(latitude, longitude)
-    dates = fetch_days(days_range, temps, start_day)
+    temps, start_day = asyncio.run(fetch_temp(latitude, longitude))
+    dates = asyncio.run(fetch_days(days_range, temps, start_day))
 
-    update_db(city, latitude, longitude)
-
-    return jsonify(dates)
+    return jsonify({"dates": dates})
 
 
 async def fetch_temp(latitude, longitude):
@@ -94,6 +97,7 @@ async def fetch_days(days_range: str, temperatures: list, start_day: str):
         start_date = datetime.strptime(format_date(start_date_str), "%Y-%m-%d")
         end_date = datetime.strptime(format_date(end_date_str), "%Y-%m-%d")
         current_date = datetime.strptime(start_day, "%Y-%m-%d")
+        end_date
 
         dates = []
         count = 0
@@ -114,23 +118,28 @@ async def fetch_days(days_range: str, temperatures: list, start_day: str):
         return None
 
 
-def update_db(city, latitude, longitude):
-    """
-    Updating the Cassandra cluster.
-    """
-    session.execute(
-    f"""
-    INSERT INTO weather_table (city, latitude, longitude, timestamp)
-    VALUES ({city}, {latitude}, {longitude}, {time.time()})
-    """
-    )
+# def update_db(city, latitude, longitude):
+#     """
+#     Updating the Cassandra cluster.
+#     """
+#     session.execute(
+#     f"""
+#     INSERT INTO weather_table (city, latitude, longitude, timestamp)
+#     VALUES ('{city}', {latitude}, {longitude}, {time.time()})
+#     """
+#     )
 
 
-def shutdown_cluster():
-    """
-    Shutting down Cassandra cluster.
-    """
-    print("Shutting down Cassandra cluster...")
-    cluster.shutdown()
+# def shutdown_cluster():
+#     """
+#     Shutting down Cassandra cluster.
+#     """
+#     print("Shutting down Cassandra cluster...")
+#     cluster.shutdown()
 
-atexit.register(shutdown_cluster)
+# atexit.register(shutdown_cluster)
+
+
+
+# if __name__ == '__main__':
+#     weather_service.run(debug=True, port=8001)

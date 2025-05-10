@@ -7,31 +7,26 @@ import "../../pages/VisitPlace.css"
 import { useLocation } from "react-router-dom";
 
 // Load environment variables from .env file
-require('dotenv').config();
-
-const API_TRIP_PLANNER = process.env.REACT_APP_API_TRIP_PLANNER;
+const API_TRIP_PLANNER = import.meta.env.VITE_REACT_APP_API_TRIP_PLANNER;
 
 
-async function fetchVisitPlacesViaTripPlanner({ city }) { ///////// !!!!!!!
-  const apiServiceUrl = API_TRIP_PLANNER;
+async function fetchVisitPlacesViaTripPlanner({ city }) {
   try {
-      const response = await fetch(apiServiceUrl, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          service: "VisitPlaceService",
-          payload: { city: city },
-        }),
-      });
-  
-      const data = await response.json();
-      return {data};
-  
-    } catch (error) {
-        console.error("Error via TripPlanner:", error);
-        return null;
-      }
+    const response = await fetch(API_TRIP_PLANNER + "/retrieve", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        service: "VisitPlaceService",
+        payload: { city },
+      }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error via TripPlanner:", error);
+    return null;
   }
+}
 
 export default function VisitPlace({ city }) {
   const location = useLocation();
@@ -41,7 +36,11 @@ export default function VisitPlace({ city }) {
 
   useEffect(() => {
     if (city) {
-      fetchVisitPlacesViaTripPlanner(city).then(setPlaces).catch(console.error);
+      fetchVisitPlacesViaTripPlanner({ city })
+        .then((res) => {
+          if (res?.data) setPlaces(res.data);
+        })
+        .catch(console.error);
     }
   }, [city, to]);
 

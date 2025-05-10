@@ -1,4 +1,3 @@
-import httpx
 import os
 import atexit
 import requests
@@ -10,12 +9,13 @@ from datetime import datetime
 
 load_dotenv()
 
-CLUSTER_IP = os.getenv("CASSANDRA_CLUSTER_IP")
+# CLUSTER_IP = os.getenv("CASSANDRA_CLUSTER_IP")
 VITE_REACT_APP_GOOGLE_API = os.getenv("VITE_REACT_APP_GOOGLE_API")
-app = Flask(__name__)
+# COORDS_IP = os.getenv("VITE_REACT_APP_API_COORDS")
+visit_place_service = Flask(__name__)
 
-cluster = Cluster([CLUSTER_IP])
-session = cluster.connect()
+# cluster = Cluster([CLUSTER_IP])
+# session = cluster.connect()
 
 def get_place_details(place_id):
     """Get details for a place using Place Details API"""
@@ -40,7 +40,7 @@ def get_place_details(place_id):
         return {"hours": "Work hours not available"}
 
 
-@app.route("/places-service", methods=["GET"])
+@visit_place_service.route("/places-service", methods=["GET"])
 def load_places():
     """Find nearby tourist attractions and get details"""
     city = request.args.get("city")
@@ -48,7 +48,7 @@ def load_places():
         return jsonify({"error": "City parameter is required"}), 400
 
     coords_response = requests.get(
-        "http://localhost:5000/coords-service", params={"city": city}, timeout=5
+        "http://localhost:8002/coords-service", params={"city": city}, timeout=5
     )
     if coords_response.status_code != 200:
         return jsonify({"error": "Failed to get coordinates"}), 500
@@ -102,24 +102,27 @@ def load_places():
     return jsonify(places_details)
 
 
-def update_db(city_name, place_id, name, address, latitude, longitude):
-    """
-    Updating the Cassandra cluster.
-    """
-    session.execute(
-    f"""
-    INSERT INTO places_table (city_name, place_id, name, address, latitude, longitude)
-    VALUES ({city_name}, {place_id}, {name}, {address}, {latitude}, {longitude})
-    """
-    )
+# def update_db(city_name, place_id, name, address, latitude, longitude):
+#     """
+#     Updating the Cassandra cluster.
+#     """
+#     session.execute(
+#     f"""
+#     INSERT INTO places_table (city_name, place_id, name, address, latitude, longitude)
+#     VALUES ({city_name}, {place_id}, {name}, {address}, {latitude}, {longitude})
+#     """
+#     )
 
 
-def shutdown_cluster():
-    """
-    Shutting down Cassandra cluster.
-    """
-    print("Shutting down Cassandra cluster...")
-    cluster.shutdown()
+# def shutdown_cluster():
+#     """
+#     Shutting down Cassandra cluster.
+#     """
+#     print("Shutting down Cassandra cluster...")
+#     cluster.shutdown()
 
 
-atexit.register(shutdown_cluster)
+# atexit.register(shutdown_cluster)
+
+# if __name__ == '__main__':
+#     visit_place_service.run(debug=True, port=8003)
