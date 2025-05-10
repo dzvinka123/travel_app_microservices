@@ -2,25 +2,31 @@ import { useRef, useEffect, useState } from "react";
 import map_location_marker from "../../img/map_location_marker.png";
 import "./widgetstyles.css";
 
-async function fetchCoords(city) {
-  const apiUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${city}`;
 
+async function fetchCoordsViaTripPlanner(city) { /////////// !!!!!!!!!!!!!!!!!!!!
+  const apiServiceUrl = `http://localhost:8000/retrieve`; /// add variable in env
   try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) {
-      throw new Error("Failed to fetch city coordinates");
-    }
-    const data = await response.json();
+    const response = await fetch(apiServiceUrl, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        service: "MapService",
+        payload: { name: city },
+      }),
+    });
 
+    const data = await response.json();
     return {
       latitude: data.results[0].latitude,
       longitude: data.results[0].longitude,
     };
+
   } catch (error) {
-    console.error("Error fetching city coordinates:", error);
-    return null;
+      console.error("Error via TripPlanner:", error);
+      return null;
+    }
   }
-}
+  
 
 export default function Map({ destination }) {
   const ref = useRef();
@@ -30,7 +36,7 @@ export default function Map({ destination }) {
 
   useEffect(() => {
     if (destination) {
-      fetchCoords(destination)
+      fetchCoordsViaTripPlanner(destination)
         .then((coords) => {
           setCoords(coords);
         })
