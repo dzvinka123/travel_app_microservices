@@ -10,7 +10,8 @@ from datetime import datetime
 load_dotenv()
 
 # CLUSTER_IP = os.getenv("CASSANDRA_CLUSTER_IP")
-VITE_REACT_APP_GOOGLE_API = os.getenv("VITE_REACT_APP_GOOGLE_API")
+VITE_REACT_APP_GOOGLE_API = "AIzaSyCOmlpCB6Lm1tc4gAntK_BeZ21uOLpIaCc"
+# VITE_REACT_APP_GOOGLE_API = os.getenv("VITE_REACT_APP_GOOGLE_API")
 # COORDS_IP = os.getenv("VITE_REACT_APP_API_COORDS")
 visit_place_service = Flask(__name__)
 
@@ -60,7 +61,7 @@ def load_places():
     url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
     params = {
         "location": f"{lat},{lng}",
-        "radius": 500,
+        "radius": 300,
         "type": "tourist_attraction",
         "key": VITE_REACT_APP_GOOGLE_API,
     }

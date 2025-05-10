@@ -17,7 +17,7 @@ async function fetchVisitPlacesViaTripPlanner({ city }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         service: "VisitPlaceService",
-        payload: { city },
+        payload: { city: city },
       }),
     });
     const data = await response.json();
@@ -35,14 +35,15 @@ export default function VisitPlace({ city }) {
   const [places, setPlaces] = useState([]);
 
   useEffect(() => {
-    if (city) {
-      fetchVisitPlacesViaTripPlanner({ city })
-        .then((res) => {
-          if (res?.data) setPlaces(res.data);
-        })
-        .catch(console.error);
-    }
-  }, [city, to]);
+  const loadCity = city || to;
+  if (loadCity) {
+    fetchVisitPlacesViaTripPlanner({ city: loadCity })
+      .then((data) => {
+          setPlaces(data);
+      })
+      .catch(console.error);
+  }
+}, [city, to]);
 
   const slidesPerView = city ? 1 : 4;
 
