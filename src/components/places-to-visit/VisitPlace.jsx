@@ -6,25 +6,27 @@ import { Navigation } from 'swiper/modules';
 import "../../pages/VisitPlace.css"
 import { useLocation } from "react-router-dom";
 
-async function fetchCoords(city) {
-  const apiUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${city}`;
 
+async function fetchVisitPlacesViaTripPlanner({ city }) { ///////// !!!!!!!
+  const apiServiceUrl = `http://localhost:8000/retrieve`; /// add variable in env
   try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) {
-      throw new Error("Failed to fetch city coordinates");
-    }
-    const data = await response.json();
-
-    return {
-      latitude: data.results[0].latitude,
-      longitude: data.results[0].longitude,
-    };
-  } catch (error) {
-    console.error("Error fetching city coordinates:", error);
-    throw error;
+      const response = await fetch(apiServiceUrl, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service: "VisitPlaceService",
+          payload: { city: city },
+        }),
+      });
+  
+      const data = await response.json();
+      return {data};
+  
+    } catch (error) {
+        console.error("Error via TripPlanner:", error);
+        return null;
+      }
   }
-}
 
 export default function VisitPlace({ city }) {
   const location = useLocation();
@@ -33,9 +35,8 @@ export default function VisitPlace({ city }) {
   const [places, setPlaces] = useState([]);
 
   useEffect(() => {
-    const loadCity = city || to;
-    if (loadCity) {
-      loadPlaces(loadCity).then(setPlaces).catch(console.error); // change here to request to GppglePlacesService
+    if (city) {
+      fetchVisitPlacesViaTripPlanner(city).then(setPlaces).catch(console.error);
     }
   }, [city, to]);
 
