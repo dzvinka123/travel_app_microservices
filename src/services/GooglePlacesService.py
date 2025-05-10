@@ -17,6 +17,7 @@ visit_place_service = Flask(__name__)
 # cluster = Cluster([CLUSTER_IP])
 # session = cluster.connect()
 
+
 def get_place_details(place_id):
     """Get details for a place using Place Details API"""
     url = "https://maps.googleapis.com/maps/api/place/details/json"

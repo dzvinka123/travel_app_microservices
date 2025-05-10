@@ -9,34 +9,34 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 const API_TRIP_PLANNER = import.meta.env.VITE_REACT_APP_API_TRIP_PLANNER;
 
-
-
 async function fetchWeatherViaTripPlanner({ city, days_range }) {
-  const response = await fetch(API_TRIP_PLANNER + "/retrieve", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      service: "WeatherService",
-      payload: { city: "Lviv", days_range: days_range },
-    }),
-  });
+  try {
+      const response = await fetch(API_TRIP_PLANNER + "/retrieve", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service: "WeatherService",
+          payload: { city: city, days_range: days_range },
+        }),
+      });
   
-  const raw = await response.text();
-  console.error("Raw response:", raw);
-  const data = JSON.parse(raw);
-  return data;
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error via TripPlanner:", error);
+      return null;
+    }
   }
 
 export default function Weather({ days_range, city }) {
 const [temperatureData, setTemperatureData] = useState([]);
 
     useEffect(() => {
-        if (days_range && city) {
+    if (days_range && city) {
         fetchWeatherViaTripPlanner({ city, days_range })
-            .then((res) => {
-              console.error("Data Weather:", res.data);
-            if (res?.data) {
-                setTemperatureData({ temps: res.data });
+            .then((data) => {
+            if (data) {
+                setTemperatureData({ temps: data.dates });
             } else {
                 setTemperatureData({ temps: [] });
             }
@@ -47,6 +47,7 @@ const [temperatureData, setTemperatureData] = useState([]);
             });
         }
     }, [days_range, city]);
+
 
     return (
         <div className="weather-div">

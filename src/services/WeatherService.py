@@ -20,11 +20,14 @@ load_dotenv("/Users/dzvina/Desktop/travel_app_microservices/.env")
 # COORDS_IP = "http://localhost:8002"
 
 
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
 
 # cluster = Cluster([CLUSTER_IP])
 # session = cluster.connect()
+
 
 @weather_service.route("/weather-service", methods=["GET"])
 def get():
@@ -138,7 +141,6 @@ async def fetch_days(days_range: str, temperatures: list, start_day: str):
 #     cluster.shutdown()
 
 # atexit.register(shutdown_cluster)
-
 
 
 # if __name__ == '__main__':
