@@ -82,9 +82,7 @@ export default function Welcome() {
   const handleSubmit = (event) => {
     if (user) {
       event.preventDefault();
-      navigate("/create-trip", {
-        state: { ...formData },
-      });
+      navigate('/create-trip', { state: { ...formData } });
     } else {
       navigate("/login");
     }

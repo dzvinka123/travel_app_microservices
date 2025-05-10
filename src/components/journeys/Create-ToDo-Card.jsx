@@ -9,7 +9,7 @@ export default function CreateCard({ card_id, addNewCard }) {
     const handleAddCard = () => {
         if (inputValue.trim() !== '') {
             if (card_id) {
-                axios.post(`http://localhost:3001/todo-list`, { task: inputValue.trim(), done: 0, card_id: card_id })
+                axios.post(`http://localhost:8008/todo-list`, { task: inputValue.trim(), done: 0, card_id: card_id })
                     .then(response => {
                         const { success, message, taskId } = response.data;
                         if (success) {

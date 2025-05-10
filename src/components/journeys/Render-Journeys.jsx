@@ -11,7 +11,7 @@ export default function RenderJourneys() {
     const [activeButton, setActiveButton] = useState('active');
     const [journeys, setJourneys] = useState([]);
     const fetchJourneys = (email) => {
-        axios.get(`http://localhost:3001/user-travel-cards?email=${email}`)
+        axios.get(`http://localhost:8008/user-travel-cards?email=${email}`)
             .then(response => {
                 const { success, travelCards } = response.data;
                 if (success) {
@@ -42,7 +42,7 @@ export default function RenderJourneys() {
     const renderComponent = () => {
         if (activeButton === 'active') {
             if (journeys) {
-                const filtered = journeys.filter(item => item.active === 1);
+                const filtered = journeys.filter(item => item.active === true);
                 if (filtered.length != 0) {
                     return <JourneysActive journeys={filtered} />;
                 } else {
@@ -52,7 +52,7 @@ export default function RenderJourneys() {
             return <JourneysEmpty />;
         } else if (activeButton === 'pending') {
             if (journeys) {
-                const filtered = journeys.filter(item => item.active === 0);
+                const filtered = journeys.filter(item => item.active === false);
                 if (filtered.length != 0) {
                     return <JourneysPending journeys={filtered} />;
                 } else {

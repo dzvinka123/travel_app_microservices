@@ -30,7 +30,7 @@ export default function Friends(props) {
         }
 
         // Call server endpoint to check if user exists
-        axios.get(`http://localhost:3001/get-user?email=${email}`)
+        axios.get(`http://localhost:8009/get-user?email=${email}`)
             .then(response => {
                 const userExists = response.data.exists;
                 if (userExists) {

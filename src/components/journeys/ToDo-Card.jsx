@@ -6,7 +6,7 @@ export default function ToDoCard({ handleOnCheck, checkboxIndex, input }) {
     const onClickUpdate = (e) => {
         const done = e.target.checked;
 
-        axios.put('http://localhost:3001/todo-list', {
+        axios.put('http://localhost:8008/todo-list', {
             taskId: input.id,
             done: done
         })

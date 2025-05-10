@@ -19,7 +19,7 @@ function FormSignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post('http://localhost:8001/register', { name, email, password })
+    axios.post('http://localhost:8009/register', { name, email, password })
       .then(response => {
         setEmail("");
         setPassword("");
