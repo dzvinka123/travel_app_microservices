@@ -6,23 +6,25 @@ import { Navigation } from 'swiper/modules';
 import "../../pages/VisitPlace.css"
 import { useLocation } from "react-router-dom";
 
-async function fetchCoords(city) {
-  const apiUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${city}`;
+// Load environment variables from .env file
+const API_TRIP_PLANNER = import.meta.env.VITE_REACT_APP_API_TRIP_PLANNER;
 
+
+async function fetchVisitPlacesViaTripPlanner({ city }) {
   try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) {
-      throw new Error("Failed to fetch city coordinates");
-    }
+    const response = await fetch(API_TRIP_PLANNER + "/retrieve", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        service: "VisitPlaceService",
+        payload: { city: city },
+      }),
+    });
     const data = await response.json();
-
-    return {
-      latitude: data.results[0].latitude,
-      longitude: data.results[0].longitude,
-    };
+    return data;
   } catch (error) {
-    console.error("Error fetching city coordinates:", error);
-    throw error;
+    console.error("Error via TripPlanner:", error);
+    return null;
   }
 }
 
@@ -33,11 +35,15 @@ export default function VisitPlace({ city }) {
   const [places, setPlaces] = useState([]);
 
   useEffect(() => {
-    const loadCity = city || to;
-    if (loadCity) {
-      loadPlaces(loadCity).then(setPlaces).catch(console.error);
-    }
-  }, [city, to]);
+  const loadCity = city || to;
+  if (loadCity) {
+    fetchVisitPlacesViaTripPlanner({ city: loadCity })
+      .then((data) => {
+          setPlaces(data);
+      })
+      .catch(console.error);
+  }
+}, [city, to]);
 
   const slidesPerView = city ? 1 : 4;
 
@@ -77,58 +83,3 @@ export default function VisitPlace({ city }) {
     </div>
   );
 }
-
-const loadPlaces = async (city) => {
-  const service = new google.maps.places.PlacesService(document.createElement('div'));
-  const coords = fetchCoords(city);
-  const request = {
-    location: { lat: (await coords).latitude, lng: (await coords).longitude },
-    radius: "500",
-    type: ["tourist_attraction"],
-  };
-
-  return new Promise((resolve, reject) => {
-    service.nearbySearch(request, async (results, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        const placesDetails = await Promise.all(results.map(async place => {
-          const detail = await getPlaceDetails(service, place.place_id);
-          const photoUrl = place.photos && place.photos.length > 0 ? place.photos[0].getUrl() : 'placeholder-image-url';
-          const rating = place.rating ? `Rating: ${place.rating} (${place.user_ratings_total} reviews)` : "Rating not available";
-
-          return {
-            id: place.place_id,
-            name: place.name,
-            address: place.vicinity,
-            rating: rating,
-            hours: detail.hours,
-            imageUrl: photoUrl
-          };
-        }));
-        resolve(placesDetails);
-      } else {
-        reject(status);
-      }
-    });
-  });
-};
-
-const getPlaceDetails = async (service, placeId) => {
-  const request = {
-    placeId: placeId,
-    fields: ['rating', 'user_ratings_total', 'opening_hours']
-  };
-
-  return new Promise(resolve => {
-    service.getDetails(request, (result, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        let hours = "Work hours not available";
-        if (result.opening_hours) {
-          hours = result.opening_hours['weekday_text'][new Date().getDay() - 1]
-        }
-        resolve({ hours });
-      } else {
-        resolve({ hours: "Work hours not available" });
-      }
-    });
-  });
-};
