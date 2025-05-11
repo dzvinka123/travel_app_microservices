@@ -9,13 +9,15 @@ from cassandra.cluster import Cluster
 from cassandra.query import SimpleStatement
 from datetime import datetime
 
-load_dotenv()
+# load_dotenv("/Users/mariia/Desktop/travel_app_microservices/.env")
 
-CASSANDRA_IP = os.getenv("VITE_CASSANDRA_IP")
-CASSANDRA_KEYSPACE = os.getenv("VITE_CASSANDRA_KEYSPACE")
-VITE_REACT_APP_GOOGLE_API = "AIzaSyCOmlpCB6Lm1tc4gAntK_BeZ21uOLpIaCc"
+# CASSANDRA_IP = os.getenv("VITE_CASSANDRA_IP")
+# CASSANDRA_KEYSPACE = os.getenv("VITE_CASSANDRA_KEYSPACE")
+# VITE_REACT_APP_GOOGLE_API = os.getenv("VITE_REACT_APP_GOOGLE_API")
+# COORDS_IP = os.getenv("VITE_REACT_APP_API_COORDS")
+
 VITE_REACT_APP_GOOGLE_API = os.getenv("VITE_REACT_APP_GOOGLE_API")
-COORDS_IP = os.getenv("VITE_REACT_APP_API_COORDS")
+COORDS_IP = "http://localhost:8002"
 
 logging.debug("KEYSPACE from env: %s", repr(os.getenv("VITE_CASSANDRA_KEYSPACE")))
 
@@ -52,7 +54,7 @@ def load_places():
         return jsonify({"error": "City parameter is required"}), 400
 
     coords_response = requests.get(
-        "http://localhost:8002/coords-service", params={"city": city}, timeout=5
+        "http://coords_service:8002" + "/coords-service", params={"city": city}, timeout=5
     )
     if coords_response.status_code != 200:
         return jsonify({"error": "Failed to get coordinates"}), 500
@@ -102,77 +104,5 @@ def load_places():
                 "imageUrl": photo_url,
             }
         )
-        print("KEYSPACE from env:", CASSANDRA_KEYSPACE)
-
-        asyncio.run(update_db(city, place["place_id"], place["name"], place.get("vicinity", "Address not available"), lat, lng))
-        asyncio.run(read_db())
 
     return jsonify(places_details)
-
-
-async def create_table():
-    cluster = Cluster([CASSANDRA_IP])
-    session = cluster.connect(CASSANDRA_KEYSPACE)
-
-    session.set_keyspace(CASSANDRA_KEYSPACE)
-    statement = SimpleStatement(
-        """
-        CREATE TABLE IF NOT EXISTS places_table (
-            city_name text,
-            place_id text,
-            name text, 
-            address text, 
-            latitude float, 
-            longitude float,
-            PRIMARY KEY ((city_name), place_id)
-        )
-    """
-    )
-    await asyncio.to_thread(session.execute, statement)
-
-    cluster.shutdown()
-
-
-async def update_db(city_name, place_id, name, address, latitude, longitude):
-    """
-    Updating the Cassandra cluster.
-    """
-    cluster = Cluster([CASSANDRA_IP])
-    session = cluster.connect(CASSANDRA_KEYSPACE)
-
-    statement = SimpleStatement(
-        f"""
-        INSERT INTO places_table (city_name, place_id, name, address, latitude, longitude)
-        VALUES ('{city_name}', '{place_id}', '{name}', '{address}', {latitude}, {longitude})
-        """
-    )
-    await asyncio.to_thread(session.execute, statement)
-
-    cluster.shutdown()
-
-
-async def read_db():
-    """
-    Reading the content of the Cassandra cluster.
-    """
-    cluster = Cluster([CASSANDRA_IP])
-    session = cluster.connect(CASSANDRA_KEYSPACE)
-
-    statement = SimpleStatement("SELECT * FROM places_table")
-    rows = await asyncio.to_thread(session.execute, statement)
-
-    for row in rows:
-        print("city_name: ", row.city_name)
-        print("place_id: ", row.place_id)
-        print("name: ", row.name)
-        print("address: ", row.address)
-        print("latitude: ", row.latitude)
-        print("longitude: ", row.longitude)
-        print("\n")
-
-    cluster.shutdown()
-
-
-if __name__ == '__main__':
-    asyncio.run(create_table())
-    visit_place_service.run(debug=True, port=8003)

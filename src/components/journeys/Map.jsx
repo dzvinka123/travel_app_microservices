@@ -16,7 +16,7 @@ async function fetchCoordsViaTripPlanner(city) {
       }),
     });
 
-    const data = await response.json();
+    const data = await response.json(); 
 
     return {
       latitude: data.latitude,

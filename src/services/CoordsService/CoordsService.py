@@ -28,7 +28,3 @@ def fetch_coords():
     except (requests.HTTPError, KeyError, IndexError) as e:
         print("Error fetching city coordinates:", e)
         return jsonify({"error": str(e)}), 500
-
-
-# if __name__ == '__main__':
-#     coords_service.run(debug=True, port=8002)

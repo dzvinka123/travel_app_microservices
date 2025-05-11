@@ -1,4 +1,3 @@
-import asyncio
 import os
 import time
 import httpx
@@ -14,16 +13,20 @@ from datetime import datetime, timedelta
 
 weather_service = Flask(__name__)
 
-load_dotenv()
+load_dotenv("/Users/mariia/Desktop/travel_app_microservices/.env")
 
-CASSANDRA_IP = os.getenv("VITE_CASSANDRA_IP")
-CASSANDRA_KEYSPACE = os.getenv("VITE_CASSANDRA_KEYSPACE")
-COORDS_IP = os.getenv("VITE_REACT_APP_API_COORDS")
+# "cassandra" = os.getenv("VITE_"cassandra"")
+# "APIkeyspace" = os.getenv("VITE_"APIkeyspace"")
+# COORDS_IP = os.getenv("VITE_REACT_APP_API_COORDS")
+
+# COORDS_IP = "http://localhost:8002"
+# "APIkeyspace"="APIkeyspace"
+# "cassandra"="cassandra"
 
 logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s"
 )
-
+cluster = Cluster(["cassandra"])
 
 @weather_service.route("/weather-service", methods=["GET"])
 def get():
@@ -32,20 +35,18 @@ def get():
         return jsonify({"error": "City parameter is required"}), 400
 
     coords_response = requests.get(
-        "http://localhost:8002/coords-service", params={"city": city}, timeout=5
+        "http://coords_service:8002" + "/coords-service", params={"city": city}, timeout=5
     )
     if coords_response.status_code != 200:
         return jsonify({"error": "Failed to get coordinates"}), 500
 
     coords = coords_response.json()
     latitude, longitude = coords["latitude"], coords["longitude"]
+    logging.error("latitude, longitude in weather: ", latitude, longitude)
 
     days_range = request.args.get("days_range")
     temps, start_day = asyncio.run(fetch_temp(latitude, longitude))
     dates = asyncio.run(fetch_days(days_range, temps, start_day))
-
-    asyncio.run(update_db(city, latitude, longitude))
-    asyncio.run(read_db())
 
     return jsonify({"dates": dates})
 
@@ -118,67 +119,3 @@ async def fetch_days(days_range: str, temperatures: list, start_day: str):
     except Exception as e:
         print("Error in fetch_days:", e)
         return None
-
-
-async def create_table():
-    cluster = Cluster([CASSANDRA_IP])
-    session = cluster.connect(CASSANDRA_KEYSPACE)
-
-    session.set_keyspace(CASSANDRA_KEYSPACE)
-    statement = SimpleStatement(
-        """
-    CREATE TABLE IF NOT EXISTS weather_table (
-        city_name text,
-        latitude float,
-        longitude float,
-        timestamp float,
-        PRIMARY KEY ((city_name), timestamp)
-    )
-    """
-    )
-    await asyncio.to_thread(session.execute, statement)
-
-    cluster.shutdown()
-
-
-async def update_db(city_name, latitude, longitude):
-    """
-    Updating the Cassandra cluster.
-    """
-    cluster = Cluster(["127.0.0.1"])
-    session = cluster.connect(CASSANDRA_KEYSPACE)
-
-    statement = SimpleStatement(
-        f"""
-    INSERT INTO weather_table (city_name, latitude, longitude, timestamp)
-    VALUES ('{city_name}', {latitude}, {longitude}, {time.time()})
-    """
-    )
-    await asyncio.to_thread(session.execute, statement)
-
-    cluster.shutdown()
-
-
-async def read_db():
-    """
-    Reading the content of the Cassandra cluster.
-    """
-    cluster = Cluster(["127.0.0.1"])
-    session = cluster.connect(CASSANDRA_KEYSPACE)
-
-    statement = SimpleStatement("SELECT * FROM weather_table")
-    rows = await asyncio.to_thread(session.execute, statement)
-
-    for row in rows:
-        print("city_name: ", row.city_name, "\n")
-        print("latitude: ", row.latitude, "\n")
-        print("longitude: ", row.longitude, "\n")
-        print("timestamp: ", row.timestamp, "\n")
-        print("\n")
-
-    cluster.shutdown()
-
-
-if __name__ == '__main__':
-    asyncio.run(create_table())
-    weather_service.run(debug=True, port=8001)

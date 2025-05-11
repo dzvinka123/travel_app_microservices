@@ -16,7 +16,10 @@ EXPOSE 8000
 # Step 6: Set environment variables, such as Flask environment
 ENV FLASK_APP=TripPlannerService/TripPlanner.py
 ENV FLASK_RUN_PORT=8000
+ENV FLASK_RUN_HOST=0.0.0.0
 ENV FLASK_ENV=development
 
 # Step 7: Define the command to run when the container starts
+# CMD ["flask", "run", "--host", "0.0.0.0"]
+
 CMD ["flask", "run"]

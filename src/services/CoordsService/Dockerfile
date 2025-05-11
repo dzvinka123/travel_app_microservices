@@ -15,7 +15,11 @@ EXPOSE 8002
 # Step 6: Set environment variables, such as Flask environment
 ENV FLASK_APP=CoordsService/CoordsService.py
 ENV FLASK_RUN_PORT=8002
+ENV FLASK_RUN_HOST=0.0.0.0
 ENV FLASK_ENV=development
 
 # Step 7: Define the command to run when the container starts
+# CMD ["flask", "run", "--host", "0.0.0.0"]
+
+
 CMD ["flask", "run"]

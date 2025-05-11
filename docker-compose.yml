@@ -1,32 +1,17 @@
-version: '3.8'
-
 services:
-  cassandra:
-    image: cassandra:5.0
-    container_name: cassandra
-    environment:
-      - CASSANDRA_CLUSTER_NAME=APICluster
-      - CASSANDRA_KEYSPACE=APIkeyspace
-    ports:
-      - "9042:9042"
-    networks:
-      - travel_network
-
   trip_planner_service:
-    build:
-      context: ./src/services/
-      dockerfile: ./TripPlannerService/Dockerfile
-    container_name: trip_planner_service
-    environment:
-      - FLASK_RUN_PORT=8000
-      - FLASK_ENV=development
-    depends_on:
-      - cassandra
-    networks:
-      - travel_network
-    ports:
-      - "8000:8000"
-    command: flask run --host=0.0.0.0
+  build:
+    context: ./src/services/
+    dockerfile: ./TripPlannerService/Dockerfile
+  container_name: trip_planner_service
+  environment:
+    - FLASK_RUN_PORT=8000
+    - FLASK_ENV=development
+  networks:
+    - travel_network
+  ports:
+    - "8000:8000"
+  command: flask run --host=0.0.0.0
 
   weather_service:
     build:
@@ -36,10 +21,6 @@ services:
     environment:
       - FLASK_RUN_PORT=8001
       - FLASK_ENV=development
-      - CASSANDRA_CONTACT_POINT=cassandra
-      - CASSANDRA_KEYSPACE=APIkeyspace
-    depends_on:
-      - cassandra
     networks:
       - travel_network
     ports:
@@ -68,10 +49,6 @@ services:
     environment:
       - FLASK_RUN_PORT=8003
       - FLASK_ENV=development
-      - CASSANDRA_CONTACT_POINT=cassandra
-      - CASSANDRA_KEYSPACE=APIkeyspace
-    depends_on:
-      - cassandra
     networks:
       - travel_network
     ports:

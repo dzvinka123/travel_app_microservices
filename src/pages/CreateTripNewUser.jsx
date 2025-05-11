@@ -86,7 +86,7 @@ export default function CreateTripNewUser() {
               <img src={rigth} />
             </button>
           </div>
-          {/* <VisitPlace /> */}
+          <VisitPlace />
         </section>
 
         <section className="additional-container">
