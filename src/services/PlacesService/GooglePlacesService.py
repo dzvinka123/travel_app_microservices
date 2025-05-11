@@ -1,23 +1,25 @@
 import os
-import atexit
+import asyncio
 import requests
-from dotenv import load_dotenv
+import logging
 from flask import jsonify
+from dotenv import load_dotenv
 from flask import Flask, request
 from cassandra.cluster import Cluster
+from cassandra.query import SimpleStatement
 from datetime import datetime
 
 load_dotenv()
 
-# CLUSTER_IP = os.getenv("CASSANDRA_CLUSTER_IP")
+CASSANDRA_IP = os.getenv("VITE_CASSANDRA_IP")
+CASSANDRA_KEYSPACE = os.getenv("VITE_CASSANDRA_KEYSPACE")
 VITE_REACT_APP_GOOGLE_API = "AIzaSyCOmlpCB6Lm1tc4gAntK_BeZ21uOLpIaCc"
-# VITE_REACT_APP_GOOGLE_API = os.getenv("VITE_REACT_APP_GOOGLE_API")
-# COORDS_IP = os.getenv("VITE_REACT_APP_API_COORDS")
+VITE_REACT_APP_GOOGLE_API = os.getenv("VITE_REACT_APP_GOOGLE_API")
+COORDS_IP = os.getenv("VITE_REACT_APP_API_COORDS")
+
+logging.debug("KEYSPACE from env: %s", repr(os.getenv("VITE_CASSANDRA_KEYSPACE")))
+
 visit_place_service = Flask(__name__)
-
-# cluster = Cluster([CLUSTER_IP])
-# session = cluster.connect()
-
 
 def get_place_details(place_id):
     """Get details for a place using Place Details API"""
@@ -100,31 +102,77 @@ def load_places():
                 "imageUrl": photo_url,
             }
         )
+        print("KEYSPACE from env:", CASSANDRA_KEYSPACE)
+
+        asyncio.run(update_db(city, place["place_id"], place["name"], place.get("vicinity", "Address not available"), lat, lng))
+        asyncio.run(read_db())
 
     return jsonify(places_details)
 
 
-# def update_db(city_name, place_id, name, address, latitude, longitude):
-#     """
-#     Updating the Cassandra cluster.
-#     """
-#     session.execute(
-#     f"""
-#     INSERT INTO places_table (city_name, place_id, name, address, latitude, longitude)
-#     VALUES ({city_name}, {place_id}, {name}, {address}, {latitude}, {longitude})
-#     """
-#     )
+async def create_table():
+    cluster = Cluster([CASSANDRA_IP])
+    session = cluster.connect(CASSANDRA_KEYSPACE)
+
+    session.set_keyspace(CASSANDRA_KEYSPACE)
+    statement = SimpleStatement(
+        """
+        CREATE TABLE IF NOT EXISTS places_table (
+            city_name text,
+            place_id text,
+            name text, 
+            address text, 
+            latitude float, 
+            longitude float,
+            PRIMARY KEY ((city_name), place_id)
+        )
+    """
+    )
+    await asyncio.to_thread(session.execute, statement)
+
+    cluster.shutdown()
 
 
-# def shutdown_cluster():
-#     """
-#     Shutting down Cassandra cluster.
-#     """
-#     print("Shutting down Cassandra cluster...")
-#     cluster.shutdown()
+async def update_db(city_name, place_id, name, address, latitude, longitude):
+    """
+    Updating the Cassandra cluster.
+    """
+    cluster = Cluster([CASSANDRA_IP])
+    session = cluster.connect(CASSANDRA_KEYSPACE)
+
+    statement = SimpleStatement(
+        f"""
+        INSERT INTO places_table (city_name, place_id, name, address, latitude, longitude)
+        VALUES ('{city_name}', '{place_id}', '{name}', '{address}', {latitude}, {longitude})
+        """
+    )
+    await asyncio.to_thread(session.execute, statement)
+
+    cluster.shutdown()
 
 
-# atexit.register(shutdown_cluster)
+async def read_db():
+    """
+    Reading the content of the Cassandra cluster.
+    """
+    cluster = Cluster([CASSANDRA_IP])
+    session = cluster.connect(CASSANDRA_KEYSPACE)
 
-# if __name__ == '__main__':
-#     visit_place_service.run(debug=True, port=8003)
+    statement = SimpleStatement("SELECT * FROM places_table")
+    rows = await asyncio.to_thread(session.execute, statement)
+
+    for row in rows:
+        print("city_name: ", row.city_name)
+        print("place_id: ", row.place_id)
+        print("name: ", row.name)
+        print("address: ", row.address)
+        print("latitude: ", row.latitude)
+        print("longitude: ", row.longitude)
+        print("\n")
+
+    cluster.shutdown()
+
+
+if __name__ == '__main__':
+    asyncio.run(create_table())
+    visit_place_service.run(debug=True, port=8003)

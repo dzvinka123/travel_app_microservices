@@ -9,7 +9,7 @@ def clear_users_db():
     cursor.execute("DELETE FROM users")
     conn.commit()
     conn.close()
-    print("✅ SQLite users.db cleared")
+    print("SQLite users.db cleared")
 
 # === CLEAR JOURNEYS DB (MongoDB) ===
 def clear_journeys_db():
@@ -18,7 +18,7 @@ def clear_journeys_db():
     db["travel_cards"].delete_many({})
     db["todo_list"].delete_many({})
     db["user_card"].delete_many({})
-    print("✅ MongoDB journeys_db cleared")
+    print("MongoDB journeys_db cleared")
 
 if __name__ == "__main__":
     clear_users_db()
