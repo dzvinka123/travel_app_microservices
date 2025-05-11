@@ -14,7 +14,7 @@ from redis import Redis
 from tasks import add_travel_card_task, add_task_task, update_task_state_task
 
 app = FastAPI()
-redis_conn = Redis()
+redis_conn = Redis(host="redis", port=6379)
 q = Queue(connection=redis_conn, is_async=True, default_timeout=500, result_ttl=0)
 
 @app.middleware("http")
