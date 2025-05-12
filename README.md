@@ -105,6 +105,8 @@ VITE_REACT_APP_GOOGLE_API=your_api_key_here
 
 # Microservices Architecture
 
+The microservices are located in the folder `src/services`.
+
 The core of this project is built around a microservices architecture, each responsible for a specific domain of the application:
 
 - **User Service** – Handles user authentication, registration, and profile management. Uses **SQLite** for lightweight, persistent storage.
@@ -117,3 +119,50 @@ The core of this project is built around a microservices architecture, each resp
 ![Architecture Diagram](./img/GetAway_Micro_Architecture.png)
 
 # Scenario
+
+Upon landing on the main page, the user is prompted to either log in or sign up to access the trip planning features.
+
+![Welcome create](./img/welcome_create.jpeg)
+![Places](./img/places.jpeg)
+
+1. User Registration & Authentication
+    When a new user signs up, their credentials and profile data are stored in the User Service, which uses a lightweight SQLite database for persistent storage.
+    Returning users can log in to access their personal trip data.
+    ![Login](./img/login.jpeg)
+    ![Sign up](./img/signup.jpeg)
+
+2. Creating a Journey
+    After logging in, users are redirected to the main dashboard where they can create a new trip by selecting the source, destination, and travel dates.
+
+    ![New](./img/new_user.jpeg)
+
+    Once the user submits the trip details, they are redirected to the trip creation/edit page. This stage triggers coordination between several backend services via the API Facade Service, which orchestrates calls to:
+
+    - Coords Service – for retrieving geolocation data of source and destination.
+
+    - Weather Service – for weather forecasts at the chosen destination and date.
+
+    - Google Places Service – for nearby points of interest based on the selected location.
+    
+    ![Create Journey](./img/create_journey.jpeg)
+
+3. Enriching the Journey
+    Users can add further information to their trip:
+
+    - Description and To-Do List – saved as part of the journey data.
+
+    - Friends – selected from the user’s contact list (fetched from the User Service) and added as travel companions.
+
+    All trip-specific data, including the itinerary, description, and associated users, is stored in the Journeys Service, which utilizes MongoDB for flexible document storage. The service also communicates with a Redis queue for asynchronous processing tasks.
+
+    ![Create Places](./img/create_places.jpeg)
+    ![Save trip](./img/save_trip.jpeg)
+
+4. Viewing Journeys
+    Users can view a list of all their journeys—both active and pending—on the journeys dashboard.
+    ![User journeys](./img/user_journeys.jpeg)
+
+    By clicking on a journey, the user opens a journey widget displaying trip details. At this point, fresh dynamic data is retrieved again via the API Facade from the relevant services (Coords, Weather, Places). This data is not stored in the database to ensure it remains current and up to date.
+
+    ![Journey Widget](./img/journey_widget.jpeg)
+    ![Journey List](./img/journeys_list.jpeg)
