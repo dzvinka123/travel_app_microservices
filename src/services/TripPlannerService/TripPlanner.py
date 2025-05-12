@@ -28,6 +28,7 @@ SERVICE_API_PLACES = "http://localhost:8003"
 # VITE_CASSANDRA_KEYSPACE=APIkeyspace
 # VITE_CASSANDRA_IP=cassandra
 
+
 def get_to_Service(payload, serviceUrl):
     try:
         response = requests.get(serviceUrl, params=payload)
@@ -45,15 +46,21 @@ def retrieve_travel_data():
     payload = request_data.get("payload")
 
     if service == "MapService":
-        result = get_to_Service(payload, "http://coords_service:8002" + "/coords-service")
+        result = get_to_Service(
+            payload, "http://coords_service:8002" + "/coords-service"
+        )
         return jsonify(result), 200
 
     elif service == "WeatherService":
-        result = get_to_Service(payload, "http://weather_service:8001" + "/weather-service")
+        result = get_to_Service(
+            payload, "http://weather_service:8001" + "/weather-service"
+        )
         return jsonify(result), 200
 
     elif service == "VisitPlaceService":
-        result = get_to_Service(payload, "http://places_service:8003" + "/places-service")
+        result = get_to_Service(
+            payload, "http://places_service:8003" + "/places-service"
+        )
         return jsonify(result), 200
 
     return jsonify({"error": "Unknown service"}), 400

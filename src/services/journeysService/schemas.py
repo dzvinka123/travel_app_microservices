@@ -4,6 +4,7 @@ from typing import List, Optional
 from pydantic import BaseModel, Field, validator
 from typing import List, Optional
 
+
 class TravelCardIn(BaseModel):
     from_: str
     to: str
@@ -26,6 +27,7 @@ class TravelCardIn(BaseModel):
 class TodoUpdate(BaseModel):
     taskId: str
     done: bool
+
 
 class TodoCreate(BaseModel):
     task: str

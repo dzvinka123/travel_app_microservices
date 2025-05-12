@@ -5,7 +5,7 @@ from database import travel_cards, user_card, todo_list, db
 from schemas import TravelCardIn, TodoUpdate, TodoCreate
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
-from fastapi.exception_handlers import request_validation_exception_handler 
+from fastapi.exception_handlers import request_validation_exception_handler
 from pymongo.errors import PyMongoError
 import uvicorn
 
@@ -17,6 +17,7 @@ app = FastAPI()
 redis_conn = Redis(host="redis", port=6379)
 q = Queue(connection=redis_conn, is_async=True, default_timeout=500, result_ttl=0)
 
+
 @app.middleware("http")
 async def log_request_body(request: Request, call_next):
     if request.url.path == "/add-travel-card":
@@ -25,19 +26,28 @@ async def log_request_body(request: Request, call_next):
     response = await call_next(request)
     return response
 
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], allow_credentials=True,
-    allow_methods=["*"], allow_headers=["*"],
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
+
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):
     print("Validation error:", exc.errors())
     return JSONResponse(
         status_code=422,
-        content={"success": False, "message": "Validation failed", "errors": exc.errors()},
+        content={
+            "success": False,
+            "message": "Validation failed",
+            "errors": exc.errors(),
+        },
     )
+
 
 @app.get("/mongo-status")
 def mongo_status():
@@ -54,7 +64,7 @@ def mongo_status():
             7: "ARBITER",
             8: "DOWN",
             9: "ROLLBACK",
-            10: "REMOVED"
+            10: "REMOVED",
         }
         return {
             "success": True,
@@ -64,19 +74,21 @@ def mongo_status():
                 {
                     "name": member["name"],
                     "stateStr": member["stateStr"],
-                    "health": member["health"]
+                    "health": member["health"],
                 }
                 for member in status["members"]
-            ]
+            ],
         }
     except PyMongoError as e:
         return {"success": False, "message": str(e)}
+
 
 @app.post("/add-travel-card")
 def add_travel_card(card: TravelCardIn):
     job = q.enqueue(add_travel_card_task, card.dict())
     return {"success": True, "message": "Travel card enqueued", "job_id": job.id}
-    
+
+
 #     if not card.from_ or not card.to or not card.start_date or not card.end_date:
 #         return {
 #             "success": False,
@@ -113,6 +125,7 @@ def add_travel_card(card: TravelCardIn):
 #         "cardId": card_id
 #     }
 
+
 @app.get("/user-travel-cards")
 def get_user_travel_cards(email: str):
     if not email:
@@ -125,7 +138,9 @@ def get_user_travel_cards(email: str):
     if not card_ids:
         return {"success": True, "travelCards": []}
 
-    cards = list(travel_cards.find({"_id": {"$in": [ObjectId(cid) for cid in card_ids]}}))
+    cards = list(
+        travel_cards.find({"_id": {"$in": [ObjectId(cid) for cid in card_ids]}})
+    )
 
     # fetch todos
     todos = list(todo_list.find({"card_id": {"$in": card_ids}}))
@@ -149,20 +164,20 @@ def get_user_travel_cards(email: str):
                     "id": str(t["_id"]),
                     "task": t["task"],
                     "done": t["done"],
-                    "card_id": t["card_id"]
+                    "card_id": t["card_id"],
                 }
-                for t in todos if t["card_id"] == cid
+                for t in todos
+                if t["card_id"] == cid
             ],
             "emails": [
-                {
-                    "user_email": e["user_email"],
-                    "card_id": e["card_id"]
-                }
-                for e in email_links if e["card_id"] == cid
-            ]
+                {"user_email": e["user_email"], "card_id": e["card_id"]}
+                for e in email_links
+                if e["card_id"] == cid
+            ],
         }
 
     return {"success": True, "travelCards": [enrich(c) for c in cards]}
+
 
 @app.put("/todo-list")
 def update_task_state(update: TodoUpdate):
@@ -175,6 +190,7 @@ def update_task_state(update: TodoUpdate):
     # if result.matched_count == 0:
     #     return {"success": False, "message": "Task not found"}
     # return {"success": True, "message": "Task state updated successfully"}
+
 
 @app.post("/todo-list")
 def add_task(data: TodoCreate):

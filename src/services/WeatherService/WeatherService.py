@@ -28,6 +28,7 @@ logging.basicConfig(
 )
 cluster = Cluster(["cassandra"])
 
+
 @weather_service.route("/weather-service", methods=["GET"])
 def get():
     city = request.args.get("city")
@@ -35,7 +36,9 @@ def get():
         return jsonify({"error": "City parameter is required"}), 400
 
     coords_response = requests.get(
-        "http://coords_service:8002" + "/coords-service", params={"city": city}, timeout=5
+        "http://coords_service:8002" + "/coords-service",
+        params={"city": city},
+        timeout=5,
     )
     if coords_response.status_code != 200:
         return jsonify({"error": "Failed to get coordinates"}), 500

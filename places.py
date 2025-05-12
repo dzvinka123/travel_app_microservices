@@ -1,27 +1,22 @@
 import os
-import asyncio
+import atexit
 import requests
-import logging
-from flask import jsonify
 from dotenv import load_dotenv
+from flask import jsonify
 from flask import Flask, request
-from cassandra.cluster import Cluster
-from cassandra.query import SimpleStatement
+# from cassandra.cluster import Cluster
 from datetime import datetime
 
-# load_dotenv("/Users/mariia/Desktop/travel_app_microservices/.env")
+load_dotenv()
 
-# CASSANDRA_IP = os.getenv("VITE_CASSANDRA_IP")
-# CASSANDRA_KEYSPACE = os.getenv("VITE_CASSANDRA_KEYSPACE")
+# CLUSTER_IP = os.getenv("CASSANDRA_CLUSTER_IP")
 # VITE_REACT_APP_GOOGLE_API = os.getenv("VITE_REACT_APP_GOOGLE_API")
+VITE_REACT_APP_GOOGLE_API = "AIzaSyCOmlpCB6Lm1tc4gAntK_BeZ21uOLpIaCc"
 # COORDS_IP = os.getenv("VITE_REACT_APP_API_COORDS")
-
-VITE_REACT_APP_GOOGLE_API = os.getenv("VITE_REACT_APP_GOOGLE_API")
-COORDS_IP = "http://localhost:8002"
-
-logging.debug("KEYSPACE from env: %s", repr(os.getenv("VITE_CASSANDRA_KEYSPACE")))
-
 visit_place_service = Flask(__name__)
+
+# cluster = Cluster([CLUSTER_IP])
+# session = cluster.connect()
 
 
 def get_place_details(place_id):
@@ -50,25 +45,26 @@ def get_place_details(place_id):
 @visit_place_service.route("/places-service", methods=["GET"])
 def load_places():
     """Find nearby tourist attractions and get details"""
-    city = request.args.get("city")
+    # city = request.args.get("city")
+    city = "Paris"
     if not city:
         return jsonify({"error": "City parameter is required"}), 400
 
-    coords_response = requests.get(
-        "http://coords_service:8002" + "/coords-service",
-        params={"city": city},
-        timeout=5,
-    )
-    if coords_response.status_code != 200:
-        return jsonify({"error": "Failed to get coordinates"}), 500
+    # coords_response = requests.get(
+    #     "http://localhost:8002/coords-service", params={"city": city}, timeout=5
+    # )
+    # if coords_response.status_code != 200:
+    #     return jsonify({"error": "Failed to get coordinates"}), 500
 
-    coords = coords_response.json()
-    lat, lng = coords["latitude"], coords["longitude"]
+    # coords = coords_response.json()
+    lat = 48.8575
+    lng = 2.3514
+    # lat, lng = coords["latitude"], coords["longitude"]
 
     url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
     params = {
         "location": f"{lat},{lng}",
-        "radius": 300,
+        "radius": 500,
         "type": "tourist_attraction",
         "key": VITE_REACT_APP_GOOGLE_API,
     }
@@ -109,3 +105,29 @@ def load_places():
         )
 
     return jsonify(places_details)
+
+
+# def update_db(city_name, place_id, name, address, latitude, longitude):
+#     """
+#     Updating the Cassandra cluster.
+#     """
+#     session.execute(
+#     f"""
+#     INSERT INTO places_table (city_name, place_id, name, address, latitude, longitude)
+#     VALUES ({city_name}, {place_id}, {name}, {address}, {latitude}, {longitude})
+#     """
+#     )
+
+
+# def shutdown_cluster():
+#     """
+#     Shutting down Cassandra cluster.
+#     """
+#     print("Shutting down Cassandra cluster...")
+#     cluster.shutdown()
+
+
+# atexit.register(shutdown_cluster)
+
+if __name__ == '__main__':
+    visit_place_service.run(debug=True, port=8003)
