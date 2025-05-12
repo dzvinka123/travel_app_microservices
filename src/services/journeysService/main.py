@@ -89,43 +89,6 @@ def add_travel_card(card: TravelCardIn):
     return {"success": True, "message": "Travel card enqueued", "job_id": job.id}
 
 
-#     if not card.from_ or not card.to or not card.start_date or not card.end_date:
-#         return {
-#             "success": False,
-#             "message": "All fields are required and lists must have at least one entry"
-#         }
-
-#     # insert travel card
-#     result = travel_cards.insert_one({
-#         "from": card.from_,
-#         "to": card.to,
-#         "start_date": card.start_date,
-#         "end_date": card.end_date,
-#         "description": card.description,
-#         "active": card.active
-#     })
-
-#     card_id = str(result.inserted_id)
-
-#     # insert user-card relations
-#     if card.emails:
-#         user_card.insert_many([
-#             {"user_email": email, "card_id": card_id} for email in card.emails
-#         ])
-
-# # insert tasks
-#     if card.tasks:
-#         todo_list.insert_many([
-#             {"task": t, "done": False, "card_id": card_id} for t in card.tasks
-#         ])
-
-#     return {
-#         "success": True,
-#         "message": "Travel card, user associations, and tasks added successfully",
-#         "cardId": card_id
-#     }
-
-
 @app.get("/user-travel-cards")
 def get_user_travel_cards(email: str):
     if not email:
@@ -183,30 +146,9 @@ def get_user_travel_cards(email: str):
 def update_task_state(update: TodoUpdate):
     job = q.enqueue(update_task_state_task, update.dict())
     return {"success": True, "message": "Task update enqueued"}
-    # result = todo_list.update_one(
-    #     {"_id": ObjectId(update.taskId)},
-    #     {"$set": {"done": update.done}}
-    # )
-    # if result.matched_count == 0:
-    #     return {"success": False, "message": "Task not found"}
-    # return {"success": True, "message": "Task state updated successfully"}
 
 
 @app.post("/todo-list")
 def add_task(data: TodoCreate):
     job = q.enqueue(add_task_task, data.dict())
     return {"success": True, "message": "Task add enqueued"}
-    # if not data.task or not data.card_id:
-    #     return {"success": False, "message": "Missing required fields"}
-
-    # result = todo_list.insert_one({
-    #     "task": data.task,
-    #     "done": data.done,
-    #     "card_id": data.card_id
-    # })
-
-    # return {
-    #     "success": True,
-    #     "message": "Task added successfully",
-    #     "taskId": str(result.inserted_id)
-    # }

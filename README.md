@@ -27,61 +27,61 @@ VITE_REACT_APP_GOOGLE_API=your_api_key_here
 
 1. Create a Vite Project
 
-If not already set up:
+    If not already set up:
 
-```bash
-npm create vite@latest
-```
+    ```bash
+    npm create vite@latest
+    ```
 
 2. Install Dependencies
 
-If using a requirements.txt for Python packages:
+    If using a requirements.txt for Python packages:
 
-```bash
-pip install -r requirements.txt
-```
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-Install frontend dependencies
+    Install frontend dependencies
 
-```bash
-npm init -y
-npm install
-```
+    ```bash
+    npm init -y
+    npm install
+    ```
 
 3. Set Up MongoDB
 
-Start MongoDB with Docker and initiate the replica set:
+    Start MongoDB with Docker and initiate the replica set:
 
-```bash
-docker exec -it mongo1 mongosh
-```
+    ```bash
+    docker exec -it mongo1 mongosh
+    ```
 
-Inside the Mongo shell:
+    Inside the Mongo shell:
 
-```bash
-rs.initiate({
-  _id: "rs0",
-  members: [
-    { _id: 0, host: "mongo1:27017" },
-    { _id: 1, host: "mongo2:27017" },
-    { _id: 2, host: "mongo3:27017" }
-  ]
-});
-```
+    ```bash
+    rs.initiate({
+    _id: "rs0",
+    members: [
+        { _id: 0, host: "mongo1:27017" },
+        { _id: 1, host: "mongo2:27017" },
+        { _id: 2, host: "mongo3:27017" }
+    ]
+    });
+    ```
 
 4. Run the Project
 
-- Start the website:
+    - Start the website:
 
-        ```bash
-        npm run dev
-        ```
+            ```bash
+            npm run dev
+            ```
 
-- Start the services
+    - Start the services
 
-        ```bash
-        docker compose up --build
-        ```
+            ```bash
+            docker compose up --build
+            ```
 
 ## Additional Packages  
 
@@ -114,6 +114,6 @@ The core of this project is built around a microservices architecture, each resp
 - **Coords Service** – Handles geolocation processing.
 - **Google Places Service** – Integrates with the **Google Places API** to provide information about nearest destination places.
 
-[Acrhitecture](./img/GetAway_Micro_Architecture.png)
+![Architecture Diagram](./img/GetAway_Micro_Architecture.png)
 
 # Scenario
