@@ -7,13 +7,10 @@ from dotenv import load_dotenv
 from flask import Flask, request
 from datetime import datetime
 
-# load_dotenv("/Users/mariia/Desktop/travel_app_microservices/.env")
+load_dotenv()
 
-# VITE_REACT_APP_GOOGLE_API = os.getenv("VITE_REACT_APP_GOOGLE_API")
-# COORDS_IP = os.getenv("VITE_REACT_APP_API_COORDS")
-
+COORDS_IP = os.getenv("VITE_REACT_APP_API_COORDS")
 VITE_REACT_APP_GOOGLE_API = os.getenv("VITE_REACT_APP_GOOGLE_API")
-COORDS_IP = "http://localhost:8002"
 
 visit_place_service = Flask(__name__)
 

@@ -13,20 +13,10 @@ logging.basicConfig(
 trip_planner = Flask(__name__)
 CORS(trip_planner)
 
-# load_dotenv("/Users/mariia/Desktop/travel_app_microservices/.env")
-# SERVICE_API_WEATHER = str(os.getenv("VITE_REACT_APP_API_WEATHER"))
-# SERVICE_API_COORDS = str(os.getenv("VITE_REACT_APP_API_COORDS"))
-# SERVICE_API_PLACES = str(os.getenv("VITE_REACT_APP_API_PLACES"))
-
-SERVICE_API_WEATHER = "http://localhost:8001"
-SERVICE_API_COORDS = "http://localhost:8002"
-SERVICE_API_PLACES = "http://localhost:8003"
-# VITE_REACT_APP_API_TRIP_PLANNER=http://localhost:8000
-# VITE_REACT_APP_API_COORDS=http://localhost:8002
-# VITE_REACT_APP_API_PLACES=http://localhost:8003
-# VITE_REACT_APP_GOOGLE_API=AIzaSyCOmlpCB6Lm1tc4gAntK_BeZ21uOLpIaCc
-# VITE_CASSANDRA_KEYSPACE=APIkeyspace
-# VITE_CASSANDRA_IP=cassandra
+load_dotenv()
+SERVICE_API_WEATHER = os.getenv("VITE_REACT_APP_API_WEATHER")
+SERVICE_API_COORDS = os.getenv("VITE_REACT_APP_API_COORDS")
+SERVICE_API_PLACES = os.getenv("VITE_REACT_APP_API_PLACES")
 
 
 def get_to_Service(payload, serviceUrl):

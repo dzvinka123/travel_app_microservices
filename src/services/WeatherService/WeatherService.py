@@ -11,13 +11,9 @@ from datetime import datetime, timedelta
 
 weather_service = Flask(__name__)
 
-load_dotenv("/Users/mariia/Desktop/travel_app_microservices/.env")
+load_dotenv()
 
-# "APIkeyspace" = os.getenv("VITE_"APIkeyspace"")
-# COORDS_IP = os.getenv("VITE_REACT_APP_API_COORDS")
-
-# COORDS_IP = "http://localhost:8002"
-# "APIkeyspace"="APIkeyspace"
+COORDS_IP = os.getenv("VITE_REACT_APP_API_COORDS")
 
 logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s"
