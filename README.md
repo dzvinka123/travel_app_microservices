@@ -25,7 +25,7 @@ This project relies on a **Google API key**. You must create a `.env` file in th
 VITE_REACT_APP_GOOGLE_API=your_api_key_here
 ```
 
-1. Create a Vite Project
+1. **Create a Vite Project**
 
     If not already set up:
 
@@ -33,7 +33,7 @@ VITE_REACT_APP_GOOGLE_API=your_api_key_here
     npm create vite@latest
     ```
 
-2. Install Dependencies
+2. **Install Dependencies**
 
     If using a requirements.txt for Python packages:
 
@@ -48,7 +48,7 @@ VITE_REACT_APP_GOOGLE_API=your_api_key_here
     npm install
     ```
 
-3. Set Up MongoDB
+3. **Set Up MongoDB**
 
     Start MongoDB with Docker and initiate the replica set:
 
@@ -69,7 +69,7 @@ VITE_REACT_APP_GOOGLE_API=your_api_key_here
     });
     ```
 
-4. Run the Project
+4. **Run the Project**
 
     - Start the website:
 
@@ -116,27 +116,42 @@ The core of this project is built around a microservices architecture, each resp
 - **Coords Service** – Handles geolocation processing.
 - **Google Places Service** – Integrates with the **Google Places API** to provide information about nearest destination places.
 
-![Architecture Diagram](./img/GetAway_Micro_Architecture.png)
+<p align="center">
+    <img src="./img/GetAway_Micro_Architecture.png" alt="Architecture Diagram" width="700"/>
+</p>
 
 # Scenario
 
 Upon landing on the main page, the user is prompted to either log in or sign up to access the trip planning features.
 
-![Welcome create](./img/welcome_create.jpeg)
-![Places](./img/places.jpeg)
+<p align="center">
+    <img src="./img/welcome_create.jpeg" alt="Welcome create" width="700"/>
+</p>
 
-1. User Registration & Authentication
+<p align="center">
+    <img src="./img/places.jpeg" alt="Welcome create" width="700"/>
+</p>
+
+1. **User Registration & Authentication**
 
     When a new user signs up, their credentials and profile data are stored in the User Service, which uses a lightweight SQLite database for persistent storage.
     Returning users can log in to access their personal trip data.
-    ![Login](./img/login.jpeg)
-    ![Sign up](./img/signup.jpeg)
+    
+    <p align="center">
+        <img src="./img/login.jpeg" alt="Login" width="700"/>
+    </p>
+    
+    <p align="center">
+        <img src="./img/signup.jpeg" alt="Sign up" width="700"/>
+    </p>
 
-2. Creating a Journey
+3. **Creating a Journey**
 
     After logging in, users are redirected to the main dashboard where they can create a new trip by selecting the source, destination, and travel dates.
 
-    ![New](./img/new_user.jpeg)
+    <p align="center">
+        <img src="./img/new_user.jpeg" alt="New" width="700"/>
+    </p>
 
     Once the user submits the trip details, they are redirected to the trip creation/edit page. This stage triggers coordination between several backend services via the API Facade Service, which orchestrates calls to:
 
@@ -146,9 +161,11 @@ Upon landing on the main page, the user is prompted to either log in or sign up 
 
     - Google Places Service – for nearby points of interest based on the selected location.
     
-    ![Create Journey](./img/create_journey.jpeg)
+    <p align="center">
+        <img src="./img/create_journey.jpeg" alt="Create Journey" width="700"/>
+    </p>
 
-3. Enriching the Journey
+5. **Enriching the Journey**
 
     Users can add further information to their trip:
 
@@ -158,15 +175,29 @@ Upon landing on the main page, the user is prompted to either log in or sign up 
 
     All trip-specific data, including the itinerary, description, and associated users, is stored in the Journeys Service, which utilizes MongoDB for flexible document storage. The service also communicates with a Redis queue for asynchronous processing tasks.
 
-    ![Create Places](./img/create_places.jpeg)
-    ![Save trip](./img/save_trip.jpeg)
+    
+    <p align="center">
+        <img src="./img/create_places.jpeg" alt="Create Places" width="700"/>
+    </p>
+    
+    <p align="center">
+        <img src="./img/save_trip.jpeg" alt="Save Trip" width="700"/>
+    </p>
 
-4. Viewing Journeys
+6. **Viewing Journeys**
 
     Users can view a list of all their journeys—both active and pending—on the journeys dashboard.
-    ![User journeys](./img/user_journeys.jpeg)
+
+    <p align="center">
+        <img src="./img/user_journeys.jpeg" alt="User Journeys" width="700"/>
+    </p>
 
     By clicking on a journey, the user opens a journey widget displaying trip details. At this point, fresh dynamic data is retrieved again via the API Facade from the relevant services (Coords, Weather, Places). This data is not stored in the database to ensure it remains current and up to date.
 
-    ![Journey Widget](./img/journey_widget.jpeg)
-    ![Journey List](./img/journeys_list.jpeg)
+    <p align="center">
+        <img src="./img/journey_widget.jpeg" alt="Journey Widget" width="700"/>
+    </p>
+    
+    <p align="center">
+        <img src="./img/journeys_list.jpeg" alt="Journey List" width="700"/>
+    </p>
