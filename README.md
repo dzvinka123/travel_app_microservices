@@ -2,6 +2,12 @@
 
 GetAway is a project developed for the Web Development course. This web application enables users to create personalized trips with features such as recommendations, to-do lists, maps, and weather forecasts. The project aims to expand its capabilities to include booking accommodations and selecting transportation options for the trip (in the future).
 
+# Workflow
+
+Project tasks and progress are tracked in the **Issues** section.
+
+Additionally, a GitHub Actions workflow is included to automatically check **Python code formatting** using **Black**.
+
 # React + Vite
 
 React is working in Vite with HMR and some ESLint rules.
@@ -13,44 +19,101 @@ With two official plugins are available:
 
 # Dependencies and run
 
-The project significantly relies on the Google API key, so it is required that you create a ```.env``` file with the key defined as `VITE_REACT_APP_GOOGLE_API`.
+This project relies on a **Google API key**. You must create a `.env` file in the root directory with the following environment variable:
 
-To start project:
-
+```bash
+VITE_REACT_APP_GOOGLE_API=your_api_key_here
 ```
+
+1. Create a Vite Project
+
+If not already set up:
+
+```bash
 npm create vite@latest
 ```
 
-To run and install dependencies project:
+2. Install Dependencies
 
+If using a requirements.txt for Python packages:
+
+```bash
+pip install -r requirements.txt
 ```
+
+Install frontend dependencies
+
+```bash
+npm init -y
 npm install
-npm run dev
 ```
 
-To run server project:
+3. Set Up MongoDB
 
-```
-cd backend_part
-npm install
-npm run dev
-```
+Start MongoDB with Docker and initiate the replica set:
 
-To install DatePicker:
-
-```
-npm install --save react-date-range
-npm install --save react date-fns
+```bash
+docker exec -it mongo1 mongosh
 ```
 
-To install Swiper:
+Inside the Mongo shell:
 
-```
-npm install swiper
+```bash
+rs.initiate({
+  _id: "rs0",
+  members: [
+    { _id: 0, host: "mongo1:27017" },
+    { _id: 1, host: "mongo2:27017" },
+    { _id: 2, host: "mongo3:27017" }
+  ]
+});
 ```
 
-To wrap React components and load the Google Maps JavaScript API:
+4. Run the Project
 
-```
-npm install @googlemaps/react-wrapper
-```
+- Start the website:
+
+        ```bash
+        npm run dev
+        ```
+
+- Start the services
+
+        ```bash
+        docker compose up --build
+        ```
+
+## Additional Packages  
+
+- Date Picker
+        ```bash
+        npm install --save react-date-range
+        npm install --save react date-fns
+        ```
+
+- Swiper (Carousel)
+
+        ```bash
+        npm install swiper
+        ```
+
+- Google Maps JavaScript API Wrapper for React
+
+        ```bash
+        npm install @googlemaps/react-wrapper
+        ```
+
+# Microservices Architecture
+
+The core of this project is built around a microservices architecture, each responsible for a specific domain of the application:
+
+- **User Service** – Handles user authentication, registration, and profile management. Uses **SQLite** for lightweight, persistent storage.
+- **API Facade Service** – Acts as the main gateway for the frontend, orchestrating calls to various backend services and simplifying client interaction.
+- **Journeys Service** – Manages travel plans, destinations, and trip-related data. Backed by **MongoDB** for flexible document storage, with communication handled through a **message queue** (Redis).
+- **Weather Service** – Fetches and delivers weather forecasts for selected destinations.
+- **Coords Service** – Handles geolocation processing.
+- **Google Places Service** – Integrates with the **Google Places API** to provide information about nearest destination places.
+
+[Acrhitecture](./img/GetAway_Micro_Architecture.png)
+
+# Scenario
