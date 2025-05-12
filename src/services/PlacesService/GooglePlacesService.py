@@ -5,21 +5,15 @@ import logging
 from flask import jsonify
 from dotenv import load_dotenv
 from flask import Flask, request
-from cassandra.cluster import Cluster
-from cassandra.query import SimpleStatement
 from datetime import datetime
 
 # load_dotenv("/Users/mariia/Desktop/travel_app_microservices/.env")
 
-# CASSANDRA_IP = os.getenv("VITE_CASSANDRA_IP")
-# CASSANDRA_KEYSPACE = os.getenv("VITE_CASSANDRA_KEYSPACE")
 # VITE_REACT_APP_GOOGLE_API = os.getenv("VITE_REACT_APP_GOOGLE_API")
 # COORDS_IP = os.getenv("VITE_REACT_APP_API_COORDS")
 
 VITE_REACT_APP_GOOGLE_API = os.getenv("VITE_REACT_APP_GOOGLE_API")
 COORDS_IP = "http://localhost:8002"
-
-logging.debug("KEYSPACE from env: %s", repr(os.getenv("VITE_CASSANDRA_KEYSPACE")))
 
 visit_place_service = Flask(__name__)
 

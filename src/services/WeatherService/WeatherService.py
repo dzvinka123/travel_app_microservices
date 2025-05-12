@@ -7,26 +7,21 @@ import logging
 from dotenv import load_dotenv
 from flask import jsonify
 from flask import Flask, request
-from cassandra.cluster import Cluster
-from cassandra.query import SimpleStatement
 from datetime import datetime, timedelta
 
 weather_service = Flask(__name__)
 
 load_dotenv("/Users/mariia/Desktop/travel_app_microservices/.env")
 
-# "cassandra" = os.getenv("VITE_"cassandra"")
 # "APIkeyspace" = os.getenv("VITE_"APIkeyspace"")
 # COORDS_IP = os.getenv("VITE_REACT_APP_API_COORDS")
 
 # COORDS_IP = "http://localhost:8002"
 # "APIkeyspace"="APIkeyspace"
-# "cassandra"="cassandra"
 
 logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s"
 )
-cluster = Cluster(["cassandra"])
 
 
 @weather_service.route("/weather-service", methods=["GET"])
