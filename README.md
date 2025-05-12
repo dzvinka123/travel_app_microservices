@@ -126,12 +126,14 @@ Upon landing on the main page, the user is prompted to either log in or sign up 
 ![Places](./img/places.jpeg)
 
 1. User Registration & Authentication
+
     When a new user signs up, their credentials and profile data are stored in the User Service, which uses a lightweight SQLite database for persistent storage.
     Returning users can log in to access their personal trip data.
     ![Login](./img/login.jpeg)
     ![Sign up](./img/signup.jpeg)
 
 2. Creating a Journey
+
     After logging in, users are redirected to the main dashboard where they can create a new trip by selecting the source, destination, and travel dates.
 
     ![New](./img/new_user.jpeg)
@@ -147,6 +149,7 @@ Upon landing on the main page, the user is prompted to either log in or sign up 
     ![Create Journey](./img/create_journey.jpeg)
 
 3. Enriching the Journey
+
     Users can add further information to their trip:
 
     - Description and To-Do List – saved as part of the journey data.
@@ -159,6 +162,7 @@ Upon landing on the main page, the user is prompted to either log in or sign up 
     ![Save trip](./img/save_trip.jpeg)
 
 4. Viewing Journeys
+
     Users can view a list of all their journeys—both active and pending—on the journeys dashboard.
     ![User journeys](./img/user_journeys.jpeg)
 
