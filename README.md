@@ -86,10 +86,11 @@ VITE_REACT_APP_GOOGLE_API=your_api_key_here
 ## Additional Packages  
 
 - Date Picker
-        ```bash
-        npm install --save react-date-range
-        npm install --save react date-fns
-        ```
+  
+    ```bash
+    npm install --save react-date-range
+    npm install --save react date-fns
+    ```
 
 - Swiper (Carousel)
 
