@@ -73,15 +73,15 @@ VITE_REACT_APP_GOOGLE_API=your_api_key_here
 
     - Start the website:
 
-            ```bash
-            npm run dev
-            ```
+        ```bash
+        npm run dev
+        ```
 
     - Start the services
 
-            ```bash
-            docker compose up --build
-            ```
+        ```bash
+        docker compose up --build
+        ```
 
 ## Additional Packages  
 
@@ -93,15 +93,15 @@ VITE_REACT_APP_GOOGLE_API=your_api_key_here
 
 - Swiper (Carousel)
 
-        ```bash
-        npm install swiper
-        ```
+    ```bash
+    npm install swiper
+    ```
 
 - Google Maps JavaScript API Wrapper for React
 
-        ```bash
-        npm install @googlemaps/react-wrapper
-        ```
+    ```bash
+    npm install @googlemaps/react-wrapper
+    ```
 
 # Microservices Architecture
 
